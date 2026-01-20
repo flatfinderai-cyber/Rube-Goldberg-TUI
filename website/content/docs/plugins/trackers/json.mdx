@@ -5,10 +5,10 @@ description: Track tasks with a simple prd.json file - no external dependencies 
 
 ## JSON Tracker
 
-The JSON tracker is the simplest way to use Ralph TUI. It reads tasks from a local `prd.json` file with no external dependencies - perfect for getting started quickly.
+The JSON tracker is the simplest way to use rube-goldberg TUI. It reads tasks from a local `prd.json` file with no external dependencies - perfect for getting started quickly.
 
 <Callout type="tip">
-The JSON tracker is ideal for single-developer projects or when you want to try Ralph TUI without installing additional tools.
+The JSON tracker is ideal for single-developer projects or when you want to try rube-goldberg TUI without installing additional tools.
 </Callout>
 
 ## Prerequisites
@@ -43,14 +43,14 @@ None! Just create a `prd.json` file.
     ```
   </Step>
 
-  <Step title="Run Ralph TUI">
+  <Step title="Run rube-goldberg TUI">
     ```bash
-    ralph-tui run --prd ./prd.json
+    rube-goldberg-tui run --prd ./prd.json
     ```
   </Step>
 
   <Step title="Watch Progress">
-    As tasks complete, Ralph updates `passes: true` in your `prd.json`.
+    As tasks complete, rube-goldberg updates `passes: true` in your `prd.json`.
   </Step>
 </Steps>
 
@@ -61,7 +61,7 @@ None! Just create a `prd.json` file.
 The primary way to use the JSON tracker is via the `--prd` flag:
 
 ```bash
-ralph-tui run --prd ./path/to/prd.json
+rube-goldberg-tui run --prd ./path/to/prd.json
 ```
 
 This flag:
@@ -73,7 +73,7 @@ This flag:
 You can also configure the tracker in TOML:
 
 ```toml
-# .ralph-tui/config.toml
+# .rube-goldberg-tui/config.toml
 tracker = "json"
 
 [trackerOptions]
@@ -175,7 +175,7 @@ The recommended way to create a `prd.json`:
 
 ```bash
 # Interactive PRD creation with AI
-ralph-tui create-prd --chat
+rube-goldberg-tui create-prd --chat
 
 # When prompted, choose to convert to JSON format
 ```
@@ -187,7 +187,7 @@ This generates a PRD markdown file, then converts it to `prd.json` with the corr
 Convert an existing PRD markdown to JSON:
 
 ```bash
-ralph-tui convert --to json ./tasks/my-feature-prd.md
+rube-goldberg-tui convert --to json ./tasks/my-feature-prd.md
 ```
 
 ### From Scratch
@@ -220,7 +220,7 @@ Tasks can depend on other tasks via `dependsOn`:
 }
 ```
 
-Ralph TUI won't select a task until all its dependencies have `passes: true`.
+rube-goldberg TUI won't select a task until all its dependencies have `passes: true`.
 
 ## Priority
 
@@ -246,7 +246,7 @@ The JSON tracker selects the next task by:
 
 ## How It Works
 
-When Ralph TUI runs with the JSON tracker:
+When rube-goldberg TUI runs with the JSON tracker:
 
 1. **Load**: Read and parse `prd.json`
 2. **Validate**: Check schema, reject invalid files with helpful errors
@@ -326,7 +326,7 @@ If your file fails validation:
 
 ```bash
 # Regenerate from PRD markdown
-ralph-tui convert --to json ./tasks/my-prd.md --force
+rube-goldberg-tui convert --to json ./tasks/my-prd.md --force
 ```
 
 ## Limitations
@@ -352,7 +352,7 @@ Your file doesn't match the expected schema. Common issues:
 - Using `status` instead of `passes`
 - Missing required fields (`id`, `title`, `passes`)
 
-Run `ralph-tui convert --to json` to regenerate.
+Run `rube-goldberg-tui convert --to json` to regenerate.
 
 ### "Task not found"
 

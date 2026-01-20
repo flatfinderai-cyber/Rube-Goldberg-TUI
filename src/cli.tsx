@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * ABOUTME: CLI entry point for the Ralph TUI application.
+ * ABOUTME: CLI entry point for the RubeGoldberg TUI application.
  * Handles subcommands (plugins, run, etc.) and defaults to 'run' when no subcommand given.
  */
 
@@ -25,15 +25,15 @@ import {
  */
 function showHelp(): void {
   console.log(`
-Ralph TUI - AI Agent Loop Orchestrator
+RubeGoldberg TUI - AI Agent Loop Orchestrator
 
 Usage: rube-goldberg-tui [command] [options]
 
 Commands:
-  (none)              Start Ralph execution (same as 'run')
+  (none)              Start RubeGoldberg execution (same as 'run')
   create-prd [opts]   Create a new PRD interactively (alias: prime)
   convert [options]   Convert PRD markdown to JSON format
-  run [options]       Start Ralph execution
+  run [options]       Start RubeGoldberg execution
   resume [options]    Resume an interrupted session
   status [options]    Check session status (headless, for CI/scripts)
   logs [options]      View/manage iteration output logs
@@ -243,6 +243,6 @@ async function main(): Promise<void> {
 
 // Run the main function
 main().catch((error: unknown) => {
-  console.error('Failed to start Ralph TUI:', error);
+  console.error('Failed to start RubeGoldberg TUI:', error);
   process.exit(1);
 });

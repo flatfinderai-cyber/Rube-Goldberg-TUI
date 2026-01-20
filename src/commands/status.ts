@@ -15,7 +15,7 @@ import type { PersistedSessionState } from '../session/persistence.js';
 import type { LockCheckResult } from '../session/lock.js';
 
 /**
- * Overall status of Ralph in the current directory
+ * Overall status of RubeGoldberg in the current directory
  */
 export type RalphStatus =
   | 'running'    // Active lock held by running process
@@ -145,13 +145,13 @@ function formatDate(isoString: string): string {
 }
 
 /**
- * Determine the overall Ralph status
+ * Determine the overall RubeGoldberg status
  */
 function determineStatus(
   session: PersistedSessionState | null,
   lockCheck: LockCheckResult
 ): RalphStatus {
-  // Check if Ralph is actively running (lock held by running process)
+  // Check if RubeGoldberg is actively running (lock held by running process)
   if (lockCheck.isLocked) {
     return 'running';
   }
@@ -275,7 +275,7 @@ function printHumanStatus(
   // Display session info
   console.log('');
   console.log('═══════════════════════════════════════════════════════════════');
-  console.log('                    Ralph TUI Session Status                    ');
+  console.log('                    RubeGoldberg TUI Session Status                    ');
   console.log('═══════════════════════════════════════════════════════════════');
   console.log('');
 
@@ -369,7 +369,7 @@ function printHumanStatus(
     console.log('');
     console.log('  To restart: rube-goldberg-tui run --force');
   } else if (status === 'running') {
-    console.log('  Ralph is currently running.');
+    console.log('  RubeGoldberg is currently running.');
     console.log('');
     console.log('  To stop:    Use Ctrl+C in the running terminal');
   }
@@ -489,7 +489,7 @@ Exit Codes:
   2    Session failed or no session exists
 
 Description:
-  Shows information about any existing Ralph session including:
+  Shows information about any existing RubeGoldberg session including:
   - Current status (running, paused, completed, failed, no-session)
   - Progress (tasks completed, current iteration)
   - Elapsed time
@@ -506,9 +506,9 @@ Examples:
   rube-goldberg-tui status --cwd /path  # Check session in specific directory
 
 CI/Script Usage:
-  # Check if Ralph is done
+  # Check if RubeGoldberg is done
   if rube-goldberg-tui status --json | jq -e '.status == "completed"' > /dev/null; then
-    echo "Ralph completed successfully"
+    echo "RubeGoldberg completed successfully"
   fi
 
   # Get task progress

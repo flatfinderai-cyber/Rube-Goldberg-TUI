@@ -255,7 +255,7 @@ function CentralLoopIndicator() {
 
           {/* Text */}
           <span className="font-mono text-[10px] uppercase tracking-widest text-fg-muted">
-            Ralph
+            RubeGoldberg
           </span>
           <span className="font-mono text-lg font-bold tracking-tight text-accent-primary">
             LOOP
@@ -318,7 +318,7 @@ export function WorkflowVisualization() {
               The Execution Loop
             </h2>
             <p className="mx-auto max-w-2xl text-fg-secondary">
-              Ralph TUI orchestrates autonomous AI agents through a continuous
+              RubeGoldberg TUI orchestrates autonomous AI agents through a continuous
               four-step cycle, processing tasks until your entire backlog is
               complete.
             </p>

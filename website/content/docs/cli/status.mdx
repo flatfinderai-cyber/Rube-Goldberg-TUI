@@ -1,12 +1,12 @@
 ---
 title: status
-description: Check the current Ralph TUI session status for monitoring and CI integration.
+description: Check the current rube-goldberg TUI session status for monitoring and CI integration.
 ---
 
 ## Synopsis
 
 ```bash
-ralph-tui status [options]
+rube-goldberg-tui status [options]
 ```
 
 The `status` command displays the current session state without starting execution. It's designed for scripts, CI pipelines, and quick status checks.
@@ -28,7 +28,7 @@ Use `--json` for machine-readable output in automation scripts and CI/CD pipelin
 
 ```bash
 # Check status in current directory
-ralph-tui status
+rube-goldberg-tui status
 ```
 
 Example output:
@@ -45,7 +45,7 @@ Last Updated: 2024-01-15 14:32:00
 
 ```bash
 # Get JSON output for parsing
-ralph-tui status --json
+rube-goldberg-tui status --json
 ```
 
 Example JSON output:
@@ -73,7 +73,7 @@ Example JSON output:
 
 ```bash
 # Check status of a session in another project
-ralph-tui status --cwd /path/to/project
+rube-goldberg-tui status --cwd /path/to/project
 ```
 
 ## Status Values
@@ -93,8 +93,8 @@ The `--json` flag makes it easy to integrate with CI systems:
 
 ```bash
 #!/bin/bash
-# Check if Ralph is done
-status=$(ralph-tui status --json | jq -r '.status')
+# Check if rube-goldberg is done
+status=$(rube-goldberg-tui status --json | jq -r '.status')
 
 if [ "$status" = "completed" ]; then
   echo "All tasks completed!"
@@ -108,12 +108,12 @@ fi
 ### GitHub Actions Example
 
 ```yaml
-- name: Check Ralph Status
+- name: Check rube-goldberg Status
   run: |
-    status=$(ralph-tui status --json | jq -r '.status')
-    completed=$(ralph-tui status --json | jq -r '.tasks.completed')
-    total=$(ralph-tui status --json | jq -r '.tasks.total')
-    echo "Ralph: $completed/$total tasks completed (status: $status)"
+    status=$(rube-goldberg-tui status --json | jq -r '.status')
+    completed=$(rube-goldberg-tui status --json | jq -r '.tasks.completed')
+    total=$(rube-goldberg-tui status --json | jq -r '.tasks.total')
+    echo "rube-goldberg: $completed/$total tasks completed (status: $status)"
 ```
 
 ## Polling for Completion
@@ -128,7 +128,7 @@ interval=60   # Check every minute
 elapsed=0
 
 while [ $elapsed -lt $timeout ]; do
-  status=$(ralph-tui status --json | jq -r '.status')
+  status=$(rube-goldberg-tui status --json | jq -r '.status')
 
   if [ "$status" = "completed" ]; then
     echo "Done!"
@@ -145,7 +145,7 @@ exit 1
 
 ## Session File Location
 
-The status command looks for `.ralph-tui-session.json` in:
+The status command looks for `.rube-goldberg-tui-session.json` in:
 
 1. The directory specified by `--cwd`
 2. The current working directory (if `--cwd` not specified)

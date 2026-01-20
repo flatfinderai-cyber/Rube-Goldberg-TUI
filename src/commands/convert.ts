@@ -132,7 +132,7 @@ Options:
   --output, -o <path>    Output file path (default: ./prd.json, only for json format)
   --branch, -b <name>    Git branch name (prompts if not provided)
   --labels, -l <labels>  Labels to apply (comma-separated, beads format only)
-                         Default: "ralph" is always included for beads format
+                         Default: "rubeGoldberg" is always included for beads format
   --force, -f            Overwrite existing files without prompting
   --verbose, -v          Show detailed parsing output
   --help, -h             Show this help message
@@ -152,7 +152,7 @@ Description:
     - Creates an epic bead for the feature
     - Creates child beads for each user story
     - Sets up dependencies based on story order or explicit deps
-    - Applies the 'ralph' label to all created beads
+    - Applies the 'rubeGoldberg' label to all created beads
     - Runs bd sync after creation
     - Displays all created bead IDs
 
@@ -236,8 +236,8 @@ async function convertToBeads(
 ): Promise<BeadsConversionResult> {
   const storyIds: string[] = [];
 
-  // Ensure 'ralph' label is always included
-  const allLabels = ['ralph', ...labels.filter((l) => l !== 'ralph')];
+  // Ensure 'rubeGoldberg' label is always included
+  const allLabels = ['rubeGoldberg', ...labels.filter((l) => l !== 'rubeGoldberg')];
   const labelsStr = allLabels.join(',');
 
   // Step 1: Create the epic bead

@@ -90,7 +90,7 @@ export function Footer() {
                 <Terminal className="h-5 w-5 text-accent-primary" />
               </div>
               <span className="font-mono text-lg font-bold">
-                Ralph<span className="text-accent-primary">TUI</span>
+                RubeGoldberg<span className="text-accent-primary">TUI</span>
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-fg-secondary">
@@ -133,7 +133,7 @@ export function Footer() {
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             {/* Copyright */}
             <p className="text-sm text-fg-muted">
-              &copy; {currentYear} Ralph TUI. Open source under MIT License.
+              &copy; {currentYear} RubeGoldberg TUI. Open source under MIT License.
             </p>
           </div>
         </div>

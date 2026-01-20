@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Root layout component for the Ralph TUI website.
+ * ABOUTME: Root layout component for the RubeGoldberg TUI website.
  * Configures fonts, metadata, theme provider, and global layout with Header and Footer.
  */
 
@@ -23,8 +23,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'Ralph TUI - AI Agent Loop Orchestrator',
-    template: '%s | Ralph TUI',
+    default: 'RubeGoldberg TUI - AI Agent Loop Orchestrator',
+    template: '%s | RubeGoldberg TUI',
   },
   description:
     'An AI agent loop orchestrator that manages autonomous coding agents through intelligent task routing and continuous delivery. Automate your development workflow with PRD-driven task execution.',
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
     'developer tools',
     'continuous delivery',
   ],
-  authors: [{ name: 'Ralph TUI Team' }],
-  creator: 'Ralph TUI Team',
-  publisher: 'Ralph TUI',
+  authors: [{ name: 'RubeGoldberg TUI Team' }],
+  creator: 'RubeGoldberg TUI Team',
+  publisher: 'RubeGoldberg TUI',
   robots: {
     index: true,
     follow: true,
@@ -61,8 +61,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: BASE_URL,
-    siteName: 'Ralph TUI',
-    title: 'Ralph TUI - AI Agent Loop Orchestrator',
+    siteName: 'RubeGoldberg TUI',
+    title: 'RubeGoldberg TUI - AI Agent Loop Orchestrator',
     description:
       'An AI agent loop orchestrator that manages autonomous coding agents through intelligent task routing and continuous delivery.',
     images: [
@@ -70,14 +70,14 @@ export const metadata: Metadata = {
         url: '/og-image.svg',
         width: 1200,
         height: 630,
-        alt: 'Ralph TUI - AI Agent Loop Orchestrator',
+        alt: 'RubeGoldberg TUI - AI Agent Loop Orchestrator',
         type: 'image/svg+xml',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ralph TUI - AI Agent Loop Orchestrator',
+    title: 'RubeGoldberg TUI - AI Agent Loop Orchestrator',
     description:
       'An AI agent loop orchestrator that manages autonomous coding agents through intelligent task routing and continuous delivery.',
     images: ['/og-image.svg'],

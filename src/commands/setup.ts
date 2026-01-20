@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Setup command for Ralph TUI.
+ * ABOUTME: Setup command for RubeGoldberg TUI.
  * Runs the interactive setup wizard to create .rube-goldberg-tui/config.toml.
  */
 
@@ -39,7 +39,7 @@ export function parseSetupArgs(args: string[]): {
  */
 export function printSetupHelp(): void {
   console.log(`
-Ralph TUI Setup - Interactive Configuration Wizard
+RubeGoldberg TUI Setup - Interactive Configuration Wizard
 
 Usage: rube-goldberg-tui setup [options]
 
@@ -49,7 +49,7 @@ Options:
   --help, -h      Show this help message
 
 Description:
-  The setup wizard guides you through configuring Ralph TUI for your project.
+  The setup wizard guides you through configuring RubeGoldberg TUI for your project.
   It will ask you to:
 
   1. Select an issue tracker (beads, json, etc.)

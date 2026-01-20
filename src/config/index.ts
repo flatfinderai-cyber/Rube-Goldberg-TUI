@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Configuration loading and validation for Ralph TUI.
+ * ABOUTME: Configuration loading and validation for RubeGoldberg TUI.
  * Handles loading global and project configs, merging them, and validating the result.
  * Supports: ~/.config/rube-goldberg-tui/config.toml (global) and .rube-goldberg-tui/config.toml (project).
  */

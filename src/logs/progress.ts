@@ -169,7 +169,7 @@ export async function appendProgress(
     existing = await readFile(filePath, 'utf-8');
   } catch {
     // File doesn't exist yet - create with header
-    existing = `# Ralph Progress Log
+    existing = `# RubeGoldberg Progress Log
 
 This file tracks progress across iterations. It's automatically updated
 after each iteration and included in agent prompts for context.
@@ -254,7 +254,7 @@ export async function clearProgress(cwd: string): Promise<void> {
   const filePath = join(cwd, PROGRESS_FILE);
 
   try {
-    await writeFile(filePath, `# Ralph Progress Log
+    await writeFile(filePath, `# RubeGoldberg Progress Log
 
 This file tracks progress across iterations. It's automatically updated
 after each iteration and included in agent prompts for context.

@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Font configuration for the Ralph TUI website.
+ * ABOUTME: Font configuration for the RubeGoldberg TUI website.
  * Configures Inter for body text and Space Mono for code blocks.
  */
 

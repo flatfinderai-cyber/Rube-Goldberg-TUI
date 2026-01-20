@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Session and lock management for Ralph TUI.
+ * ABOUTME: Session and lock management for RubeGoldberg TUI.
  * Handles session persistence, lock files, and resume functionality.
  */
 
@@ -26,7 +26,7 @@ import type {
  * Directory for session data (relative to cwd)
  */
 const SESSION_DIR = '.rube-goldberg-tui';
-const LOCK_FILE = 'ralph.lock';
+const LOCK_FILE = 'rubeGoldberg.lock';
 const SESSION_FILE = 'session.json';
 
 /**

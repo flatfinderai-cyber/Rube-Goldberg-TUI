@@ -142,7 +142,7 @@ export function DocSearch({ open: controlledOpen, onOpenChange }: DocSearchProps
                   <div className="h-3 w-3 rounded-full bg-status-success/60" />
                 </div>
                 <span className="ml-2 font-mono text-xs text-fg-muted">
-                  ralph-search ~ docs
+                  rubeGoldberg-search ~ docs
                 </span>
               </div>
 
@@ -223,7 +223,7 @@ export function DocSearch({ open: controlledOpen, onOpenChange }: DocSearchProps
                   >
                     <QuickLinkItem
                       title="Getting Started"
-                      description="Introduction to Ralph TUI"
+                      description="Introduction to RubeGoldberg TUI"
                       href="/docs/getting-started/introduction"
                       onSelect={() => {
                         router.push('/docs/getting-started/introduction');

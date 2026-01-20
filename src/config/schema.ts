@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Zod schemas for Ralph TUI configuration validation.
+ * ABOUTME: Zod schemas for RubeGoldberg TUI configuration validation.
  * Provides runtime validation with helpful error messages for config files.
  */
 
@@ -43,7 +43,7 @@ export const RateLimitHandlingConfigSchema = z.object({
 /**
  * Notification sound mode schema
  */
-export const NotificationSoundModeSchema = z.enum(['off', 'system', 'ralph']);
+export const NotificationSoundModeSchema = z.enum(['off', 'system', 'rubeGoldberg']);
 
 /**
  * Notifications configuration schema

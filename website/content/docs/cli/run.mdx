@@ -1,18 +1,18 @@
 ---
 title: run
-description: Start the Ralph TUI execution loop to autonomously process tasks from your tracker.
+description: Start the rube-goldberg TUI execution loop to autonomously process tasks from your tracker.
 ---
 
 ## Synopsis
 
 ```bash
-ralph-tui run [options]
+rube-goldberg-tui run [options]
 ```
 
-The `run` command starts the autonomous execution loop. Ralph will select tasks, build prompts, execute your AI agent, detect completion, and repeat until all tasks are done or the iteration limit is reached.
+The `run` command starts the autonomous execution loop. rube-goldberg will select tasks, build prompts, execute your AI agent, detect completion, and repeat until all tasks are done or the iteration limit is reached.
 
 <Callout type="tip">
-Running `ralph-tui` without any command also starts the TUI interface, allowing you to navigate and start execution interactively.
+Running `rube-goldberg-tui` without any command also starts the TUI interface, allowing you to navigate and start execution interactively.
 </Callout>
 
 ## Options
@@ -44,8 +44,8 @@ Running `ralph-tui` without any command also starts the TUI interface, allowing 
 | Option | Description |
 |--------|-------------|
 | `--prompt <path>` | Custom prompt template file path |
-| `--output-dir <path>` | Directory for iteration logs (default: `.ralph-tui/iterations`) |
-| `--progress-file <path>` | Progress file for cross-iteration context (default: `.ralph-tui/progress.md`) |
+| `--output-dir <path>` | Directory for iteration logs (default: `.rube-goldberg-tui/iterations`) |
+| `--progress-file <path>` | Progress file for cross-iteration context (default: `.rube-goldberg-tui/progress.md`) |
 
 ### Display Options
 
@@ -61,7 +61,7 @@ The `--model` flag accepts different values depending on which agent you're usin
 ### Claude Agent
 
 ```bash
-ralph-tui run --agent claude --model <model>
+rube-goldberg-tui run --agent claude --model <model>
 ```
 
 | Model | Description |
@@ -73,7 +73,7 @@ ralph-tui run --agent claude --model <model>
 ### OpenCode Agent
 
 ```bash
-ralph-tui run --agent opencode --model <provider>/<model>
+rube-goldberg-tui run --agent opencode --model <provider>/<model>
 ```
 
 Models use `provider/model` format. Valid providers:
@@ -96,61 +96,61 @@ Model names within each provider are validated by the provider's API. If you spe
 
 ```bash
 # Run with a prd.json file
-ralph-tui run --prd ./prd.json
+rube-goldberg-tui run --prd ./prd.json
 
 # Limit to 5 iterations
-ralph-tui run --prd ./prd.json --iterations 5
+rube-goldberg-tui run --prd ./prd.json --iterations 5
 ```
 
 ### Using Beads Tracker
 
 ```bash
 # Run with a beads epic
-ralph-tui run --epic my-feature-epic
+rube-goldberg-tui run --epic my-feature-epic
 
 # Use beads-bv for intelligent task selection
-ralph-tui run --epic my-feature-epic --tracker beads-bv
+rube-goldberg-tui run --epic my-feature-epic --tracker beads-bv
 ```
 
 ### Agent & Model Override
 
 ```bash
 # Use Claude Opus for complex tasks
-ralph-tui run --prd ./prd.json --agent claude --model opus
+rube-goldberg-tui run --prd ./prd.json --agent claude --model opus
 
 # Use OpenCode with GPT-4
-ralph-tui run --prd ./prd.json --agent opencode --model openai/gpt-4o
+rube-goldberg-tui run --prd ./prd.json --agent opencode --model openai/gpt-4o
 ```
 
 ### Custom Prompt Template
 
 ```bash
 # Use a custom Handlebars template
-ralph-tui run --prd ./prd.json --prompt ./my-template.hbs
+rube-goldberg-tui run --prd ./prd.json --prompt ./my-template.hbs
 ```
 
 ### Headless Mode (CI/Scripts)
 
 ```bash
 # Run without TUI for automation
-ralph-tui run --prd ./prd.json --headless --iterations 10
+rube-goldberg-tui run --prd ./prd.json --headless --iterations 10
 ```
 
 ### Development Workflow
 
 ```bash
 # Add delay between iterations for monitoring
-ralph-tui run --prd ./prd.json --delay 5000
+rube-goldberg-tui run --prd ./prd.json --delay 5000
 
 # Custom output directory for logs
-ralph-tui run --prd ./prd.json --output-dir ./logs/ralph
+rube-goldberg-tui run --prd ./prd.json --output-dir ./logs/rube-goldberg
 ```
 
 ## Execution Flow
 
-When you run this command, Ralph:
+When you run this command, rube-goldberg:
 
-1. **Loads configuration** from `.ralph-tui/config.toml`
+1. **Loads configuration** from `.rube-goldberg-tui/config.toml`
 2. **Connects to tracker** (json, beads, or beads-bv)
 3. **Selects next task** based on priority and dependencies
 4. **Builds prompt** using the Handlebars template
@@ -162,14 +162,14 @@ When you run this command, Ralph:
 
 ## Session Persistence
 
-Ralph automatically saves state to `.ralph-tui-session.json`:
+rube-goldberg automatically saves state to `.rube-goldberg-tui-session.json`:
 
 - Current iteration number
 - Task statuses
 - Iteration history
 - Active task IDs (for crash recovery)
 
-If interrupted, use [`ralph-tui resume`](/docs/cli/resume) to continue.
+If interrupted, use [`rube-goldberg-tui resume`](/docs/cli/resume) to continue.
 
 ## Related Commands
 

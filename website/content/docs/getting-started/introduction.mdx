@@ -1,19 +1,19 @@
 ---
 title: Introduction
-description: Ralph TUI is an AI Agent Loop Orchestrator - a terminal UI for running AI coding agents autonomously through task lists.
+description: rube-goldberg TUI is an AI Agent Loop Orchestrator - a terminal UI for running AI coding agents autonomously through task lists.
 ---
 
-## What is Ralph TUI?
+## What is rube-goldberg TUI?
 
-Ralph TUI is an **AI Agent Loop Orchestrator** that automates the cycle of selecting tasks, building prompts, running AI agents, and detecting completion. Instead of manually copying task details into Claude Code or OpenCode, Ralph does it for you in a continuous loop.
+rube-goldberg TUI is an **AI Agent Loop Orchestrator** that automates the cycle of selecting tasks, building prompts, running AI agents, and detecting completion. Instead of manually copying task details into Claude Code or OpenCode, rube-goldberg does it for you in a continuous loop.
 
 <Callout type="tip">
-Ralph TUI connects your AI coding assistant (Claude Code, OpenCode) to your task tracker (prd.json, Beads) and runs them in an autonomous loop, completing tasks one-by-one with intelligent selection, error handling, and full visibility.
+rube-goldberg TUI connects your AI coding assistant (Claude Code, OpenCode) to your task tracker (prd.json, Beads) and runs them in an autonomous loop, completing tasks one-by-one with intelligent selection, error handling, and full visibility.
 </Callout>
 
 ## The Autonomous Loop
 
-Ralph TUI operates in a continuous execution cycle:
+rube-goldberg TUI operates in a continuous execution cycle:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -34,11 +34,11 @@ Ralph TUI operates in a continuous execution cycle:
 
 ## Key Concepts
 
-Understanding these core concepts will help you get the most out of Ralph TUI:
+Understanding these core concepts will help you get the most out of rube-goldberg TUI:
 
 ### Task Tracker
 
-Where your tasks live. Ralph TUI supports multiple tracker backends:
+Where your tasks live. rube-goldberg TUI supports multiple tracker backends:
 
 - **prd.json** - Simple JSON file format with no external dependencies
 - **Beads** - Git-backed issue tracker with hierarchy and dependencies
@@ -56,11 +56,11 @@ Handlebars templates that transform task data into agent prompts. You can custom
 
 ### Completion Detection
 
-When an agent outputs `<promise>COMPLETE</promise>`, Ralph TUI recognizes the task is done and moves to the next one. This token-based detection enables fully autonomous operation.
+When an agent outputs `<promise>COMPLETE</promise>`, rube-goldberg TUI recognizes the task is done and moves to the next one. This token-based detection enables fully autonomous operation.
 
 ### Session Persistence
 
-Ralph TUI saves state between runs. You can pause anytime, resume later, and even recover from crashes with work intact.
+rube-goldberg TUI saves state between runs. You can pause anytime, resume later, and even recover from crashes with work intact.
 
 ## Architecture Overview
 
@@ -72,13 +72,13 @@ The system consists of several components working together:
 - **Tracker Plugins** - Integrations with prd.json, Beads, and Beads+bv
 - **Prompt Templates** - Customizable Handlebars templates for agent instructions
 
-## Why Ralph TUI?
+## Why rube-goldberg TUI?
 
 <Callout type="info">
-Manual AI-assisted coding works well for single tasks, but becomes tedious when working through feature backlogs. Ralph TUI eliminates the copy-paste-wait cycle.
+Manual AI-assisted coding works well for single tasks, but becomes tedious when working through feature backlogs. rube-goldberg TUI eliminates the copy-paste-wait cycle.
 </Callout>
 
-**Without Ralph TUI:**
+**Without rube-goldberg TUI:**
 1. Open your task tracker
 2. Copy task details
 3. Paste into Claude Code
@@ -86,8 +86,8 @@ Manual AI-assisted coding works well for single tasks, but becomes tedious when 
 5. Mark task done
 6. Repeat...
 
-**With Ralph TUI:**
-1. Start Ralph
+**With rube-goldberg TUI:**
+1. Start rube-goldberg
 2. Watch the progress dashboard
 3. Coffee break ☕
 
@@ -98,4 +98,4 @@ Ready to get started? Here's where to go next:
 - **[Quick Start](/docs/getting-started/quick-start)** - Get up and running in 2 minutes
 - **[Installation](/docs/getting-started/installation)** - Detailed installation options
 - **[CLI Commands](/docs/cli/overview)** - Learn all available commands
-- **[Configuration](/docs/configuration/overview)** - Customize Ralph TUI for your workflow
+- **[Configuration](/docs/configuration/overview)** - Customize rube-goldberg TUI for your workflow

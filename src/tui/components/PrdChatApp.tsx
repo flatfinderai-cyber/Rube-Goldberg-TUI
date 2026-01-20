@@ -1,5 +1,5 @@
 /**
- * ABOUTME: PRD Chat application component for the Ralph TUI.
+ * ABOUTME: PRD Chat application component for the RubeGoldberg TUI.
  * Provides an interactive chat interface for generating PRDs using an AI agent.
  * After PRD generation, shows a split view with PRD preview and tracker options.
  */

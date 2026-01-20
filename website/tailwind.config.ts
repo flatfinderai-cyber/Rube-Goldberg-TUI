@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Tailwind CSS configuration with design tokens from the Ralph TUI theme.
+ * ABOUTME: Tailwind CSS configuration with design tokens from the RubeGoldberg TUI theme.
  * Uses CSS variables for dark/light mode theming support.
  */
 

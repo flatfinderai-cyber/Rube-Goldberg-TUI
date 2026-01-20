@@ -1,11 +1,11 @@
 ---
 title: Handlebars Reference
-description: Complete reference for Handlebars syntax and available template variables in Ralph TUI.
+description: Complete reference for Handlebars syntax and available template variables in rube-goldberg TUI.
 ---
 
 ## Handlebars Basics
 
-Ralph uses [Handlebars](https://handlebarsjs.com) for template rendering. Handlebars is a logic-less templating language that uses double curly braces for variable substitution.
+rube-goldberg uses [Handlebars](https://handlebarsjs.com) for template rendering. Handlebars is a logic-less templating language that uses double curly braces for variable substitution.
 
 ### Variable Substitution
 
@@ -69,7 +69,7 @@ Add template comments that won't appear in output:
 
 ## Available Variables
 
-Ralph provides these variables for template rendering:
+rube-goldberg provides these variables for template rendering:
 
 ### Task Information
 
@@ -126,7 +126,7 @@ The full description from your task tracker. For JSON (prd.json), this is the st
 
 ### acceptanceCriteria
 
-Extracted from task metadata or parsed from description. Ralph formats array-based criteria as a markdown checklist:
+Extracted from task metadata or parsed from description. rube-goldberg formats array-based criteria as a markdown checklist:
 
 ```handlebars
 {{#if acceptanceCriteria}}
@@ -170,7 +170,7 @@ When cross-iteration progress tracking is enabled, this contains a summary of re
 {{/if}}
 ```
 
-The progress file is managed automatically by Ralph and includes:
+The progress file is managed automatically by rube-goldberg and includes:
 - Notes from previous iterations
 - Insights and learnings
 - Context for the current task
@@ -247,10 +247,10 @@ Combine conditions for complex logic:
 
 ### Expression Escaping
 
-By default, Handlebars escapes HTML entities. Ralph disables this (using `noEscape: true`), so your content renders as-is:
+By default, Handlebars escapes HTML entities. rube-goldberg disables this (using `noEscape: true`), so your content renders as-is:
 
 ```handlebars
-{{!-- These render the same in Ralph --}}
+{{!-- These render the same in rube-goldberg --}}
 {{taskDescription}}
 {{{taskDescription}}}
 ```
@@ -319,7 +319,7 @@ When you have comma-separated values:
 {{/if}}
 ```
 
-Note: `labels` is already comma-joined by Ralph. For full control, access `task.labels` array directly.
+Note: `labels` is already comma-joined by rube-goldberg. For full control, access `task.labels` array directly.
 
 ### Date/Time Context
 
@@ -341,7 +341,7 @@ If a variable shows as empty:
 
 1. Check the variable name spelling
 2. Verify your tracker provides that data
-3. Use `ralph-tui template show` to see available data
+3. Use `rube-goldberg-tui template show` to see available data
 
 ### Syntax Errors
 

@@ -1,15 +1,15 @@
 ---
 title: Installation
-description: Install Ralph TUI using bun, npm, or from source. Includes prerequisites and agent setup.
+description: Install rube-goldberg TUI using bun, npm, or from source. Includes prerequisites and agent setup.
 ---
 
 ## Prerequisites
 
-Before installing Ralph TUI, ensure you have the following:
+Before installing rube-goldberg TUI, ensure you have the following:
 
 ### Bun Runtime
 
-Ralph TUI requires **Bun >= 1.0.0** as its runtime. While you can install the package using npm or pnpm, Bun must be installed to run ralph-tui because it uses [OpenTUI](https://github.com/anomalyco/opentui), which depends on Bun's native features.
+rube-goldberg TUI requires **Bun >= 1.0.0** as its runtime. While you can install the package using npm or pnpm, Bun must be installed to run rube-goldberg-tui because it uses [OpenTUI](https://github.com/anomalyco/opentui), which depends on Bun's native features.
 
 <TabsRoot defaultValue="unix">
   <TabsList>
@@ -43,7 +43,7 @@ bun --version
 
 ### AI Coding Agent
 
-Ralph TUI orchestrates AI coding agents. You'll need at least one installed:
+rube-goldberg TUI orchestrates AI coding agents. You'll need at least one installed:
 
 - **[Claude Code](https://code.claude.com/docs/en/overview)** - Anthropic's official CLI for Claude
 - **[OpenCode](https://opencode.ai/docs)** - Open-source alternative supporting multiple AI providers
@@ -63,52 +63,52 @@ Choose your preferred installation method:
   <TabsContent value="bun">
     ```bash
     # Install globally with Bun
-    bun install -g ralph-tui
+    bun install -g rube-goldberg-tui
 
     # Verify installation
-    ralph-tui --version
+    rube-goldberg-tui --version
     ```
 
-    Bun is the recommended package manager for Ralph TUI as it provides the fastest installation and best runtime compatibility.
+    Bun is the recommended package manager for rube-goldberg TUI as it provides the fastest installation and best runtime compatibility.
   </TabsContent>
   <TabsContent value="npm">
     ```bash
     # Install globally with npm
-    npm install -g ralph-tui
+    npm install -g rube-goldberg-tui
 
     # Verify installation
-    ralph-tui --version
+    rube-goldberg-tui --version
     ```
 
-    Note: Even when installed via npm, Ralph TUI requires Bun as its runtime.
+    Note: Even when installed via npm, rube-goldberg TUI requires Bun as its runtime.
   </TabsContent>
   <TabsContent value="pnpm">
     ```bash
     # Install globally with pnpm
-    pnpm add -g ralph-tui
+    pnpm add -g rube-goldberg-tui
 
     # Verify installation
-    ralph-tui --version
+    rube-goldberg-tui --version
     ```
 
-    Note: Even when installed via pnpm, Ralph TUI requires Bun as its runtime.
+    Note: Even when installed via pnpm, rube-goldberg TUI requires Bun as its runtime.
   </TabsContent>
   <TabsContent value="bunx">
     ```bash
     # Run directly without installing
-    bunx ralph-tui
+    bunx rube-goldberg-tui
 
     # Or with specific commands
-    bunx ralph-tui run --prd ./prd.json
+    bunx rube-goldberg-tui run --prd ./prd.json
     ```
 
-    Useful for trying Ralph TUI without a global installation.
+    Useful for trying rube-goldberg TUI without a global installation.
   </TabsContent>
   <TabsContent value="source">
     ```bash
     # Clone the repository
-    git clone https://github.com/subsy/ralph-tui.git
-    cd ralph-tui
+    git clone https://github.com/subsy/rube-goldberg-tui.git
+    cd rube-goldberg-tui
 
     # Install dependencies
     bun install
@@ -121,28 +121,28 @@ Choose your preferred installation method:
     bun link
     ```
 
-    Recommended for contributors or if you want to customize Ralph TUI.
+    Recommended for contributors or if you want to customize rube-goldberg TUI.
   </TabsContent>
 </TabsRoot>
 
 ## Post-Installation Setup
 
-After installation, initialize Ralph TUI in your project:
+After installation, initialize rube-goldberg TUI in your project:
 
 ```bash
 cd your-project
-ralph-tui setup
+rube-goldberg-tui setup
 ```
 
 The setup wizard will:
 
 1. **Detect agents** - Find installed AI coding agents (Claude Code, OpenCode)
-2. **Create configuration** - Generate `.ralph-tui/config.toml` with your preferences
+2. **Create configuration** - Generate `.rube-goldberg-tui/config.toml` with your preferences
 3. **Install skills** - Add bundled skills for PRD creation and task conversion
 4. **Detect trackers** - Optionally find existing prd.json or Beads setups
 
 <Callout type="tip">
-You can re-run `ralph-tui setup` at any time to reconfigure your project.
+You can re-run `rube-goldberg-tui setup` at any time to reconfigure your project.
 </Callout>
 
 ## Verifying Installation
@@ -150,28 +150,28 @@ You can re-run `ralph-tui setup` at any time to reconfigure your project.
 Run these commands to verify everything is set up correctly:
 
 ```bash
-# Check Ralph TUI version
-ralph-tui --version
+# Check rube-goldberg TUI version
+rube-goldberg-tui --version
 
 # List detected agents
-ralph-tui plugins agents
+rube-goldberg-tui plugins agents
 
 # List detected trackers
-ralph-tui plugins trackers
+rube-goldberg-tui plugins trackers
 
 # View current configuration
-ralph-tui config show
+rube-goldberg-tui config show
 ```
 
 ## Troubleshooting
 
 ### "Agent not found"
 
-If Ralph TUI can't find your AI agent:
+If rube-goldberg TUI can't find your AI agent:
 
 1. Verify the agent CLI is installed: `which claude` or `which opencode`
 2. Ensure the agent is in your PATH
-3. Run `ralph-tui plugins agents` to see detected agents
+3. Run `rube-goldberg-tui plugins agents` to see detected agents
 
 ### "bun: command not found"
 
@@ -216,7 +216,7 @@ If you encounter permission errors during global installation:
 
 ## Next Steps
 
-With Ralph TUI installed:
+With rube-goldberg TUI installed:
 
 - **[Quick Start](/docs/getting-started/quick-start)** - Get running in 2 minutes
 - **[CLI Commands](/docs/cli/overview)** - Learn all available commands

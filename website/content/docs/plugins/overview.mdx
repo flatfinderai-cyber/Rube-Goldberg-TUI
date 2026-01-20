@@ -1,11 +1,11 @@
 ---
 title: Plugin Architecture
-description: Understanding Ralph TUI's plugin system for agent and tracker integrations.
+description: Understanding rube-goldberg TUI's plugin system for agent and tracker integrations.
 ---
 
 ## Plugin Architecture
 
-Ralph TUI uses a plugin system to support multiple AI agents and task trackers. This modular design lets you choose the tools that best fit your workflow.
+rube-goldberg TUI uses a plugin system to support multiple AI agents and task trackers. This modular design lets you choose the tools that best fit your workflow.
 
 <Callout type="info">
 Plugins are independent - any agent can work with any tracker. Use Claude Code with Beads, or OpenCode with prd.json, or any combination.
@@ -13,7 +13,7 @@ Plugins are independent - any agent can work with any tracker. Use Claude Code w
 
 ## Two Plugin Types
 
-Ralph TUI has two categories of plugins:
+rube-goldberg TUI has two categories of plugins:
 
 ### Agent Plugins
 
@@ -47,7 +47,7 @@ Tracker plugins connect to task management systems. They handle:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         Ralph TUI                               │
+│                         rube-goldberg TUI                               │
 │                                                                 │
 │  ┌──────────────┐                         ┌──────────────┐     │
 │  │   Tracker    │──── Get Next Task ─────▶│   Engine     │     │
@@ -110,7 +110,7 @@ The execution engine orchestrates plugins:
     Start with the **JSON tracker** and **Claude Code agent**:
 
     ```bash
-    ralph-tui run --prd ./prd.json --agent claude
+    rube-goldberg-tui run --prd ./prd.json --agent claude
     ```
 
     No external dependencies needed - just create a `prd.json` file and go.
@@ -119,7 +119,7 @@ The execution engine orchestrates plugins:
     Use **Beads tracker** for git-backed issue tracking:
 
     ```bash
-    ralph-tui run --tracker beads --epic my-epic
+    rube-goldberg-tui run --tracker beads --epic my-epic
     ```
 
     Issues sync across team members via git.
@@ -128,7 +128,7 @@ The execution engine orchestrates plugins:
     Use **Beads-BV tracker** for intelligent task selection:
 
     ```bash
-    ralph-tui run --tracker beads-bv --epic my-epic
+    rube-goldberg-tui run --tracker beads-bv --epic my-epic
     ```
 
     BV uses PageRank and critical path analysis to pick tasks that unblock the most work.
@@ -142,7 +142,7 @@ The execution engine orchestrates plugins:
 Set default plugins in your config file:
 
 ```toml
-# .ralph-tui/config.toml
+# .rube-goldberg-tui/config.toml
 agent = "claude"
 tracker = "json"
 
@@ -155,7 +155,7 @@ model = "sonnet"
 Override config with CLI flags:
 
 ```bash
-ralph-tui run --agent opencode --tracker beads-bv --epic my-epic
+rube-goldberg-tui run --agent opencode --tracker beads-bv --epic my-epic
 ```
 
 ### Multiple Plugin Configs
@@ -178,7 +178,7 @@ default = true
 model = "opus"
 
 # Switch between them
-# ralph-tui run --agent claude-fast
+# rube-goldberg-tui run --agent claude-fast
 ```
 
 ## Plugin Interface

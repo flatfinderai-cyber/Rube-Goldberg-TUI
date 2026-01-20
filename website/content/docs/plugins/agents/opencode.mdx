@@ -1,6 +1,6 @@
 ---
 title: OpenCode Agent
-description: Use OpenCode CLI with multiple AI providers in Ralph TUI.
+description: Use OpenCode CLI with multiple AI providers in rube-goldberg TUI.
 ---
 
 ## OpenCode Agent
@@ -8,7 +8,7 @@ description: Use OpenCode CLI with multiple AI providers in Ralph TUI.
 The OpenCode agent plugin integrates with the `opencode` CLI, an open-source AI coding assistant that supports multiple providers including Anthropic, OpenAI, Google, xAI, and Ollama.
 
 <Callout type="tip">
-OpenCode lets you use any supported AI provider with Ralph TUI, including local models via Ollama.
+OpenCode lets you use any supported AI provider with rube-goldberg TUI, including local models via Ollama.
 </Callout>
 
 ## Prerequisites
@@ -32,7 +32,7 @@ opencode --version
     Use the `--agent opencode` flag:
 
     ```bash
-    ralph-tui run --prd ./prd.json --agent opencode
+    rube-goldberg-tui run --prd ./prd.json --agent opencode
     ```
   </Step>
 
@@ -40,7 +40,7 @@ opencode --version
     Specify provider and model with `--model`:
 
     ```bash
-    ralph-tui run --prd ./prd.json --agent opencode --model anthropic/claude-3-5-sonnet
+    rube-goldberg-tui run --prd ./prd.json --agent opencode --model anthropic/claude-3-5-sonnet
     ```
   </Step>
 </Steps>
@@ -52,7 +52,7 @@ opencode --version
 Basic configuration:
 
 ```toml
-# .ralph-tui/config.toml
+# .rube-goldberg-tui/config.toml
 agent = "opencode"
 
 [agentOptions]
@@ -128,7 +128,7 @@ OpenCode supports multiple AI providers. Models are specified in `provider/model
 ```
 
 <Callout type="info">
-Model names are validated by the provider's API. Invalid model names result in errors from OpenCode, not Ralph TUI.
+Model names are validated by the provider's API. Invalid model names result in errors from OpenCode, not rube-goldberg TUI.
 </Callout>
 
 ## Agent Types
@@ -149,12 +149,12 @@ agent = "build"
 ```
 
 <Callout type="warning">
-Using non-default agent types may trigger warning messages in OpenCode output. Ralph TUI filters these automatically, but you may see them if running OpenCode directly.
+Using non-default agent types may trigger warning messages in OpenCode output. rube-goldberg TUI filters these automatically, but you may see them if running OpenCode directly.
 </Callout>
 
 ## File Context
 
-OpenCode supports attaching files via the `--file` flag. Ralph TUI extracts file paths from your task and adds them automatically:
+OpenCode supports attaching files via the `--file` flag. rube-goldberg TUI extracts file paths from your task and adds them automatically:
 
 ```bash
 opencode run --file /path/to/context.ts
@@ -164,7 +164,7 @@ Multiple files can be attached - each gets its own `--file` argument.
 
 ## How It Works
 
-When Ralph TUI executes a task with OpenCode:
+When rube-goldberg TUI executes a task with OpenCode:
 
 1. **Build command**: Constructs `opencode run [options]`
 2. **Pass prompt via stdin**: Avoids shell escaping issues
@@ -175,7 +175,7 @@ When Ralph TUI executes a task with OpenCode:
 
 ### CLI Arguments
 
-Ralph TUI builds these arguments:
+rube-goldberg TUI builds these arguments:
 
 ```bash
 opencode run \
@@ -188,7 +188,7 @@ opencode run \
 
 ### Output Filtering
 
-OpenCode emits metadata lines during execution (tool calls, progress indicators). Ralph TUI filters these for cleaner output:
+OpenCode emits metadata lines during execution (tool calls, progress indicators). rube-goldberg TUI filters these for cleaner output:
 
 - Lines starting with `| ` or `! ` (status lines)
 - Progress indicators like `[1/3]`
@@ -245,7 +245,7 @@ With Ollama, you can run models locally:
     ```
   </Step>
 
-  <Step title="Configure Ralph TUI">
+  <Step title="Configure rube-goldberg TUI">
     ```toml
     agent = "opencode"
 
@@ -257,7 +257,7 @@ With Ollama, you can run models locally:
 
   <Step title="Run">
     ```bash
-    ralph-tui run --prd ./prd.json
+    rube-goldberg-tui run --prd ./prd.json
     ```
   </Step>
 </Steps>

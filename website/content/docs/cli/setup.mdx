@@ -1,24 +1,24 @@
 ---
 title: setup
-description: Run the interactive setup wizard to configure Ralph TUI for your project.
+description: Run the interactive setup wizard to configure rube-goldberg TUI for your project.
 ---
 
 ## Synopsis
 
 ```bash
-ralph-tui setup
+rube-goldberg-tui setup
 ```
 
-The `setup` command runs an interactive wizard that configures Ralph TUI for your project. It detects available agents, creates configuration files, and installs bundled skills.
+The `setup` command runs an interactive wizard that configures rube-goldberg TUI for your project. It detects available agents, creates configuration files, and installs bundled skills.
 
 <Callout type="tip">
-Running `ralph-tui setup` is the recommended first step when starting with Ralph TUI in a new project.
+Running `rube-goldberg-tui setup` is the recommended first step when starting with rube-goldberg TUI in a new project.
 </Callout>
 
 ## Aliases
 
 ```bash
-ralph-tui init    # Same as setup
+rube-goldberg-tui init    # Same as setup
 ```
 
 ## What Setup Does
@@ -35,7 +35,7 @@ The interactive wizard performs these steps:
   </Step>
 
   <Step title="Create Configuration">
-    Creates `.ralph-tui/config.toml` with your selected options:
+    Creates `.rube-goldberg-tui/config.toml` with your selected options:
     - Default agent and tracker
     - Model preferences
     - Error handling strategy
@@ -44,9 +44,9 @@ The interactive wizard performs these steps:
 
   <Step title="Install Skills">
     Installs bundled skills for PRD creation and task conversion:
-    - `ralph-tui-prd` - AI-powered PRD creation
-    - `ralph-tui-create-json` - Convert PRD to prd.json
-    - `ralph-tui-create-beads` - Convert PRD to Beads issues
+    - `rube-goldberg-tui-prd` - AI-powered PRD creation
+    - `rube-goldberg-tui-create-json` - Convert PRD to prd.json
+    - `rube-goldberg-tui-create-beads` - Convert PRD to Beads issues
   </Step>
 
   <Step title="Detect Existing Trackers">
@@ -63,13 +63,13 @@ The interactive wizard performs these steps:
 
 ```bash
 cd your-project
-ralph-tui setup
+rube-goldberg-tui setup
 ```
 
 Example interaction:
 
 ```
-Welcome to Ralph TUI Setup!
+Welcome to rube-goldberg TUI Setup!
 
 Detecting installed agents...
 ✓ Found: claude (Claude Code)
@@ -88,24 +88,24 @@ Detecting installed agents...
 ❯ 10
 
 Creating configuration...
-✓ Created .ralph-tui/config.toml
+✓ Created .rube-goldberg-tui/config.toml
 
 Installing skills...
-✓ Installed ralph-tui-prd
-✓ Installed ralph-tui-create-json
-✓ Installed ralph-tui-create-beads
+✓ Installed rube-goldberg-tui-prd
+✓ Installed rube-goldberg-tui-create-json
+✓ Installed rube-goldberg-tui-create-beads
 
 Setup complete! Next steps:
-1. Create a PRD: ralph-tui create-prd --chat
-2. Start Ralph: ralph-tui run --prd ./prd.json
+1. Create a PRD: rube-goldberg-tui create-prd --chat
+2. Start rube-goldberg: rube-goldberg-tui run --prd ./prd.json
 ```
 
 ## Configuration Created
 
-Setup creates `.ralph-tui/config.toml`:
+Setup creates `.rube-goldberg-tui/config.toml`:
 
 ```toml
-# .ralph-tui/config.toml (created by setup)
+# .rube-goldberg-tui/config.toml (created by setup)
 
 # Default tracker and agent
 tracker = "json"
@@ -131,9 +131,9 @@ Skills are installed to your Claude Code skills directory:
 
 | Skill | Location | Purpose |
 |-------|----------|---------|
-| `ralph-tui-prd` | `~/.claude-code/skills/` | AI-powered PRD creation |
-| `ralph-tui-create-json` | `~/.claude-code/skills/` | Convert PRD to JSON tasks |
-| `ralph-tui-create-beads` | `~/.claude-code/skills/` | Convert PRD to Beads issues |
+| `rube-goldberg-tui-prd` | `~/.claude-code/skills/` | AI-powered PRD creation |
+| `rube-goldberg-tui-create-json` | `~/.claude-code/skills/` | Convert PRD to JSON tasks |
+| `rube-goldberg-tui-create-beads` | `~/.claude-code/skills/` | Convert PRD to Beads issues |
 
 <Callout type="info">
 Skills require Claude Code. If using OpenCode, you can still create PRDs using the built-in template mode.
@@ -141,15 +141,15 @@ Skills require Claude Code. If using OpenCode, you can still create PRDs using t
 
 ## Skipping Setup
 
-If you want to run Ralph without the interactive setup:
+If you want to run rube-goldberg without the interactive setup:
 
 ```bash
 # Skip setup and use defaults
-ralph-tui run --prd ./prd.json --no-setup
+rube-goldberg-tui run --prd ./prd.json --no-setup
 
 # Or create config manually
-mkdir -p .ralph-tui
-cat > .ralph-tui/config.toml << 'EOF'
+mkdir -p .rube-goldberg-tui
+cat > .rube-goldberg-tui/config.toml << 'EOF'
 tracker = "json"
 agent = "claude"
 maxIterations = 10
@@ -162,7 +162,7 @@ You can run setup again to update your configuration:
 
 ```bash
 # Re-run setup (will ask before overwriting)
-ralph-tui setup
+rube-goldberg-tui setup
 ```
 
 <Callout type="warning">

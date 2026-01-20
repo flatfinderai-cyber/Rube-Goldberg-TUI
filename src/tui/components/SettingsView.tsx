@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Settings view component for configuring Ralph TUI.
+ * ABOUTME: Settings view component for configuring RubeGoldberg TUI.
  * Displays current configuration values and allows modification.
  * Changes are persisted to .rube-goldberg-tui/config.toml in the project directory.
  */
@@ -159,8 +159,8 @@ function buildSettingDefinitions(
       key: 'notificationSound',
       label: 'Notif Sound',
       type: 'select',
-      description: 'Sound mode: off, system (OS default), or ralph (Wiggum quotes)',
-      options: ['off', 'system', 'ralph'],
+      description: 'Sound mode: off, system (OS default), or rubeGoldberg (Wiggum quotes)',
+      options: ['off', 'system', 'rubeGoldberg'],
       getValue: (config) => config.notifications?.sound ?? 'off',
       setValue: (config, value) => ({
         ...config,

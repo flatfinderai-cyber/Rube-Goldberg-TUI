@@ -97,7 +97,7 @@ Options:
   --help, -h   Show this help message
 
 Description:
-  Opens the Ralph TUI documentation in your default web browser.
+  Opens the RubeGoldberg TUI documentation in your default web browser.
   Use --url to just print the URL if you prefer to open it manually.
 
 Examples:

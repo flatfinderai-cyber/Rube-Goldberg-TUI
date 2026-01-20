@@ -1,7 +1,7 @@
 /**
  * ABOUTME: Custom MDX components registry for documentation pages.
  * Maps HTML elements and custom components for MDX rendering with
- * terminal-inspired styling consistent with the Ralph TUI theme.
+ * terminal-inspired styling consistent with the RubeGoldberg TUI theme.
  */
 
 import type { MDXComponents } from 'mdx/types';

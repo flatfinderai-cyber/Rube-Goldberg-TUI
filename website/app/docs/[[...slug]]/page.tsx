@@ -38,8 +38,8 @@ export async function generateMetadata({ params }: DocPageProps) {
   // If no slug, we'll redirect in the page component
   if (!resolvedParams.slug || resolvedParams.slug.length === 0) {
     return {
-      title: 'Documentation - Ralph TUI',
-      description: 'Ralph TUI documentation',
+      title: 'Documentation - RubeGoldberg TUI',
+      description: 'RubeGoldberg TUI documentation',
     };
   }
   const slugPath = resolvedParams.slug.join('/');
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: DocPageProps) {
   } catch {
     return {
       title: 'Documentation',
-      description: 'Ralph TUI documentation',
+      description: 'RubeGoldberg TUI documentation',
     };
   }
 }

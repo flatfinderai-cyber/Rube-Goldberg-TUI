@@ -114,7 +114,7 @@ const FEATURES: Feature[] = [
     id: 'faithful-origins',
     title: 'True to Origins',
     description:
-      "Designed to be faithful to Geoffrey Huntley's original Ralph approach — autonomous agents working through task backlogs.",
+      "Designed to be faithful to Geoffrey Huntley's original RubeGoldberg approach — autonomous agents working through task backlogs.",
     icon: Heart,
     accentColor: 'text-status-error',
     glowColor: 'rgba(247, 118, 142, 0.35)',

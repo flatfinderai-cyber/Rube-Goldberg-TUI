@@ -222,7 +222,7 @@ function getAcceptanceCriteria(task: TrackerTask): string {
 /**
  * Build template variables from task and config.
  * @param task The current task
- * @param config The ralph configuration
+ * @param config The rubeGoldberg configuration
  * @param epic Optional epic information
  * @returns The flattened template variables
  */
@@ -259,7 +259,7 @@ export function buildTemplateVariables(
 /**
  * Build full template context for rendering.
  * @param task The current task
- * @param config The ralph configuration
+ * @param config The rubeGoldberg configuration
  * @param epic Optional epic information
  * @param recentProgress Optional recent progress summary
  * @returns The template context
@@ -306,7 +306,7 @@ function compileTemplate(
 /**
  * Render a prompt from a template and task context.
  * @param task The current task
- * @param config The ralph configuration
+ * @param config The rubeGoldberg configuration
  * @param epic Optional epic information
  * @param recentProgress Optional recent progress summary from previous iterations
  * @returns The render result with the prompt or error
@@ -371,10 +371,10 @@ export function clearTemplateCache(): void {
 /**
  * Get the path where a custom template should be written for initialization.
  * @param cwd The working directory
- * @param filename Optional custom filename (default: 'ralph-prompt.hbs')
+ * @param filename Optional custom filename (default: 'rubeGoldberg-prompt.hbs')
  * @returns The full path for the custom template
  */
-export function getCustomTemplatePath(cwd: string, filename = 'ralph-prompt.hbs'): string {
+export function getCustomTemplatePath(cwd: string, filename = 'rubeGoldberg-prompt.hbs'): string {
   return path.join(cwd, filename);
 }
 

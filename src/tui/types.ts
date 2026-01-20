@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Type definitions for Ralph TUI components.
+ * ABOUTME: Type definitions for RubeGoldberg TUI components.
  * Defines the data structures and props used across the TUI layout components.
  */
 
@@ -74,7 +74,7 @@ export interface TaskItem {
  * Also displays selected agent and tracker plugin names for configuration visibility.
  */
 export interface HeaderProps {
-  /** Current Ralph execution status */
+  /** Current RubeGoldberg execution status */
   status: RalphStatus;
   /** Elapsed time in seconds */
   elapsedTime: number;

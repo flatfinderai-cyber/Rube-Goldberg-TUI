@@ -83,7 +83,7 @@ export async function ensureIterationsDir(cwd: string, customDir?: string): Prom
  * Options for building iteration metadata.
  */
 export interface BuildMetadataOptions {
-  /** Ralph config (for agent plugin, model, epicId) */
+  /** RubeGoldberg config (for agent plugin, model, epicId) */
   config?: Partial<RalphConfig>;
 
   /** Agent switches that occurred during this iteration */
@@ -277,7 +277,7 @@ function parseMetadataHeader(header: string): IterationLogMetadata | null {
  * Options for saving iteration logs.
  */
 export interface SaveIterationLogOptions {
-  /** Ralph config (for output directory, agent plugin, model, epicId) */
+  /** RubeGoldberg config (for output directory, agent plugin, model, epicId) */
   config?: Partial<RalphConfig>;
 
   /** Subagent trace data to persist (optional) */

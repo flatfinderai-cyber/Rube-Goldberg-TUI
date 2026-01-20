@@ -1,18 +1,18 @@
 ---
 title: resume
-description: Resume an interrupted Ralph TUI session from where it left off.
+description: Resume an interrupted rube-goldberg TUI session from where it left off.
 ---
 
 ## Synopsis
 
 ```bash
-ralph-tui resume [options]
+rube-goldberg-tui resume [options]
 ```
 
-The `resume` command continues execution from a previously interrupted session. Ralph loads the saved session state and picks up where it left off, automatically resetting any stale "in_progress" tasks.
+The `resume` command continues execution from a previously interrupted session. rube-goldberg loads the saved session state and picks up where it left off, automatically resetting any stale "in_progress" tasks.
 
 <Callout type="tip">
-Session state is automatically saved to `.ralph-tui-session.json`. You can resume even after crashes or forced exits.
+Session state is automatically saved to `.rube-goldberg-tui-session.json`. You can resume even after crashes or forced exits.
 </Callout>
 
 ## Options
@@ -29,33 +29,33 @@ Session state is automatically saved to `.ralph-tui-session.json`. You can resum
 
 ```bash
 # Resume from current directory
-ralph-tui resume
+rube-goldberg-tui resume
 
 # Resume headless for CI pipelines
-ralph-tui resume --headless
+rube-goldberg-tui resume --headless
 ```
 
 ### Resume from Different Directory
 
 ```bash
 # Resume a session in another project
-ralph-tui resume --cwd /path/to/project
+rube-goldberg-tui resume --cwd /path/to/project
 ```
 
 ### Force Override Stale Lock
 
 ```bash
 # Override if previous instance crashed
-ralph-tui resume --force
+rube-goldberg-tui resume --force
 ```
 
 <Callout type="warning">
-Only use `--force` when you're certain no other Ralph instance is running. Using it while another instance is active can cause conflicts.
+Only use `--force` when you're certain no other rube-goldberg instance is running. Using it while another instance is active can cause conflicts.
 </Callout>
 
 ## What Gets Restored
 
-When you resume a session, Ralph restores:
+When you resume a session, rube-goldberg restores:
 
 - **Iteration number** - Continues counting from where you left off
 - **Task statuses** - Completed tasks remain completed
@@ -64,7 +64,7 @@ When you resume a session, Ralph restores:
 
 ## Handling Stale Tasks
 
-If Ralph was interrupted while a task was "in_progress", resume automatically:
+If rube-goldberg was interrupted while a task was "in_progress", resume automatically:
 
 1. Detects tasks stuck in "in_progress" state
 2. Resets them to "open" status
@@ -74,7 +74,7 @@ This ensures no tasks are permanently stuck due to crashes.
 
 ## Session Lock
 
-Ralph uses a lock mechanism to prevent multiple instances:
+rube-goldberg uses a lock mechanism to prevent multiple instances:
 
 - The session file includes a lock timestamp
 - If the lock is stale (older than a threshold), resume can proceed
@@ -85,9 +85,9 @@ Ralph uses a lock mechanism to prevent multiple instances:
 <Steps>
   <Step title="Start Execution">
     ```bash
-    ralph-tui run --prd ./prd.json
+    rube-goldberg-tui run --prd ./prd.json
     ```
-    Ralph begins processing tasks.
+    rube-goldberg begins processing tasks.
   </Step>
 
   <Step title="Interrupt">
@@ -97,9 +97,9 @@ Ralph uses a lock mechanism to prevent multiple instances:
 
   <Step title="Resume Later">
     ```bash
-    ralph-tui resume
+    rube-goldberg-tui resume
     ```
-    Ralph continues from where it left off.
+    rube-goldberg continues from where it left off.
   </Step>
 </Steps>
 
@@ -107,23 +107,23 @@ Ralph uses a lock mechanism to prevent multiple instances:
 
 ### "Session lock exists"
 
-Another Ralph instance may be running, or a previous instance crashed:
+Another rube-goldberg instance may be running, or a previous instance crashed:
 
 ```bash
 # Check if another instance is running
-ps aux | grep ralph-tui
+ps aux | grep rube-goldberg-tui
 
 # If not, force resume
-ralph-tui resume --force
+rube-goldberg-tui resume --force
 ```
 
 ### "No session found"
 
-No `.ralph-tui-session.json` file exists in the working directory:
+No `.rube-goldberg-tui-session.json` file exists in the working directory:
 
 ```bash
 # Start a new session instead
-ralph-tui run --prd ./prd.json
+rube-goldberg-tui run --prd ./prd.json
 ```
 
 ### "Task stuck in_progress"

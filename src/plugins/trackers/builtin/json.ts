@@ -268,7 +268,7 @@ function statusToPasses(status: TrackerTaskStatus): boolean {
  * Convert a PrdUserStory to TrackerTask.
  */
 function storyToTask(story: PrdUserStory, parentName?: string): TrackerTask {
-  // Use notes or completionNotes (notes takes precedence as it's the Ralph standard)
+  // Use notes or completionNotes (notes takes precedence as it's the RubeGoldberg standard)
   const notes = story.notes || story.completionNotes;
 
   return {

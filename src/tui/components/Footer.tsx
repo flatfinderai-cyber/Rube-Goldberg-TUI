@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Footer component for the Ralph TUI.
+ * ABOUTME: Footer component for the RubeGoldberg TUI.
  * Displays keyboard shortcuts for user reference.
  */
 

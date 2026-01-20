@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Configuration management commands for Ralph TUI.
+ * ABOUTME: Configuration management commands for RubeGoldberg TUI.
  * Provides 'config show' to display merged configuration with source info.
  */
 
@@ -62,7 +62,7 @@ function formatMergedConfig(config: StoredConfig): string {
     lines.push('│   defaultTracker = "beads-bv"');
     lines.push('│   maxIterations = 10');
     lines.push('│   iterationDelay = 1000');
-    lines.push('│   outputDir = ".ralph-output"');
+    lines.push('│   outputDir = ".rubeGoldberg-output"');
   } else {
     // Serialize to TOML and add pipe prefix for box alignment
     const toml = serializeConfig(config);
@@ -94,7 +94,7 @@ export async function executeConfigShowCommand(args: string[]): Promise<void> {
   const { config, source } = await loadStoredConfigWithSource(cwd);
 
   // Display
-  console.log('Ralph TUI Configuration');
+  console.log('RubeGoldberg TUI Configuration');
   console.log('═'.repeat(56));
 
   // Source information
@@ -122,7 +122,7 @@ export async function executeConfigShowCommand(args: string[]): Promise<void> {
  */
 export function printConfigHelp(): void {
   console.log(`
-Ralph TUI Configuration Commands
+RubeGoldberg TUI Configuration Commands
 
 Usage: rube-goldberg-tui config <command> [options]
 

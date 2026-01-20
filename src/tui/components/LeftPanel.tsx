@@ -1,5 +1,5 @@
 /**
- * ABOUTME: LeftPanel component for the Ralph TUI.
+ * ABOUTME: LeftPanel component for the RubeGoldberg TUI.
  * Displays the task list with status indicators (done/active/pending/blocked).
  */
 

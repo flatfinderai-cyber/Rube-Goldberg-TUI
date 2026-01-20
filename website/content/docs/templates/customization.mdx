@@ -5,7 +5,7 @@ description: Create and customize prompt templates to match your workflow and pr
 
 ## Why Customize Templates?
 
-While Ralph's built-in templates work for most projects, customization lets you:
+While rube-goldberg's built-in templates work for most projects, customization lets you:
 
 - Add project-specific instructions or quality gates
 - Include additional context like code style guidelines
@@ -17,13 +17,13 @@ While Ralph's built-in templates work for most projects, customization lets you:
 The fastest way to get started is copying the built-in template:
 
 ```bash
-ralph-tui template init
+rube-goldberg-tui template init
 ```
 
-This creates `.ralph-tui-prompt.hbs` in your project root, pre-populated with the current template for your tracker type.
+This creates `.rube-goldberg-tui-prompt.hbs` in your project root, pre-populated with the current template for your tracker type.
 
 <Callout type="tip">
-The `.hbs` extension stands for Handlebars, the templating engine Ralph uses. You can also use `.md` or any other extension—Ralph just reads the file content.
+The `.hbs` extension stands for Handlebars, the templating engine rube-goldberg uses. You can also use `.md` or any other extension—rube-goldberg just reads the file content.
 </Callout>
 
 ## Template Locations
@@ -34,23 +34,23 @@ Create a template in your project directory:
 
 ```
 your-project/
-├── .ralph-tui/
+├── .rube-goldberg-tui/
 │   └── config.toml
-├── .ralph-tui-prompt.hbs    # Custom template here
+├── .rube-goldberg-tui-prompt.hbs    # Custom template here
 └── ...
 ```
 
 Reference it in your config:
 
 ```toml
-# .ralph-tui/config.toml
-prompt_template = ".ralph-tui-prompt.hbs"
+# .rube-goldberg-tui/config.toml
+prompt_template = ".rube-goldberg-tui-prompt.hbs"
 ```
 
 Or pass it via CLI:
 
 ```bash
-ralph-tui run --prompt .ralph-tui-prompt.hbs
+rube-goldberg-tui run --prompt .rube-goldberg-tui-prompt.hbs
 ```
 
 ### User-Level Templates
@@ -58,7 +58,7 @@ ralph-tui run --prompt .ralph-tui-prompt.hbs
 For templates that apply across all your projects, use the config directory:
 
 ```
-~/.config/ralph-tui/
+~/.config/rube-goldberg-tui/
 ├── config.toml              # Global config
 ├── prompt.md                # Default for JSON tracker
 └── prompt-beads.md          # Default for Beads trackers
@@ -67,7 +67,7 @@ For templates that apply across all your projects, use the config directory:
 Initialize user-level templates with:
 
 ```bash
-ralph-tui template init --global
+rube-goldberg-tui template init --global
 ```
 
 ## Creating a Custom Template
@@ -321,7 +321,7 @@ When finished, signal completion with:
 
 ## Cross-Iteration Progress Tracking
 
-Ralph maintains a **progress file** (`.ralph-tui/progress.md`) that summarizes work completed across iterations. Use the `{{recentProgress}}` variable to include this summary in your prompts:
+rube-goldberg maintains a **progress file** (`.rube-goldberg-tui/progress.md`) that summarizes work completed across iterations. Use the `{{recentProgress}}` variable to include this summary in your prompts:
 
 ```handlebars
 {{#if recentProgress}}
@@ -338,21 +338,21 @@ Ralph maintains a **progress file** (`.ralph-tui/progress.md`) that summarizes w
 - Agents have their own context/caching that benefits from summary over full logs
 - You want to avoid redundant file analysis between iterations
 
-**Default behavior**: Ralph's built-in OOTB templates now include `{{recentProgress}}` to help agents understand context without receiving full iteration history.
+**Default behavior**: rube-goldberg's built-in OOTB templates now include `{{recentProgress}}` to help agents understand context without receiving full iteration history.
 
 ### How It Works
 
-1. After each iteration, Ralph extracts key information to `{{progressFile}}` (default: `.ralph-tui/progress.md`)
+1. After each iteration, rube-goldberg extracts key information to `{{progressFile}}` (default: `.rube-goldberg-tui/progress.md`)
 2. On subsequent iterations, the content is available as `{{recentProgress}}`
 3. The summary includes completed tasks, key changes, and notes from previous work
 
 <Callout type="info">
-The progress file is distinct from iteration logs (`.ralph-tui/iterations/`). Use `{{recentProgress}}` for context and `ralph-tui logs` for detailed debugging.
+The progress file is distinct from iteration logs (`.rube-goldberg-tui/iterations/`). Use `{{recentProgress}}` for context and `rube-goldberg-tui logs` for detailed debugging.
 </Callout>
 
 ### Customizing Progress Content
 
-The progress file is managed by Ralph's engine. To customize what gets included:
+The progress file is managed by rube-goldberg's engine. To customize what gets included:
 
 1. **Modify task completion** - Ensure tasks include helpful completion notes
 2. **Use task notes** - Include relevant context in tracker task notes
@@ -385,10 +385,10 @@ View how your template renders with a specific task:
 
 ```bash
 # Show current template source
-ralph-tui template show
+rube-goldberg-tui template show
 
 # Run in dry-run mode to see prompts without executing
-ralph-tui run --prd ./prd.json --iterations 1 --headless
+rube-goldberg-tui run --prd ./prd.json --iterations 1 --headless
 ```
 
 ### Validate Syntax

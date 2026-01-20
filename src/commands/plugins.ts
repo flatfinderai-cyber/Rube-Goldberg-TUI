@@ -29,7 +29,7 @@ Options:
   --help, -h   Show this help message
 
 Description:
-  Ralph TUI uses a plugin system for both AI agents and task trackers.
+  RubeGoldberg TUI uses a plugin system for both AI agents and task trackers.
 
   Agent plugins execute prompts via AI coding assistants:
     - claude: Claude Code CLI (claude command)

@@ -46,7 +46,7 @@ export function Sidebar({ className = '' }: SidebarProps) {
           <Terminal className="h-5 w-5 text-accent-primary" />
         </div>
         <span className="font-mono text-base font-bold tracking-tight">
-          Ralph<span className="text-accent-primary">TUI</span>
+          RubeGoldberg<span className="text-accent-primary">TUI</span>
         </span>
       </div>
 
@@ -104,7 +104,7 @@ export function Sidebar({ className = '' }: SidebarProps) {
         {/* Terminal prompt decoration */}
         <div className="mt-3 flex items-center gap-1.5 font-mono text-[10px] text-fg-dim">
           <span className="text-accent-primary">$</span>
-          <span>ralph --help</span>
+          <span>rubeGoldberg --help</span>
           <span className="animate-pulse text-accent-primary">_</span>
         </div>
       </div>

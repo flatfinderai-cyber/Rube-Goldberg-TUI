@@ -49,11 +49,11 @@ This creates a `.beads/` directory with your issue tracker.
     ```
   </Step>
 
-  <Step title="Run Ralph TUI">
+  <Step title="Run rube-goldberg TUI">
     Run with the epic ID:
 
     ```bash
-    ralph-tui run --tracker beads --epic beads-abc123
+    rube-goldberg-tui run --tracker beads --epic beads-abc123
     ```
   </Step>
 </Steps>
@@ -65,7 +65,7 @@ This creates a `.beads/` directory with your issue tracker.
 Run with epic and tracker:
 
 ```bash
-ralph-tui run --tracker beads --epic beads-abc123
+rube-goldberg-tui run --tracker beads --epic beads-abc123
 ```
 
 ### Config File
@@ -73,12 +73,12 @@ ralph-tui run --tracker beads --epic beads-abc123
 Set defaults in TOML:
 
 ```toml
-# .ralph-tui/config.toml
+# .rube-goldberg-tui/config.toml
 tracker = "beads"
 
 [trackerOptions]
 beadsDir = ".beads"
-labels = "ralph"
+labels = "rube-goldberg"
 ```
 
 ### Options Reference
@@ -134,7 +134,7 @@ bd show beads-task-b
 
 ### Statuses
 
-| Beads Status | Ralph TUI Status | Description |
+| Beads Status | rube-goldberg TUI Status | Description |
 |--------------|------------------|-------------|
 | `open` | `open` | Ready to work |
 | `in_progress` | `in_progress` | Currently being worked on |
@@ -175,7 +175,7 @@ bd sync
 git pull
 ```
 
-Ralph TUI calls `bd sync` automatically when you run.
+rube-goldberg TUI calls `bd sync` automatically when you run.
 
 ## Label Filtering
 
@@ -183,18 +183,18 @@ Filter tasks by labels:
 
 ```bash
 # CLI
-ralph-tui run --tracker beads --epic beads-xyz
+rube-goldberg-tui run --tracker beads --epic beads-xyz
 
 # With label filter in config
 [trackerOptions]
-labels = "ralph,frontend"
+labels = "rube-goldberg,frontend"
 ```
 
 Only tasks with matching labels will be selected.
 
 ## How It Works
 
-When Ralph TUI runs with the Beads tracker:
+When rube-goldberg TUI runs with the Beads tracker:
 
 1. **Detect**: Check for `.beads/` directory and `bd` CLI
 2. **Query**: Run `bd list --json --parent <epic>` to get tasks
@@ -265,11 +265,11 @@ Convert a PRD to Beads issues:
 
 ```bash
 # Create PRD
-ralph-tui create-prd --chat
+rube-goldberg-tui create-prd --chat
 
 # When prompted, choose "Beads" format
 # Or convert manually:
-ralph-tui convert --to beads ./tasks/my-prd.md
+rube-goldberg-tui convert --to beads ./tasks/my-prd.md
 ```
 
 ## Beads vs JSON Tracker

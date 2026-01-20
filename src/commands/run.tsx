@@ -192,7 +192,7 @@ export function parseRunArgs(args: string[]): ExtendedRuntimeOptions {
  */
 export function printRunHelp(): void {
   console.log(`
-rube-goldberg-tui run - Start Ralph execution
+rube-goldberg-tui run - Start RubeGoldberg execution
 
 Usage: rube-goldberg-tui run [options]
 
@@ -223,7 +223,7 @@ Log Output Format (--no-tui mode):
   Components: progress, agent, engine, tracker, session, system
 
   Example output:
-    [10:42:15] [INFO] [engine] Ralph started. Total tasks: 5
+    [10:42:15] [INFO] [engine] RubeGoldberg started. Total tasks: 5
     [10:42:15] [INFO] [progress] Iteration 1/10: Working on US-001 - Add login
     [10:42:15] [INFO] [agent] Building prompt for task...
     [10:42:30] [INFO] [progress] Iteration 1 finished. Task US-001: COMPLETED. Duration: 15s
@@ -340,7 +340,7 @@ async function detectAndHandleStaleTasks(
   console.log('');
   console.log('⚠️  Stale in_progress tasks detected');
   console.log('');
-  console.log('A previous Ralph session did not exit cleanly.');
+  console.log('A previous RubeGoldberg session did not exit cleanly.');
   console.log(`Found ${activeTaskIds.length} task(s) stuck in "in_progress" status:`);
   console.log('');
   for (const task of taskDetails) {
@@ -1240,13 +1240,13 @@ export async function executeRunCommand(args: string[]): Promise<void> {
 
     // Setup completed, continue with run
     console.log('');
-    console.log('Setup complete! Starting Ralph...');
+    console.log('Setup complete! Starting RubeGoldberg...');
     console.log('');
   } else if (!configExists && options.noSetup) {
     console.log('No .rube-goldberg-tui/config.toml found. Using default configuration.');
   }
 
-  console.log('Initializing Ralph TUI...');
+  console.log('Initializing RubeGoldberg TUI...');
 
   // Initialize plugins
   await initializePlugins();

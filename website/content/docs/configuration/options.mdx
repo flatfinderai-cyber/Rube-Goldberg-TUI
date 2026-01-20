@@ -1,11 +1,11 @@
 ---
 title: Options Reference
-description: Complete reference for all Ralph TUI configuration options with types, defaults, and constraints.
+description: Complete reference for all rube-goldberg TUI configuration options with types, defaults, and constraints.
 ---
 
 ## Configuration Options Reference
 
-This page documents every configuration option available in Ralph TUI. Options can be set in config files (TOML) or via CLI flags.
+This page documents every configuration option available in rube-goldberg TUI. Options can be set in config files (TOML) or via CLI flags.
 
 <Callout type="tip">
 Most options have sensible defaults. You typically only need to configure the agent and tracker for your project.
@@ -21,8 +21,8 @@ These control basic execution behavior.
 | `tracker` | string | - | Tracker plugin to use (e.g., "beads-bv", "json") |
 | `maxIterations` | number | `10` | Maximum iterations per session (0 = unlimited, max 1000) |
 | `iterationDelay` | number | `1000` | Delay between iterations in milliseconds (max 300000) |
-| `outputDir` | string | `.ralph-tui/iterations` | Directory for iteration log files |
-| `progressFile` | string | `.ralph-tui/progress.md` | Progress file for cross-iteration context |
+| `outputDir` | string | `.rube-goldberg-tui/iterations` | Directory for iteration log files |
+| `progressFile` | string | `.rube-goldberg-tui/progress.md` | Progress file for cross-iteration context |
 | `autoCommit` | boolean | `false` | Auto-commit after each completed task |
 | `prompt_template` | string | - | Custom Handlebars template path |
 | `subagentTracingDetail` | string | `"off"` | Subagent visibility level |
@@ -155,7 +155,7 @@ For basic Beads integration:
 
 ## Error Handling
 
-Controls how Ralph responds to task failures.
+Controls how rube-goldberg responds to task failures.
 
 ```toml
 [errorHandling]
@@ -227,7 +227,7 @@ sound = "off"
 |-------|-------------|
 | `"off"` | No sound |
 | `"system"` | Use OS default notification sound |
-| `"ralph"` | Play random Ralph Wiggum sound clips |
+| `"rube-goldberg"` | Play random rube-goldberg Wiggum sound clips |
 
 ## Custom Skills Directory
 
@@ -253,7 +253,7 @@ my-skills/
 
 ```bash
 # Use a custom skill with create-prd
-ralph-tui create-prd --chat --prd-skill custom-prd-skill
+rube-goldberg-tui create-prd --chat --prd-skill custom-prd-skill
 ```
 
 <Callout type="warning">
@@ -358,7 +358,7 @@ All numeric options have validation constraints:
 
 ## Environment Variables
 
-Ralph TUI respects these environment variables:
+rube-goldberg TUI respects these environment variables:
 
 | Variable | Description |
 |----------|-------------|

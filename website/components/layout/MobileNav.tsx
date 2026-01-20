@@ -116,7 +116,7 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
               <Terminal className="h-5 w-5 text-accent-primary" />
             </div>
             <span className="font-mono text-base font-bold">
-              Ralph<span className="text-accent-primary">TUI</span>
+              RubeGoldberg<span className="text-accent-primary">TUI</span>
             </span>
           </div>
 

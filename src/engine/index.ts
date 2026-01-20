@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Execution engine for Ralph TUI agent loop.
+ * ABOUTME: Execution engine for RubeGoldberg TUI agent loop.
  * Handles the iteration cycle: select task → inject prompt → run agent → check result → update tracker.
  * Supports configurable error handling strategies: retry, skip, abort.
  */

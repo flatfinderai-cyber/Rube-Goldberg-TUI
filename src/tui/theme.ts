@@ -1,10 +1,10 @@
 /**
- * ABOUTME: Theme constants and types for the Ralph TUI application.
+ * ABOUTME: Theme constants and types for the RubeGoldberg TUI application.
  * Provides consistent styling across all TUI components with a modern dark theme.
  */
 
 /**
- * Color palette for the Ralph TUI
+ * Color palette for the RubeGoldberg TUI
  */
 export const colors = {
   // Background colors
@@ -60,7 +60,7 @@ export const colors = {
 /**
  * Status indicator symbols
  * Task status: ✓ (done), ▶ (active/actionable), ○ (pending), ⊘ (blocked), ✓ (closed - greyed)
- * Ralph status: ▶ (running), ◎ (pausing), ⏸ (paused), ■ (stopped), ✓ (complete), ○ (idle/ready)
+ * RubeGoldberg status: ▶ (running), ◎ (pausing), ⏸ (paused), ■ (stopped), ✓ (complete), ○ (idle/ready)
  */
 export const statusIndicators = {
   done: '✓',
@@ -105,7 +105,7 @@ export const keyboardShortcuts = [
  */
 export const fullKeyboardShortcuts = [
   { key: '?', description: 'Show/hide this help', category: 'General' },
-  { key: 'q', description: 'Quit Ralph', category: 'General' },
+  { key: 'q', description: 'Quit RubeGoldberg', category: 'General' },
   { key: 'Esc', description: 'Go back / Cancel', category: 'General' },
   { key: ',', description: 'Open settings', category: 'General' },
   { key: 's', description: 'Start execution (when ready)', category: 'Execution' },
@@ -157,7 +157,7 @@ export const layout = {
 } as const;
 
 /**
- * Ralph status types
+ * RubeGoldberg status types
  * - 'ready': Waiting for user to start execution (interactive mode)
  * - 'running': Actively executing iterations (generic running state)
  * - 'selecting': Selecting next task to work on

@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Progress Dashboard component for the Ralph TUI.
+ * ABOUTME: Progress Dashboard component for the RubeGoldberg TUI.
  * Displays execution status, current task info, and agent/tracker configuration.
  * Shows detailed activity information to make engine state clear.
  */
@@ -11,7 +11,7 @@ import { colors, statusIndicators, layout, type RalphStatus } from '../theme.js'
  * Props for the ProgressDashboard component
  */
 export interface ProgressDashboardProps {
-  /** Current Ralph execution status */
+  /** Current RubeGoldberg execution status */
   status: RalphStatus;
   /** Name of the agent being used */
   agentName: string;

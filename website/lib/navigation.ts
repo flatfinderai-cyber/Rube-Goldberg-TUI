@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Navigation configuration for the Ralph TUI documentation site.
+ * ABOUTME: Navigation configuration for the RubeGoldberg TUI documentation site.
  * Defines the sidebar structure with types for navigation items.
  */
 

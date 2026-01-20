@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Epic selection application component for the Ralph TUI.
+ * ABOUTME: Epic selection application component for the RubeGoldberg TUI.
  * Provides keyboard navigation and epic selection functionality.
  * Used when rube-goldberg-tui is launched without an --epic flag.
  */

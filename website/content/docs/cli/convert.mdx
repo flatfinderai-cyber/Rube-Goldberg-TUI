@@ -6,10 +6,10 @@ description: Convert PRD markdown files to executable task formats like prd.json
 ## Synopsis
 
 ```bash
-ralph-tui convert [options] <prd-file>
+rube-goldberg-tui convert [options] <prd-file>
 ```
 
-The `convert` command transforms a PRD markdown file into a task format that Ralph can execute. It extracts user stories, acceptance criteria, and quality gates to create structured task files.
+The `convert` command transforms a PRD markdown file into a task format that rube-goldberg can execute. It extracts user stories, acceptance criteria, and quality gates to create structured task files.
 
 <Callout type="tip">
 If you used `create-prd --chat`, you were likely already prompted to convert to tasks. Use this command when you have an existing PRD that needs conversion.
@@ -36,31 +36,31 @@ If you used `create-prd --chat`, you were likely already prompted to convert to 
 
 ```bash
 # Convert PRD to prd.json
-ralph-tui convert ./tasks/prd-my-feature.md
+rube-goldberg-tui convert ./tasks/prd-my-feature.md
 
 # Specify output path
-ralph-tui convert ./tasks/prd-my-feature.md --output ./my-tasks.json
+rube-goldberg-tui convert ./tasks/prd-my-feature.md --output ./my-tasks.json
 ```
 
 ### Explicit Format
 
 ```bash
 # Convert to JSON format
-ralph-tui convert --to json ./tasks/prd-my-feature.md
+rube-goldberg-tui convert --to json ./tasks/prd-my-feature.md
 ```
 
 ### Overwrite Existing
 
 ```bash
 # Force overwrite of existing prd.json
-ralph-tui convert --force ./tasks/prd-my-feature.md
+rube-goldberg-tui convert --force ./tasks/prd-my-feature.md
 ```
 
 ### With Git Branch
 
 ```bash
 # Specify branch name for beads integration
-ralph-tui convert --branch feat/my-feature ./tasks/prd-my-feature.md
+rube-goldberg-tui convert --branch feat/my-feature ./tasks/prd-my-feature.md
 ```
 
 ## Conversion Process
@@ -85,7 +85,7 @@ When you run `convert`, the command:
   </Step>
 
   <Step title="Generate Output">
-    Creates the task file in the specified format with proper structure for Ralph to execute.
+    Creates the task file in the specified format with proper structure for rube-goldberg to execute.
   </Step>
 </Steps>
 
@@ -124,7 +124,7 @@ The JSON output follows this structure:
 ```
 
 <Callout type="info">
-The `passes: false` field indicates the task hasn't been completed. Ralph sets this to `true` when the task is done.
+The `passes: false` field indicates the task hasn't been completed. rube-goldberg sets this to `true` when the task is done.
 </Callout>
 
 ## Quality Gate Integration
@@ -180,7 +180,7 @@ You can also manually add dependencies in the PRD:
   <Step title="Create PRD">
     Write or generate a PRD markdown file:
     ```bash
-    ralph-tui create-prd --chat
+    rube-goldberg-tui create-prd --chat
     # Save as ./tasks/prd-auth.md
     ```
   </Step>
@@ -191,13 +191,13 @@ You can also manually add dependencies in the PRD:
 
   <Step title="Convert to Tasks">
     ```bash
-    ralph-tui convert ./tasks/prd-auth.md
+    rube-goldberg-tui convert ./tasks/prd-auth.md
     ```
   </Step>
 
-  <Step title="Run Ralph">
+  <Step title="Run rube-goldberg">
     ```bash
-    ralph-tui run --prd ./prd.json
+    rube-goldberg-tui run --prd ./prd.json
     ```
   </Step>
 </Steps>
@@ -231,9 +231,9 @@ These commands must pass for every user story:
 Use `--force` to overwrite, or specify a different output path:
 
 ```bash
-ralph-tui convert --force ./tasks/prd-auth.md
+rube-goldberg-tui convert --force ./tasks/prd-auth.md
 # or
-ralph-tui convert ./tasks/prd-auth.md --output ./new-tasks.json
+rube-goldberg-tui convert ./tasks/prd-auth.md --output ./new-tasks.json
 ```
 
 ## Related Commands

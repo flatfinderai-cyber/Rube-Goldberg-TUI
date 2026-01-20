@@ -135,7 +135,7 @@ export interface TemplateRenderResult {
 export type BuiltinTemplateType = 'default' | 'beads' | 'json' | 'beads-bv';
 
 /**
- * Template configuration in ralph config.
+ * Template configuration in rubeGoldberg config.
  */
 export interface TemplateConfig {
   /** Path to custom template file (relative to cwd or absolute) */

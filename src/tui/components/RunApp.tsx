@@ -1,5 +1,5 @@
 /**
- * ABOUTME: RunApp component for the Ralph TUI execution view.
+ * ABOUTME: RunApp component for the RubeGoldberg TUI execution view.
  * Integrates with the execution engine to display real-time progress.
  * Handles graceful interruption with confirmation dialog.
  */
@@ -318,7 +318,7 @@ export function RunApp({
   // Streaming parser for live output - extracts readable content and prevents memory bloat
   const outputParserRef = useRef(new StreamingOutputParser());
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [epicName] = useState('Ralph');
+  const [epicName] = useState('RubeGoldberg');
   // Derive agent/tracker names from config - these are displayed in the header
   const agentName = storedConfig?.defaultAgent || storedConfig?.agent || 'claude';
   // Use trackerType (from resolved config.tracker.plugin) as priority since it's the actual plugin in use
@@ -1253,7 +1253,7 @@ export function RunApp({
       {/* Interrupt Confirmation Dialog */}
       <ConfirmationDialog
         visible={showInterruptDialog}
-        title="⚠ Interrupt Ralph?"
+        title="⚠ Interrupt RubeGoldberg?"
         message="Current iteration will be terminated."
         hint="[y] Yes  [n/Esc] No  [Ctrl+C] Force quit"
       />
@@ -1261,7 +1261,7 @@ export function RunApp({
       {/* Quit Confirmation Dialog */}
       <ConfirmationDialog
         visible={showQuitDialog}
-        title="Quit Ralph?"
+        title="Quit RubeGoldberg?"
         message="Session will be saved and can be resumed later."
         hint="[y] Yes  [n/Esc] Cancel"
       />

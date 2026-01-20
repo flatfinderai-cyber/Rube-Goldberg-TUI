@@ -1,6 +1,6 @@
 /**
- * ABOUTME: Epic selection view component for the Ralph TUI.
- * Displays a list of available epics for the user to select and start a Ralph run.
+ * ABOUTME: Epic selection view component for the RubeGoldberg TUI.
+ * Displays a list of available epics for the user to select and start a RubeGoldberg run.
  * Used when rube-goldberg-tui is launched without an --epic flag.
  */
 

@@ -1,6 +1,6 @@
 /**
  * ABOUTME: Main entry point for rube-goldberg-tui
- * Ralph TUI is an AI Agent Loop Orchestrator that provides a terminal user interface
+ * RubeGoldberg TUI is an AI Agent Loop Orchestrator that provides a terminal user interface
  * for managing and monitoring AI agent workflows.
  */
 

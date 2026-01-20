@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Hero section component for the Ralph TUI landing page.
+ * ABOUTME: Hero section component for the RubeGoldberg TUI landing page.
  * Features animated gradient background, typing cursor effect, and terminal-inspired
  * install command block with copy functionality.
  */
@@ -223,7 +223,7 @@ function TypingCursor() {
 }
 
 /**
- * Hero section component for the Ralph TUI landing page.
+ * Hero section component for the RubeGoldberg TUI landing page.
  *
  * Features:
  * - Animated gradient mesh background

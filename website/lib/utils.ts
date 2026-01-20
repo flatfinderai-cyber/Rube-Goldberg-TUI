@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Utility functions for the Ralph TUI website.
+ * ABOUTME: Utility functions for the RubeGoldberg TUI website.
  * Provides the cn() function for merging Tailwind CSS classes.
  */
 

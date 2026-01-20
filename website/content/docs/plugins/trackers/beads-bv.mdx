@@ -51,7 +51,7 @@ bd init
 
   <Step title="Run with Beads-BV">
     ```bash
-    ralph-tui run --tracker beads-bv --epic beads-xyz
+    rube-goldberg-tui run --tracker beads-bv --epic beads-xyz
     ```
 
     BV will recommend "Database schema" first because completing it unblocks the most work.
@@ -63,18 +63,18 @@ bd init
 ### CLI Flags
 
 ```bash
-ralph-tui run --tracker beads-bv --epic beads-xyz
+rube-goldberg-tui run --tracker beads-bv --epic beads-xyz
 ```
 
 ### Config File
 
 ```toml
-# .ralph-tui/config.toml
+# .rube-goldberg-tui/config.toml
 tracker = "beads-bv"
 
 [trackerOptions]
 beadsDir = ".beads"
-labels = "ralph"
+labels = "rube-goldberg"
 ```
 
 ### Options Reference
@@ -227,7 +227,7 @@ The TUI displays these in the status bar when using Beads-BV.
 
 ## How It Works
 
-When Ralph TUI runs with Beads-BV:
+When rube-goldberg TUI runs with Beads-BV:
 
 1. **Detect**: Check for `.beads/`, `bd`, and `bv` CLIs
 2. **Triage**: Run `bv --robot-triage` for recommendations

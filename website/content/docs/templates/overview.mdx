@@ -1,11 +1,11 @@
 ---
 title: Prompt Templates Overview
-description: Learn how Ralph TUI uses Handlebars templates to build prompts for AI agents.
+description: Learn how rube-goldberg TUI uses Handlebars templates to build prompts for AI agents.
 ---
 
 ## What Are Prompt Templates?
 
-Prompt templates are [Handlebars](https://handlebarsjs.com) templates that transform task data into structured prompts for AI agents. When Ralph picks a task from your tracker, it uses a template to build the prompt that gets sent to Claude Code or OpenCode.
+Prompt templates are [Handlebars](https://handlebarsjs.com) templates that transform task data into structured prompts for AI agents. When rube-goldberg picks a task from your tracker, it uses a template to build the prompt that gets sent to Claude Code or OpenCode.
 
 <Callout type="info">
 Handlebars is a simple templating language that uses `{{variable}}` syntax for variable substitution and `{{#if condition}}...{{/if}}` for conditional blocks.
@@ -38,11 +38,11 @@ Templates give you control over how your AI agent receives task information:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-When Ralph executes a task:
+When rube-goldberg executes a task:
 
 <Steps>
   <Step title="Load Template">
-    Ralph loads the appropriate template based on your tracker type (JSON, Beads, or custom).
+    rube-goldberg loads the appropriate template based on your tracker type (JSON, Beads, or custom).
   </Step>
 
   <Step title="Build Context">
@@ -60,7 +60,7 @@ When Ralph executes a task:
 
 ## Built-in Templates
 
-Ralph includes optimized templates for each tracker type:
+rube-goldberg includes optimized templates for each tracker type:
 
 | Tracker | Template | Optimized For |
 |---------|----------|---------------|
@@ -130,34 +130,34 @@ When finished, signal completion with:
 
 ## Template Resolution Order
 
-Ralph searches for templates in this order, using the first one found:
+rube-goldberg searches for templates in this order, using the first one found:
 
 <Steps>
   <Step title="Custom Path">
     Explicit `--prompt` argument or `prompt_template` in config file.
 
     ```bash
-    ralph-tui run --prompt ./my-template.hbs
+    rube-goldberg-tui run --prompt ./my-template.hbs
     ```
   </Step>
 
   <Step title="User Config Directory">
-    Templates in `~/.config/ralph-tui/`:
+    Templates in `~/.config/rube-goldberg-tui/`:
     - `prompt.md` for JSON tracker
     - `prompt-beads.md` for Beads trackers
   </Step>
 
   <Step title="Built-in Template">
-    Bundled defaults that ship with Ralph TUI.
+    Bundled defaults that ship with rube-goldberg TUI.
   </Step>
 </Steps>
 
 ## Viewing Your Current Template
 
-To see which template Ralph is using:
+To see which template rube-goldberg is using:
 
 ```bash
-ralph-tui template show
+rube-goldberg-tui template show
 ```
 
 This displays the resolved template source and content.

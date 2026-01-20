@@ -328,7 +328,7 @@ export async function executeCreatePrdCommand(args: string[]): Promise<void> {
   // If a tracker format was selected, launch rube-goldberg-tui with the tasks loaded
   if (result.selectedTracker) {
     console.log('');
-    console.log('Launching Ralph TUI with your new tasks...');
+    console.log('Launching RubeGoldberg TUI with your new tasks...');
     console.log('');
 
     const runArgs: string[] = [];

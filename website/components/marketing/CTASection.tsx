@@ -1,5 +1,5 @@
 /**
- * ABOUTME: CTASection component for the Ralph TUI landing page final call-to-action.
+ * ABOUTME: CTASection component for the RubeGoldberg TUI landing page final call-to-action.
  * Features terminal-inspired aesthetics with animated prompt cursor, gradient mesh
  * background, and dual CTA buttons. Uses framer-motion for scroll-triggered reveals.
  */
@@ -219,7 +219,7 @@ export function CTASection() {
             <span>Ready to&nbsp;</span>
             <span className="whitespace-nowrap">
               <span className="bg-gradient-to-r from-accent-primary via-accent-secondary to-accent-tertiary bg-clip-text text-transparent">
-                Ralph
+                RubeGoldberg
               </span>
               <span className="text-fg-primary">?</span>
               <PromptCursor />

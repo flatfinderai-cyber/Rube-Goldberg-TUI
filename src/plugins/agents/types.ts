@@ -341,7 +341,7 @@ export interface AgentPlugin {
 
   /**
    * Clean up resources when the plugin is unloaded.
-   * Called when Ralph TUI shuts down. Should interrupt any running executions.
+   * Called when RubeGoldberg TUI shuts down. Should interrupt any running executions.
    */
   dispose(): Promise<void>;
 }

@@ -123,7 +123,7 @@ export function Header() {
               </div>
               {/* Logo text */}
               <span className="font-mono text-lg font-bold tracking-tight">
-                Ralph<span className="text-accent-primary">TUI</span>
+                RubeGoldberg<span className="text-accent-primary">TUI</span>
               </span>
             </Link>
 

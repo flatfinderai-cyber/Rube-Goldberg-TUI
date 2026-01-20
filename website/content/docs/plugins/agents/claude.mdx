@@ -1,14 +1,14 @@
 ---
 title: Claude Code Agent
-description: Integrate Anthropic's Claude Code CLI with Ralph TUI for AI-assisted coding.
+description: Integrate Anthropic's Claude Code CLI with rube-goldberg TUI for AI-assisted coding.
 ---
 
 ## Claude Code Agent
 
-The Claude Code agent plugin integrates with Anthropic's `claude` CLI to execute AI coding tasks. It's the default agent for Ralph TUI and provides the richest feature set.
+The Claude Code agent plugin integrates with Anthropic's `claude` CLI to execute AI coding tasks. It's the default agent for rube-goldberg TUI and provides the richest feature set.
 
 <Callout type="tip">
-Claude Code supports **subagent tracing** - Ralph TUI can show nested tool calls (Read, Write, Task) in real-time as Claude works.
+Claude Code supports **subagent tracing** - rube-goldberg TUI can show nested tool calls (Read, Write, Task) in real-time as Claude works.
 </Callout>
 
 ## Prerequisites
@@ -32,7 +32,7 @@ claude --version
     Use the `--agent claude` flag (or set as default in config):
 
     ```bash
-    ralph-tui run --prd ./prd.json --agent claude
+    rube-goldberg-tui run --prd ./prd.json --agent claude
     ```
   </Step>
 
@@ -40,7 +40,7 @@ claude --version
     Override the model with `--model`:
 
     ```bash
-    ralph-tui run --prd ./prd.json --model opus
+    rube-goldberg-tui run --prd ./prd.json --model opus
     ```
   </Step>
 
@@ -60,7 +60,7 @@ claude --version
 The simplest configuration:
 
 ```toml
-# .ralph-tui/config.toml
+# .rube-goldberg-tui/config.toml
 agent = "claude"
 
 [agentOptions]
@@ -109,7 +109,7 @@ Select via CLI or config:
 
 ```bash
 # CLI
-ralph-tui run --prd ./prd.json --model opus
+rube-goldberg-tui run --prd ./prd.json --model opus
 
 # Config
 [agentOptions]
@@ -118,7 +118,7 @@ model = "opus"
 
 ## Subagent Tracing
 
-Claude Code emits structured JSONL when running with `--output-format stream-json`. Ralph TUI parses this to display:
+Claude Code emits structured JSONL when running with `--output-format stream-json`. rube-goldberg TUI parses this to display:
 
 - Tool invocations (Read, Write, Bash, Task, etc.)
 - Nested subagent calls and their output
@@ -146,12 +146,12 @@ Or toggle in TUI:
 - Press `u` to toggle the subagent tracing panel
 
 <Callout type="info">
-Subagent tracing requires Claude's streaming JSON output. Ralph TUI automatically adds the necessary flags (`--verbose --output-format stream-json`) when tracing is enabled.
+Subagent tracing requires Claude's streaming JSON output. rube-goldberg TUI automatically adds the necessary flags (`--verbose --output-format stream-json`) when tracing is enabled.
 </Callout>
 
 ## Autonomous Operation
 
-By default, Claude Code prompts for permission before modifying files. Ralph TUI runs with `--dangerously-skip-permissions` to enable fully autonomous operation.
+By default, Claude Code prompts for permission before modifying files. rube-goldberg TUI runs with `--dangerously-skip-permissions` to enable fully autonomous operation.
 
 <Callout type="warning">
 Only use autonomous mode with trusted task inputs. Claude will execute file modifications, terminal commands, and more without asking.
@@ -166,13 +166,13 @@ skipPermissions = false
 
 ## File Context
 
-Claude Code supports adding directory context via `--add-dir`. Ralph TUI extracts directories from any file paths in your task and adds them automatically.
+Claude Code supports adding directory context via `--add-dir`. rube-goldberg TUI extracts directories from any file paths in your task and adds them automatically.
 
 This helps Claude understand your project structure when working on related files.
 
 ## How It Works
 
-When Ralph TUI executes a task with Claude:
+When rube-goldberg TUI executes a task with Claude:
 
 1. **Build command**: Constructs `claude --print [options]`
 2. **Pass prompt via stdin**: Avoids shell escaping issues with special characters
@@ -183,7 +183,7 @@ When Ralph TUI executes a task with Claude:
 
 ### CLI Arguments
 
-Ralph TUI builds these arguments:
+rube-goldberg TUI builds these arguments:
 
 ```bash
 claude \

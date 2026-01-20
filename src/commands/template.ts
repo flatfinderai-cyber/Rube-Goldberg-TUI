@@ -97,7 +97,7 @@ ${BOLD}Show Options:${RESET}
 
 ${BOLD}Init Options:${RESET}
   ${DIM}--tracker <name>${RESET}   Use template for specific tracker (default, beads, beads-bv, json)
-  ${DIM}--output <path>${RESET}    Custom output path (default: ./ralph-prompt.hbs)
+  ${DIM}--output <path>${RESET}    Custom output path (default: ./rubeGoldberg-prompt.hbs)
   ${DIM}--force${RESET}            Overwrite existing file
 
 ${BOLD}Init-Prompts Options:${RESET}

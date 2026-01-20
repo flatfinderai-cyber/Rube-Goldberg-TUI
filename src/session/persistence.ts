@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Session persistence for Ralph TUI.
+ * ABOUTME: Session persistence for RubeGoldberg TUI.
  * Handles saving and loading full session state including task statuses,
  * iteration history, and tracker state to .rube-goldberg-tui/session.json.
  */

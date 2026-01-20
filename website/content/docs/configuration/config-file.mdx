@@ -1,11 +1,11 @@
 ---
 title: Config File Reference
-description: Complete guide to Ralph TUI configuration file structure with annotated examples.
+description: Complete guide to rube-goldberg TUI configuration file structure with annotated examples.
 ---
 
 ## Config File Structure
 
-Ralph TUI uses TOML files for configuration. TOML is a minimal, human-readable format that's easy to edit and version control.
+rube-goldberg TUI uses TOML files for configuration. TOML is a minimal, human-readable format that's easy to edit and version control.
 
 <Callout type="info">
 Configuration is validated using Zod schemas at runtime. Invalid configurations will show helpful error messages pointing to the specific problem.
@@ -16,7 +16,7 @@ Configuration is validated using Zod schemas at runtime. Invalid configurations 
 The simplest valid configuration just needs an agent:
 
 ```toml
-# .ralph-tui/config.toml
+# .rube-goldberg-tui/config.toml
 agent = "claude"
 ```
 
@@ -27,7 +27,7 @@ This uses Claude Code with all default settings.
 Here's a fully annotated configuration file showing all available options:
 
 ```toml
-# .ralph-tui/config.toml
+# .rube-goldberg-tui/config.toml
 # ─────────────────────────────────────────────
 # Core Settings
 # ─────────────────────────────────────────────
@@ -45,10 +45,10 @@ maxIterations = 10
 iterationDelay = 1000
 
 # Output directory for iteration logs
-outputDir = ".ralph-tui/iterations"
+outputDir = ".rube-goldberg-tui/iterations"
 
 # Progress file for cross-iteration context
-progressFile = ".ralph-tui/progress.md"
+progressFile = ".rube-goldberg-tui/progress.md"
 
 # Auto-commit after each completed task
 autoCommit = false
@@ -121,7 +121,7 @@ recoverPrimaryBetweenIterations = true
 # Enable desktop notifications
 enabled = true
 
-# Sound mode: "off", "system", or "ralph"
+# Sound mode: "off", "system", or "rube-goldberg"
 sound = "off"
 ```
 
@@ -248,7 +248,7 @@ When multiple config files exist, they're merged with these rules:
 3. **Objects** (`errorHandling`, `agentOptions`): Merged, with project values taking precedence
 
 ```toml
-# ~/.config/ralph-tui/config.toml (global)
+# ~/.config/rube-goldberg-tui/config.toml (global)
 agent = "claude"
 maxIterations = 10
 
@@ -257,7 +257,7 @@ model = "claude-sonnet-4-20250514"
 ```
 
 ```toml
-# .ralph-tui/config.toml (project)
+# .rube-goldberg-tui/config.toml (project)
 maxIterations = 5  # Overrides global
 
 [agentOptions]
@@ -268,10 +268,10 @@ timeout = 30000  # Merged with global agentOptions
 
 ## Validation Errors
 
-If your configuration has errors, Ralph TUI will show helpful messages:
+If your configuration has errors, rube-goldberg TUI will show helpful messages:
 
 ```
-Configuration error in .ralph-tui/config.toml:
+Configuration error in .rube-goldberg-tui/config.toml:
   • maxIterations: Number must be less than or equal to 1000
   • errorHandling.strategy: Invalid enum value. Expected 'retry' | 'skip' | 'abort'
 ```

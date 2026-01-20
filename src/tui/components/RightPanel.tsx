@@ -1,5 +1,5 @@
 /**
- * ABOUTME: RightPanel component for the Ralph TUI.
+ * ABOUTME: RightPanel component for the RubeGoldberg TUI.
  * Displays the current iteration details or selected task details.
  * Supports toggling between details view and output view with 'o' key.
  * Includes collapsible subagent sections when subagent tracing is enabled.
@@ -155,7 +155,7 @@ function NoSelection(): ReactNode {
       </box>
       <box style={{ marginBottom: 2 }}>
         <text fg={colors.fg.secondary}>
-          No tasks available. To start working with Ralph:
+          No tasks available. To start working with RubeGoldberg:
         </text>
       </box>
       <box style={{ flexDirection: 'column', gap: 1 }}>

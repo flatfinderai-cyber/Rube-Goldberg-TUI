@@ -244,13 +244,13 @@ export class StructuredLogger {
    * Log engine lifecycle events.
    */
   engineStarted(totalTasks: number): void {
-    this.info('engine', `Ralph started. Total tasks: ${totalTasks}`);
+    this.info('engine', `RubeGoldberg started. Total tasks: ${totalTasks}`);
   }
 
   engineStopped(reason: string, totalIterations: number, tasksCompleted: number): void {
     this.info(
       'engine',
-      `Ralph stopped. Reason: ${reason}. Iterations: ${totalIterations}, Tasks completed: ${tasksCompleted}`
+      `RubeGoldberg stopped. Reason: ${reason}. Iterations: ${totalIterations}, Tasks completed: ${tasksCompleted}`
     );
   }
 

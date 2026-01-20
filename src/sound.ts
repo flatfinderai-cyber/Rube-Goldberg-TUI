@@ -213,7 +213,7 @@ async function playRalphSound(): Promise<void> {
   const randomSound = RALPH_SOUNDS[Math.floor(Math.random() * RALPH_SOUNDS.length)];
 
   if (!randomSound) {
-    console.warn('[sound] No Ralph sounds available');
+    console.warn('[sound] No RubeGoldberg sounds available');
     return;
   }
 
@@ -224,7 +224,7 @@ async function playRalphSound(): Promise<void> {
 /**
  * Play notification sound based on the configured mode.
  *
- * @param mode - The sound mode ('off', 'system', or 'ralph')
+ * @param mode - The sound mode ('off', 'system', or 'rubeGoldberg')
  */
 export async function playNotificationSound(mode: NotificationSoundMode): Promise<void> {
   switch (mode) {
@@ -235,7 +235,7 @@ export async function playNotificationSound(mode: NotificationSoundMode): Promis
     case 'system':
       return playSystemSound();
 
-    case 'ralph':
+    case 'rubeGoldberg':
       return playRalphSound();
 
     default: {

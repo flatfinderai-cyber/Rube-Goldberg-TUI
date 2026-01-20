@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Home page component for the Ralph TUI website.
+ * ABOUTME: Home page component for the RubeGoldberg TUI website.
  * Composes the full landing page with Hero, WorkflowVisualization,
  * FeatureGrid, and CTASection marketing components.
  */

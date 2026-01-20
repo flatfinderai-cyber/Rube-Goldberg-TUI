@@ -184,7 +184,7 @@ async function runHeadless(
   engine.on((event) => {
     switch (event.type) {
       case 'engine:started':
-        console.log(`\nResumed Ralph. Total tasks: ${event.totalTasks}`);
+        console.log(`\nResumed RubeGoldberg. Total tasks: ${event.totalTasks}`);
         break;
 
       case 'iteration:started':
@@ -312,7 +312,7 @@ export async function executeResumeCommand(args: string[]): Promise<void> {
   // Check for lock conflicts
   const sessionCheck = await checkSession(cwd);
   if (sessionCheck.isLocked && !sessionCheck.isStale && !force) {
-    console.error('Another Ralph instance is already running.');
+    console.error('Another RubeGoldberg instance is already running.');
     console.error(`  PID: ${sessionCheck.lock?.pid}`);
     console.error('Use --force to override.');
     process.exit(1);
@@ -323,7 +323,7 @@ export async function executeResumeCommand(args: string[]): Promise<void> {
     await cleanStaleLock(cwd);
   }
 
-  console.log('Resuming Ralph TUI session...');
+  console.log('Resuming RubeGoldberg TUI session...');
   console.log('');
 
   // Initialize plugins

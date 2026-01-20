@@ -198,7 +198,7 @@ export function PlanningPhase() {
               The Planning Phase
             </h2>
             <p className="mx-auto max-w-2xl text-fg-secondary">
-              Great autonomous execution starts with great planning. Ralph TUI
+              Great autonomous execution starts with great planning. RubeGoldberg TUI
               helps you create structured, dependency-aware task breakdowns
               through interactive AI collaboration.
             </p>

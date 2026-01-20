@@ -1,11 +1,11 @@
 ---
 title: Debugging
-description: How to debug Ralph TUI issues using logs, verbose mode, session inspection, and diagnostic tools.
+description: How to debug rube-goldberg TUI issues using logs, verbose mode, session inspection, and diagnostic tools.
 ---
 
 ## Overview
 
-When something goes wrong with Ralph TUI, systematic debugging helps identify the root cause quickly. This guide covers the diagnostic tools and techniques available.
+When something goes wrong with rube-goldberg TUI, systematic debugging helps identify the root cause quickly. This guide covers the diagnostic tools and techniques available.
 
 <Callout type="tip">
 Start with the simplest diagnostic (logs) before moving to more complex debugging. Most issues can be resolved by examining iteration output.
@@ -15,28 +15,28 @@ Start with the simplest diagnostic (logs) before moving to more complex debuggin
 
 ## Iteration Logs
 
-Ralph TUI automatically saves output from each iteration to the `.ralph-tui/iterations/` directory.
+rube-goldberg TUI automatically saves output from each iteration to the `.rube-goldberg-tui/iterations/` directory.
 
 ### Viewing Logs
 
 ```bash
 # View the most recent iteration
-ralph-tui logs
+rube-goldberg-tui logs
 
 # View a specific iteration
-ralph-tui logs --iteration 5
+rube-goldberg-tui logs --iteration 5
 
 # View logs for a specific task
-ralph-tui logs --task US-005
+rube-goldberg-tui logs --task US-005
 
 # View full output without truncation
-ralph-tui logs --iteration 5 --verbose
+rube-goldberg-tui logs --iteration 5 --verbose
 ```
 
 ### Log File Location
 
 ```
-.ralph-tui/
+.rube-goldberg-tui/
 └── iterations/
     ├── iteration-001.json
     ├── iteration-002.json
@@ -53,13 +53,13 @@ Each log file contains:
 
 ```bash
 # Search for errors across all iterations
-grep -r "error" .ralph-tui/iterations/
+grep -r "error" .rube-goldberg-tui/iterations/
 
 # Find completion tokens
-grep -r "COMPLETE" .ralph-tui/iterations/
+grep -r "COMPLETE" .rube-goldberg-tui/iterations/
 
 # Search for specific task mentions
-grep -r "US-005" .ralph-tui/iterations/
+grep -r "US-005" .rube-goldberg-tui/iterations/
 ```
 
 ### Cleaning Up Logs
@@ -68,29 +68,29 @@ Old logs can accumulate and consume disk space:
 
 ```bash
 # Preview what would be deleted
-ralph-tui logs --clean --keep 10 --dry-run
+rube-goldberg-tui logs --clean --keep 10 --dry-run
 
 # Delete old logs, keeping the 10 most recent
-ralph-tui logs --clean --keep 10
+rube-goldberg-tui logs --clean --keep 10
 ```
 
 ---
 
 ## Session Inspection
 
-The session file (`.ralph-tui-session.json`) contains the complete state of your Ralph TUI session.
+The session file (`.rube-goldberg-tui-session.json`) contains the complete state of your rube-goldberg TUI session.
 
 ### Viewing Session State
 
 ```bash
 # Quick status check
-ralph-tui status
+rube-goldberg-tui status
 
 # JSON output for scripting
-ralph-tui status --json
+rube-goldberg-tui status --json
 
-# Raw session file (when ralph-tui isn't running)
-cat .ralph-tui-session.json | jq .
+# Raw session file (when rube-goldberg-tui isn't running)
+cat .rube-goldberg-tui-session.json | jq .
 ```
 
 ### Session File Structure
@@ -123,10 +123,10 @@ cat .ralph-tui-session.json | jq .
 
     ```bash
     # Check if the process exists
-    ps -p $(cat .ralph-tui-session.json | jq -r '.lockPid')
+    ps -p $(cat .rube-goldberg-tui-session.json | jq -r '.lockPid')
 
     # Force resume if it doesn't
-    ralph-tui resume --force
+    rube-goldberg-tui resume --force
     ```
   </TabsContent>
   <TabsContent value="corrupted">
@@ -134,11 +134,11 @@ cat .ralph-tui-session.json | jq .
 
     ```bash
     # Validate JSON syntax
-    cat .ralph-tui-session.json | jq . 2>&1
+    cat .rube-goldberg-tui-session.json | jq . 2>&1
 
     # Back up and recreate if corrupted
-    mv .ralph-tui-session.json .ralph-tui-session.json.bak
-    ralph-tui run --prd ./prd.json
+    mv .rube-goldberg-tui-session.json .rube-goldberg-tui-session.json.bak
+    rube-goldberg-tui run --prd ./prd.json
     ```
   </TabsContent>
   <TabsContent value="missing">
@@ -146,7 +146,7 @@ cat .ralph-tui-session.json | jq .
 
     ```bash
     # There's no session to resume - start fresh
-    ralph-tui run --prd ./prd.json
+    rube-goldberg-tui run --prd ./prd.json
     ```
   </TabsContent>
 </TabsRoot>
@@ -159,13 +159,13 @@ cat .ralph-tui-session.json | jq .
 
 ```bash
 # See the merged configuration from all sources
-ralph-tui config show
+rube-goldberg-tui config show
 ```
 
 This shows the final configuration after merging:
 1. Default values
-2. Global config (`~/.config/ralph-tui/config.toml`)
-3. Project config (`.ralph-tui/config.toml`)
+2. Global config (`~/.config/rube-goldberg-tui/config.toml`)
+3. Project config (`.rube-goldberg-tui/config.toml`)
 4. CLI flags
 
 ### Validate TOML Syntax
@@ -174,7 +174,7 @@ TOML syntax errors can cause configuration issues:
 
 ```bash
 # Check for TOML parsing errors
-cat .ralph-tui/config.toml | npx toml2json 2>&1
+cat .rube-goldberg-tui/config.toml | npx toml2json 2>&1
 ```
 
 Common TOML mistakes:
@@ -187,9 +187,9 @@ Common TOML mistakes:
 ```
 CLI Flags (highest priority)
     ↓
-Project Config (.ralph-tui/config.toml)
+Project Config (.rube-goldberg-tui/config.toml)
     ↓
-Global Config (~/.config/ralph-tui/config.toml)
+Global Config (~/.config/rube-goldberg-tui/config.toml)
     ↓
 Default Values (lowest priority)
 ```
@@ -202,7 +202,7 @@ Default Values (lowest priority)
 
 ```bash
 # List detected agents
-ralph-tui plugins agents
+rube-goldberg-tui plugins agents
 
 # Test agent directly
 which claude && claude --version
@@ -223,13 +223,13 @@ echo "Say hello" | opencode run
 
 ### View Agent Command
 
-To see what command Ralph TUI executes:
+To see what command rube-goldberg TUI executes:
 
 1. Check iteration logs for the full command
 2. Look for the `command` field in log JSON
 
 ```bash
-ralph-tui logs --iteration 1 --verbose | head -50
+rube-goldberg-tui logs --iteration 1 --verbose | head -50
 ```
 
 ---
@@ -286,7 +286,7 @@ bv --robot-insights | jq '.Cycles'
 
 ```bash
 # Display the active prompt template
-ralph-tui template show
+rube-goldberg-tui template show
 ```
 
 ### Test Template Rendering
@@ -316,10 +316,10 @@ The progress file tracks cross-iteration context.
 
 ```bash
 # View accumulated progress
-cat .ralph-tui/progress.md
+cat .rube-goldberg-tui/progress.md
 
 # Check file size (capped at ~50KB)
-ls -la .ralph-tui/progress.md
+ls -la .rube-goldberg-tui/progress.md
 ```
 
 ### Reset Progress
@@ -328,10 +328,10 @@ If progress context is causing issues:
 
 ```bash
 # Clear progress file
-echo "" > .ralph-tui/progress.md
+echo "" > .rube-goldberg-tui/progress.md
 
 # Or remove entirely (will be recreated)
-rm .ralph-tui/progress.md
+rm .rube-goldberg-tui/progress.md
 ```
 
 ---
@@ -343,14 +343,14 @@ rm .ralph-tui/progress.md
 <Steps>
   <Step title="Check iteration logs">
     ```bash
-    ralph-tui logs --task TASK-ID --verbose
+    rube-goldberg-tui logs --task TASK-ID --verbose
     ```
     Look for the `<promise>COMPLETE</promise>` token in output.
   </Step>
 
   <Step title="Verify template includes completion instruction">
     ```bash
-    ralph-tui template show | grep -i "promise\|complete"
+    rube-goldberg-tui template show | grep -i "promise\|complete"
     ```
   </Step>
 
@@ -368,20 +368,20 @@ rm .ralph-tui/progress.md
 <Steps>
   <Step title="Check configuration">
     ```bash
-    ralph-tui config show
+    rube-goldberg-tui config show
     ```
     Verify settings match your expectations.
   </Step>
 
   <Step title="Review session state">
     ```bash
-    ralph-tui status --json
+    rube-goldberg-tui status --json
     ```
   </Step>
 
   <Step title="Examine recent iterations">
     ```bash
-    ralph-tui logs --verbose
+    rube-goldberg-tui logs --verbose
     ```
   </Step>
 
@@ -434,21 +434,21 @@ rm .ralph-tui/progress.md
 
 When reporting issues to GitHub, include:
 
-1. **Ralph TUI version:**
+1. **rube-goldberg TUI version:**
    ```bash
-   ralph-tui --version
+   rube-goldberg-tui --version
    ```
 
 2. **Configuration (sanitized):**
    ```bash
-   ralph-tui config show
+   rube-goldberg-tui config show
    ```
 
 3. **Relevant iteration logs** (remove sensitive data)
 
 4. **Session status:**
    ```bash
-   ralph-tui status --json
+   rube-goldberg-tui status --json
    ```
 
 5. **Steps to reproduce** the issue

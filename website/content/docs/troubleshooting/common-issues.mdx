@@ -1,13 +1,13 @@
 ---
 title: Common Issues
-description: FAQ-style solutions for common Ralph TUI problems including task selection, agent errors, sessions, and rate limiting.
+description: FAQ-style solutions for common rube-goldberg TUI problems including task selection, agent errors, sessions, and rate limiting.
 ---
 
 ## Task Selection Issues
 
 ### "No tasks available"
 
-This error occurs when Ralph TUI cannot find any tasks to execute.
+This error occurs when rube-goldberg TUI cannot find any tasks to execute.
 
 <Callout type="warning">
 Check your task source first - the cause differs depending on whether you're using prd.json or Beads.
@@ -38,13 +38,13 @@ cat prd.json | jq '.userStories[] | {id, title, passes}'
 
 ### Tasks Stuck in "in_progress"
 
-If Ralph TUI crashed or was forcefully terminated, tasks may remain stuck in the `in_progress` state.
+If rube-goldberg TUI crashed or was forcefully terminated, tasks may remain stuck in the `in_progress` state.
 
 **Solution:**
 
 ```bash
 # Resume will automatically reset stale in_progress tasks
-ralph-tui resume
+rube-goldberg-tui resume
 
 # Or manually reset via Beads
 bd update TASK-ID --status open
@@ -55,7 +55,7 @@ bd update TASK-ID --status open
 
 ### Wrong Task Being Selected
 
-Ralph TUI selects tasks based on priority and dependency order. If an unexpected task is selected:
+rube-goldberg TUI selects tasks based on priority and dependency order. If an unexpected task is selected:
 
 1. **Check dependencies**: Tasks with blockers are skipped
 2. **Verify priorities**: Lower priority numbers are processed first
@@ -75,7 +75,7 @@ bv --robot-triage | jq '.recommendations[0]'
 
 ### "Agent not found"
 
-Ralph TUI cannot locate your AI agent CLI executable.
+rube-goldberg TUI cannot locate your AI agent CLI executable.
 
 **Solutions:**
 
@@ -92,12 +92,12 @@ Ralph TUI cannot locate your AI agent CLI executable.
 
 3. See detected agents:
    ```bash
-   ralph-tui plugins agents
+   rube-goldberg-tui plugins agents
    ```
 
 4. Specify the agent explicitly:
    ```bash
-   ralph-tui run --agent claude --prd ./prd.json
+   rube-goldberg-tui run --agent claude --prd ./prd.json
    ```
 
 <Callout type="tip">
@@ -110,7 +110,7 @@ If you don't see real-time output from the agent:
 
 1. **Check subagent tracing settings**: High filtering may hide output
    ```toml
-   # In .ralph-tui/config.toml
+   # In .rube-goldberg-tui/config.toml
    subagentTracingDetail = "full"  # Try "full" for maximum visibility
    ```
 
@@ -154,25 +154,25 @@ If you don't see real-time output from the agent:
 
 ### "Session lock exists"
 
-Another Ralph TUI instance may be running, or a previous session didn't shut down cleanly.
+Another rube-goldberg TUI instance may be running, or a previous session didn't shut down cleanly.
 
 **Solutions:**
 
 1. **Check for running processes:**
    ```bash
-   ps aux | grep ralph-tui
+   ps aux | grep rube-goldberg-tui
    ```
 
 2. **Wait for the existing session** to complete
 
 3. **Force override the lock:**
    ```bash
-   ralph-tui resume --force
+   rube-goldberg-tui resume --force
    ```
 
 4. **Manually remove the lock file:**
    ```bash
-   rm .ralph-tui-session.json
+   rm .rube-goldberg-tui-session.json
    ```
 
 <Callout type="warning">
@@ -181,41 +181,41 @@ Force overriding or deleting the session file will lose any unsaved progress. On
 
 ### Session Won't Resume
 
-If `ralph-tui resume` fails:
+If `rube-goldberg-tui resume` fails:
 
 1. **Check session file exists:**
    ```bash
-   ls -la .ralph-tui-session.json
+   ls -la .rube-goldberg-tui-session.json
    ```
 
 2. **Verify session file is valid JSON:**
    ```bash
-   cat .ralph-tui-session.json | jq .
+   cat .rube-goldberg-tui-session.json | jq .
    ```
 
 3. **Check for stale locks:**
    ```bash
-   ralph-tui status --json
+   rube-goldberg-tui status --json
    ```
 
 4. **Start fresh if needed:**
    ```bash
-   rm .ralph-tui-session.json
-   ralph-tui run --prd ./prd.json
+   rm .rube-goldberg-tui-session.json
+   rube-goldberg-tui run --prd ./prd.json
    ```
 
 ### Progress Lost After Crash
 
-Ralph TUI saves progress after each iteration. If progress was lost:
+rube-goldberg TUI saves progress after each iteration. If progress was lost:
 
 1. **Check iteration logs** for completed work:
    ```bash
-   ralph-tui logs --iteration 1
+   rube-goldberg-tui logs --iteration 1
    ```
 
 2. **Review the progress file:**
    ```bash
-   cat .ralph-tui/progress.md
+   cat .rube-goldberg-tui/progress.md
    ```
 
 3. **For Beads**, task status is persisted immediately:
@@ -232,13 +232,13 @@ Ralph TUI saves progress after each iteration. If progress was lost:
 When using Claude Code or other API-based agents, you may hit rate limits during long sessions.
 
 <Callout type="info">
-Rate limiting is common with high-volume usage. Ralph TUI has built-in strategies to handle this gracefully.
+Rate limiting is common with high-volume usage. rube-goldberg TUI has built-in strategies to handle this gracefully.
 </Callout>
 
 **Configure rate limit handling:**
 
 ```toml
-# .ralph-tui/config.toml
+# .rube-goldberg-tui/config.toml
 
 [rateLimitHandling]
 strategy = "wait"           # wait | fallback | abort
@@ -261,14 +261,14 @@ fallbackAgents = ["opencode"]
 
 1. **Use iteration delays:**
    ```bash
-   ralph-tui run --delay 5000 --prd ./prd.json
+   rube-goldberg-tui run --delay 5000 --prd ./prd.json
    ```
 
-2. **Limit concurrent sessions** - Don't run multiple Ralph TUI instances simultaneously
+2. **Limit concurrent sessions** - Don't run multiple rube-goldberg TUI instances simultaneously
 
 3. **Consider using a lower-tier model** for less critical tasks:
    ```bash
-   ralph-tui run --model haiku --prd ./prd.json
+   rube-goldberg-tui run --model haiku --prd ./prd.json
    ```
 
 ### Rate Limit with Beads Sync
@@ -289,16 +289,16 @@ bd sync
 
 ### Task Not Marked Complete
 
-Ralph TUI detects completion when the agent outputs `<promise>COMPLETE</promise>`. If tasks aren't being marked complete:
+rube-goldberg TUI detects completion when the agent outputs `<promise>COMPLETE</promise>`. If tasks aren't being marked complete:
 
 1. **Verify the agent outputs the token:**
    ```bash
-   ralph-tui logs --iteration 5 --verbose | grep -i "promise"
+   rube-goldberg-tui logs --iteration 5 --verbose | grep -i "promise"
    ```
 
 2. **Check your prompt template** includes completion instructions:
    ```bash
-   ralph-tui template show
+   rube-goldberg-tui template show
    ```
 
 3. **Ensure the agent follows instructions** - The prompt template should clearly instruct the agent to output the completion token
@@ -309,7 +309,7 @@ If tasks are marked complete prematurely:
 
 1. **Review the iteration logs:**
    ```bash
-   ralph-tui logs --task US-005 --verbose
+   rube-goldberg-tui logs --task US-005 --verbose
    ```
 
 2. **Check for early completion tokens** in agent output
@@ -322,26 +322,26 @@ If tasks are marked complete prematurely:
 
 ### Config File Not Found
 
-Ralph TUI looks for configuration in this order:
+rube-goldberg TUI looks for configuration in this order:
 1. CLI flags
-2. Project config: `.ralph-tui/config.toml`
-3. Global config: `~/.config/ralph-tui/config.toml`
+2. Project config: `.rube-goldberg-tui/config.toml`
+3. Global config: `~/.config/rube-goldberg-tui/config.toml`
 
 **Solutions:**
 
 ```bash
 # Run setup to create config
-ralph-tui setup
+rube-goldberg-tui setup
 
 # Or view current effective config
-ralph-tui config show
+rube-goldberg-tui config show
 ```
 
 ### Config Options Not Taking Effect
 
 1. **Check config file syntax:**
    ```bash
-   cat .ralph-tui/config.toml
+   cat .rube-goldberg-tui/config.toml
    ```
 
 2. **Verify TOML formatting** - TOML is sensitive to syntax
@@ -350,7 +350,7 @@ ralph-tui config show
 
 4. **View merged configuration:**
    ```bash
-   ralph-tui config show
+   rube-goldberg-tui config show
    ```
 
 ---
@@ -363,10 +363,10 @@ If your issue isn't covered here:
 
 2. **Review iteration logs** for error details:
    ```bash
-   ralph-tui logs --verbose
+   rube-goldberg-tui logs --verbose
    ```
 
 3. **Check GitHub Issues** for similar problems:
-   [github.com/subsy/ralph-tui/issues](https://github.com/subsy/ralph-tui/issues)
+   [github.com/subsy/rube-goldberg-tui/issues](https://github.com/subsy/rube-goldberg-tui/issues)
 
 4. **Enable verbose output** for more diagnostics

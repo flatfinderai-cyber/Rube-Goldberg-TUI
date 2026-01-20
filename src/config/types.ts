@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Type definitions for Ralph TUI configuration.
+ * ABOUTME: Type definitions for RubeGoldberg TUI configuration.
  * Defines the structure of configuration files and runtime options.
  */
 
@@ -48,9 +48,9 @@ export type SubagentDetailLevel = 'off' | 'minimal' | 'moderate' | 'full';
  * Sound mode for notifications.
  * - 'off': No sound (default)
  * - 'system': Use OS default notification sound
- * - 'ralph': Play random Rube Goldberg sound clips
+ * - 'rubeGoldberg': Play random Rube Goldberg sound clips
  */
-export type NotificationSoundMode = 'off' | 'system' | 'ralph';
+export type NotificationSoundMode = 'off' | 'system' | 'rubeGoldberg';
 
 /**
  * Notifications configuration for desktop notifications.

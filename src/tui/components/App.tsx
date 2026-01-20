@@ -1,5 +1,5 @@
 /**
- * ABOUTME: Main App component for the Ralph TUI.
+ * ABOUTME: Main App component for the RubeGoldberg TUI.
  * Composes Header, LeftPanel, RightPanel, and Footer into a responsive layout.
  */
 
