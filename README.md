@@ -211,12 +211,3 @@ rube-goldberg-tui/
 - [Handlebars](https://handlebarsjs.com) - Prompt templating
 - [Zod](https://zod.dev) - Configuration validation
 
-See [CLAUDE.md](CLAUDE.md) for detailed development guidelines.
-
-## Credits
-
-Thanks to Geoffrey Huntley for the [original Rube Goldberg loop concept](https://ghuntley.com/ralph/).
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
