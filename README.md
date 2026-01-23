@@ -1,4 +1,4 @@
-# Rube Goldberg TUI
+# Rube Goldberg 
 
 [![npm version](https://img.shields.io/npm/v/rube-goldberg-tui.svg)](https://www.npmjs.com/package/rube-goldberg-tui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
