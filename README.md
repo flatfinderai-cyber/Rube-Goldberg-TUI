@@ -137,7 +137,7 @@ rube-goldberg-tui create-prd --output ./docs
 | `q` | Quit |
 | `?` | Show help |
 
-See the [full CLI reference](https://rube-goldberg-tui.com/docs/cli/overview) for all options.
+See the [full CLI reference](https://rube.works) for all options.
 
 ### Custom Skills Directory
 
@@ -210,13 +210,8 @@ rube-goldberg-tui/
 - [React](https://react.dev) - Component model for TUI
 - [Handlebars](https://handlebarsjs.com) - Prompt templating
 - [Zod](https://zod.dev) - Configuration validation
+- [Prototype Cafe Workflow] (https://prototype.cafe) - Home of the Innovation Station of Lila Inglis Abegunrin
+- [Rube Goldburd Machine] (https://rube.works) - Modern Day Chain Reaction AI Agent for Bilding AI Agents
 
-See [CLAUDE.md](CLAUDE.md) for detailed development guidelines.
 
-## Credits
 
-Thanks to Geoffrey Huntley for the [original Rube Goldberg loop concept](https://ghuntley.com/ralph/).
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
