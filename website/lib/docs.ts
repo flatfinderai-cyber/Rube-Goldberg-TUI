@@ -171,6 +171,11 @@ export function generateTableOfContents(content: string): TocItem[] {
  * @returns Document data including content, frontmatter, and TOC
  */
 export async function getDocBySlug(slug: string): Promise<DocData> {
+  // Validate slug to reject absolute paths and directory traversal attempts
+  if (slug.includes('..') || resolve('/', slug) !== '/' + slug) {
+    throw new Error('Invalid document path');
+  }
+
   // Resolve to absolute path for reliable comparison
   const docsDirectory = resolve(process.cwd(), 'content', 'docs');
 
@@ -178,8 +183,8 @@ export async function getDocBySlug(slug: string): Promise<DocData> {
   const filePath = resolve(docsDirectory, `${slug}.mdx`);
 
   // Ensure the resolved path is within the docs directory
-  // Use trailing slash to prevent sibling-prefix matches (e.g., /docs-evil/file)
-  if (!filePath.startsWith(docsDirectory + '/')) {
+  // Use path.sep to prevent sibling-prefix matches (e.g., /docs-evil/file)
+  if (!filePath.startsWith(docsDirectory + '/') && !filePath.startsWith(docsDirectory + '\\')) {
     throw new Error('Invalid document path');
   }
 
@@ -205,9 +210,18 @@ export async function getAllDocSlugs(): Promise<string[]> {
       const entries = await readdir(dir, { withFileTypes: true });
 
       for (const entry of entries) {
+        // Validate filename to prevent path traversal
+        if (entry.name.includes('..') || resolve('/', entry.name) !== '/' + entry.name) {
+          continue;
+        }
         const relativePath = prefix ? `${prefix}/${entry.name}` : entry.name;
 
         if (entry.isDirectory()) {
+          const resolvedPath = resolve(dir, entry.name);
+          // Ensure resolved path is within docs directory
+          if (!resolvedPath.startsWith(resolve(docsDirectory) + '/') && !resolvedPath.startsWith(resolve(docsDirectory) + '\\')) {
+            continue;
+          }
           await scanDirectory(join(dir, entry.name), relativePath);
         } else if (entry.name.endsWith('.mdx')) {
           // Remove .mdx extension

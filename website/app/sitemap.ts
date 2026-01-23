@@ -19,7 +19,15 @@ function getDocSlugs(dir: string, basePath: string = ''): string[] {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
 
     for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
+      // Validate filename to prevent path traversal
+      if (entry.name.includes('..') || path.isAbsolute(entry.name)) {
+        continue;
+      }
+      const fullPath = path.resolve(dir, entry.name);
+      // Ensure resolved path is within base directory
+      if (!fullPath.startsWith(path.resolve(dir) + path.sep)) {
+        continue;
+      }
       const relativePath = basePath ? `${basePath}/${entry.name}` : entry.name;
 
       if (entry.isDirectory()) {
