@@ -7,8 +7,7 @@ import type { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
 
-const BASE_URL = 'https://rube-goldberg-tui.dev';
-
+const BASE_URL = 'https://rube.works';
 /**
  * Recursively collects all MDX files from the docs content directory.
  */
