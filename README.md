@@ -1,33 +1,76 @@
-# Rube Goldberg 
+# Rube Goldberg Web Platform
 
 [![npm version](https://img.shields.io/npm/v/rube-goldberg-tui.svg)](https://www.npmjs.com/package/rube-goldberg-tui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Built with Bun](https://img.shields.io/badge/Built%20with-Bun-f9f1e1.svg)](https://bun.sh)
+[![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-000000.svg)](https://nextjs.org)
 
-**AI Agent Loop Orchestrator** - A terminal UI for orchestrating AI coding agents to work through task lists autonomously.
+**AI Agent Loop Orchestrator** - A web platform for orchestrating AI coding agents to work through task lists autonomously.
 
-Rube Goldberg TUI connects your AI coding assistant (Claude Code, OpenCode) to your task tracker and runs them in an autonomous loop, completing tasks one-by-one with intelligent selection, error handling, and full visibility.
+Rube Goldberg connects your AI coding assistant (Claude Code, OpenCode, GitHub Copilot) to your task tracker (Beads, GitHub Issues) and runs them in an autonomous loop, completing tasks one-by-one with intelligent selection, error handling, and full real-time visibility.
 
-![Rube Goldberg TUI Screenshot](docs/images/rube-goldberg-tui.png)
+![Rube Goldberg Web Platform Screenshot](docs/images/rube-goldberg-web.png)
 
 ## Quick Start
 
+### Web Platform (Recommended)
+
 ```bash
-# Install
-bun install -g rube-goldberg-tui
+# Clone and setup
+git clone https://github.com/flatfinderai-cyber/Rube-Goldberg-TUI.git
+cd Rube-Goldberg-TUI/apps/vibe-coding-platform
+
+# Install dependencies
+npm install
+
+# Configure environment
+cp .env.example .env.local
+# Edit .env.local with your API keys
+
+# Start the web app
+npm run dev
+```
+
+Open `http://localhost:3000` and start orchestrating AI agents through your browser!
+
+### CLI (Legacy)
+
+```bash
+# Install CLI
+npm install -g rube-goldberg-tui
 
 # Setup your project
 cd your-project
 rube-goldberg-tui setup
 
-# Create a PRD with AI assistance
-rube-goldberg-tui create-prd --chat
-
-# Run Rube Goldberg!
+# Run Rube Goldberg
 rube-goldberg-tui run --prd ./prd.json
 ```
 
-That's it! Rube Goldberg will work through your tasks autonomously.
+## Tech Stack
+
+### Frontend
+- **Next.js 15** - React framework with App Router
+- **React 19** - UI components and hooks
+- **Tailwind CSS** - Utility-first styling
+- **shadcn/ui** - Beautiful, accessible components
+- **Monaco Editor** - Code viewing and editing
+
+### Backend
+- **Node.js** - Runtime environment
+- **PostgreSQL** - Primary database (via Drizzle ORM)
+- **Vercel Sandbox** - Isolated execution environments
+- **Server-Sent Events (SSE)** - Real-time streaming
+
+### AI & Agents
+- **Claude Code** - Anthropic's AI coding assistant
+- **GitHub Copilot CLI** - GitHub's AI pair programmer
+- **OpenCode** - Open-source coding agent
+- **Custom Agent SDK** - Build your own integrations
+
+### Infrastructure
+- **Vercel** - Hosting and deployment
+- **GitHub Actions** - CI/CD pipeline
+- **Docker** - Containerization (optional)
 
 ## Documentation
 
@@ -35,17 +78,47 @@ That's it! Rube Goldberg will work through your tasks autonomously.
 
 ### Quick Links
 
+- **[Web Platform Guide](https://rube-goldberg-tui.com/docs/getting-started/web-platform)** - Complete web setup
 - **[Quick Start Guide](https://rube-goldberg-tui.com/docs/getting-started/quick-start)** - Get running in 2 minutes
-- **[Installation](https://rube-goldberg-tui.com/docs/getting-started/installation)** - All installation options
-- **[CLI Reference](https://rube-goldberg-tui.com/docs/cli/overview)** - Complete command reference
-- **[Configuration](https://rube-goldberg-tui.com/docs/configuration/overview)** - Customize Rube Goldberg for your workflow
+- **[API Reference](https://rube-goldberg-tui.com/docs/api/overview)** - REST and SSE endpoints
+- **[Agent Plugins](https://rube-goldberg-tui.com/docs/agents/overview)** - Integrate custom AI agents
+- **[Configuration](https://rube-goldberg-tui.com/docs/configuration/overview)** - Customize for your workflow
+- **[Deployment](https://rube-goldberg-tui.com/docs/deployment/overview)** - Deploy to production
 - **[Troubleshooting](https://rube-goldberg-tui.com/docs/troubleshooting/common-issues)** - Common issues and solutions
+
+## Features
+
+### 🌐 Web Interface
+- **Real-time Dashboard**: Watch agents work through tasks with live streaming output
+- **Task Management**: Create, prioritize, and track tasks through an intuitive UI
+- **Visual Progress**: See iteration counts, success rates, and agent status at a glance
+- **File Browser**: Inspect generated code changes in an integrated file viewer
+- **Multi-Agent Support**: Switch between Claude Code, Copilot, OpenCode, and more
+
+### 🤖 Autonomous Execution
+- **Smart Task Selection**: Automatically picks the next best task based on priority and dependencies
+- **Error Recovery**: Configurable retry strategies with automatic error handling
+- **Rate Limit Management**: Automatic fallback to alternative agents when limits hit
+- **Crash Recovery**: Resume interrupted sessions without losing progress
+- **Parallel Subagents**: Track and visualize nested agent executions
+
+### 🔌 Integrations
+- **Task Trackers**: Beads, GitHub Issues, Linear, Jira (coming soon)
+- **AI Agents**: Claude Code, GitHub Copilot CLI, OpenCode, Cursor, Google Gemini
+- **Version Control**: Automatic git operations and branch management
+- **Sandboxes**: Vercel Sandbox integration for isolated execution
+
+### 📊 Analytics & Logging
+- **Execution Logs**: Complete history of all iterations with searchable output
+- **Performance Metrics**: Track completion rates, average iteration time, agent usage
+- **Export Options**: Download logs in JSON or plain text format
+- **Session Recovery**: Resume from any point with full context restoration
 
 ## How It Works
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                                                                 │
+│                         WEB DASHBOARD                           │
 │   ┌──────────────┐     ┌──────────────┐     ┌──────────────┐   │
 │   │  1. SELECT   │────▶│  2. BUILD    │────▶│  3. EXECUTE  │   │
 │   │    TASK      │     │    PROMPT    │     │    AGENT     │   │

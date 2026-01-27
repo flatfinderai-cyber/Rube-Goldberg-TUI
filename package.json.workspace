@@ -1,0 +1,20 @@
+{
+  "name": "rube-goldberg-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/vibe-coding-platform"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=vibe-coding-platform",
+    "build": "npm run build --workspace=vibe-coding-platform",
+    "start": "npm run start --workspace=vibe-coding-platform",
+    "lint": "npm run lint --workspace=vibe-coding-platform",
+    "typecheck": "tsc --noEmit",
+    "engine:build": "tsc --project tsconfig.json",
+    "clean": "rm -rf apps/vibe-coding-platform/.next apps/vibe-coding-platform/dist dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
