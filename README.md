@@ -205,8 +205,8 @@ rube-goldberg-tui/
 
 ### Key Technologies
 
-- [pnpm](https://pnpm.io) - Fast, disk space efficient package manager
-- [Bun](https://bun.sh) - JavaScript runtime
+- [pnpm](https://pnpm.io) - Package manager
+- [Bun](https://bun.sh) - JavaScript runtime and bundler
 - [OpenTUI](https://github.com/anomalyco/opentui) - Terminal UI framework
 - [React](https://react.dev) - Component model for TUI
 - [Handlebars](https://handlebarsjs.com) - Prompt templating
