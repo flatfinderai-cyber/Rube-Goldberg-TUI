@@ -68,3 +68,7 @@ export {
   parseDocsArgs,
   printDocsHelp,
 } from './docs.js';
+
+export {
+  executeServerCommand,
+} from './server.js';
