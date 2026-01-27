@@ -70,12 +70,14 @@ Rube Goldberg selects the highest-priority task, builds a prompt, executes your 
 - **Real-time TUI**: Watch agent output, control execution with keyboard shortcuts
 - **Subagent Tracing**: See nested agent calls in real-time
 - **Cross-iteration Context**: Automatic progress tracking between tasks
+- **API Server**: REST + WebSocket API for frontend integration ([rube.works](https://rube.works))
 
 ## CLI Commands
 
 | Command | Description |
 |---------|-------------|
 | `rube-goldberg-tui` | Launch the interactive TUI |
+| `rube-goldberg-tui server` | **NEW:** Start API server for frontend |
 | `rube-goldberg-tui run [options]` | Start Rube Goldberg execution |
 | `rube-goldberg-tui resume` | Resume an interrupted session |
 | `rube-goldberg-tui status` | Check session status |
@@ -152,6 +154,46 @@ rube-goldberg-tui create-prd --prd-skill my-custom-skill
 ```
 
 Skills must be folders inside `skills_dir` containing a `SKILL.md` file.
+
+## API Server Mode
+
+**NEW:** Run Rube Goldberg as an API server for frontend integration!
+
+```bash
+# Start API server
+rube-goldberg-tui server
+
+# Custom port
+rube-goldberg-tui server --port 8080
+```
+
+The API server provides:
+- **REST API** for control operations (start, stop, pause, resume, status)
+- **WebSocket** for real-time event streaming
+- **Frontend Integration** with [rube.works](https://rube.works)
+
+See [API Documentation](docs/API.md) for complete details.
+
+### API Quick Start
+
+```javascript
+// Start execution via API
+fetch('http://localhost:3030/api/execution/start', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    prdPath: './prd.json',
+    iterations: 10
+  })
+});
+
+// Monitor with WebSocket
+const ws = new WebSocket('ws://localhost:3030');
+ws.onmessage = (event) => {
+  const message = JSON.parse(event.data);
+  console.log('Engine event:', message);
+};
+```
 
 ## Contributing
 
