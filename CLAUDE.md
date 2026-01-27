@@ -20,32 +20,32 @@ project. The patterns you establish will be copied. The corners you cut will be 
 
 ## Build Instructions
 
-This project uses **bun** as its package manager and runtime.
+This project uses **pnpm** as its package manager and runtime.
 
 ```bash
 # Install dependencies
-bun install
+pnpm install
 
 # Build the project
-bun run build
+pnpm run build
 
 # Type check (no emit)
-bun run typecheck
+pnpm run typecheck
 
 # Lint
-bun run lint
-bun run lint:fix    # Auto-fix lint issues
+pnpm run lint
+pnpm run lint:fix    # Auto-fix lint issues
 
 # Run in development mode
-bun run dev
+pnpm run dev
 
 # Clean build artifacts
-bun run clean
+pnpm run clean
 ```
 
 **After making code changes**, always run:
 ```bash
-bun run typecheck && bun run build
+pnpm run typecheck && pnpm run build
 ```
 
 This project uses **bd** (beads) for issue tracking. Run `bd onboard` to get started.
