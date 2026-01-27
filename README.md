@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/rube-goldberg-tui.svg)](https://www.npmjs.com/package/rube-goldberg-tui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Built with Bun](https://img.shields.io/badge/Built%20with-Bun-f9f1e1.svg)](https://bun.sh)
+[![Built with pnpm](https://img.shields.io/badge/Built%20with-pnpm-f9ad00.svg)](https://pnpm.io)
 
 **AI Agent Loop Orchestrator** - A terminal UI for orchestrating AI coding agents to work through task lists autonomously.
 
@@ -14,7 +14,7 @@ Rube Goldberg TUI connects your AI coding assistant (Claude Code, OpenCode) to y
 
 ```bash
 # Install
-bun install -g rube-goldberg-tui
+pnpm install -g rube-goldberg-tui
 
 # Setup your project
 cd your-project
@@ -160,17 +160,17 @@ Skills must be folders inside `skills_dir` containing a `SKILL.md` file.
 ```bash
 git clone https://github.com/subsy/rube-goldberg-tui.git
 cd rube-goldberg-tui
-bun install
-bun run dev
+pnpm install
+pnpm run dev
 ```
 
 ### Build & Test
 
 ```bash
-bun run build       # Build the project
-bun run typecheck   # Type check (no emit)
-bun run lint        # Run linter
-bun run lint:fix    # Auto-fix lint issues
+pnpm run build       # Build the project
+pnpm run typecheck   # Type check (no emit)
+pnpm run lint        # Run linter
+pnpm run lint:fix    # Auto-fix lint issues
 ```
 
 ### Project Structure
@@ -205,13 +205,12 @@ rube-goldberg-tui/
 
 ### Key Technologies
 
+- [pnpm](https://pnpm.io) - Fast, disk space efficient package manager
 - [Bun](https://bun.sh) - JavaScript runtime
 - [OpenTUI](https://github.com/anomalyco/opentui) - Terminal UI framework
 - [React](https://react.dev) - Component model for TUI
 - [Handlebars](https://handlebarsjs.com) - Prompt templating
 - [Zod](https://zod.dev) - Configuration validation
-- [Prototype Cafe Workflow] (https://prototype.cafe) - Home of the Innovation Station of Lila Inglis Abegunrin
-- [Rube Goldburd Machine] (https://rube.works) - Modern Day Chain Reaction AI Agent for Bilding AI Agents
 
 
 
