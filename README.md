@@ -210,8 +210,11 @@ rube-goldberg-tui/
 - [React](https://react.dev) - Component model for TUI
 - [Handlebars](https://handlebarsjs.com) - Prompt templating
 - [Zod](https://zod.dev) - Configuration validation
-- [Prototype Cafe Workflow] (https://prototype.cafe) - Home of the Innovation Station of Lila Inglis Abegunrin
-- [Rube Goldburd Machine] (https://rube.works) - Modern Day Chain Reaction AI Agent for Bilding AI Agents
+
+### Related Projects
+
+- [Prototype Cafe Workflow](https://prototype.cafe) - Home of the Innovation Station of Lila Inglis Abegunrin
+- [Rube Goldberg Machine](https://rube.works) - Modern Day Chain Reaction AI Agent for Building AI Agents
 
 
 
