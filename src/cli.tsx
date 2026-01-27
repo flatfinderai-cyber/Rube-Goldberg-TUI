@@ -18,6 +18,7 @@ import {
   executeCreatePrdCommand,
   executeConvertCommand,
   executeDocsCommand,
+  executeServerCommand,
 } from './commands/index.js';
 
 /**
@@ -31,6 +32,7 @@ Usage: rube-goldberg-tui [command] [options]
 
 Commands:
   (none)              Start RubeGoldberg execution (same as 'run')
+  server [options]    Start API server for frontend integration
   create-prd [opts]   Create a new PRD interactively (alias: prime)
   convert [options]   Convert PRD markdown to JSON format
   run [options]       Start RubeGoldberg execution
@@ -46,6 +48,12 @@ Commands:
   docs [section]      Open documentation in browser
   help, --help, -h    Show this help message
   version, --version, -v  Show version number
+
+Server Options:
+  --port, -p <number> HTTP/WebSocket port (default: 3030)
+  --no-cors           Disable CORS
+  --cors <origins>    Comma-separated allowed origins
+  --enable-auth       Enable authentication (future feature)
 
 Run Options:
   --epic <id>         Epic ID for beads tracker
@@ -136,6 +144,12 @@ async function handleSubcommand(args: string[]): Promise<boolean> {
   // Convert command
   if (command === 'convert') {
     await executeConvertCommand(args.slice(1));
+    return true;
+  }
+
+  // Server command
+  if (command === 'server') {
+    await executeServerCommand(args.slice(1));
     return true;
   }
 

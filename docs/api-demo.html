@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rube Goldberg API Example</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #0f0f0f;
+      color: #e0e0e0;
+    }
+    
+    h1 {
+      color: #00ff88;
+      border-bottom: 2px solid #00ff88;
+      padding-bottom: 10px;
+    }
+    
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .status {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+    
+    .status-label {
+      color: #888;
+    }
+    
+    .status-value {
+      color: #00ff88;
+      font-weight: bold;
+    }
+    
+    button {
+      background: #00ff88;
+      color: #0f0f0f;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 5px;
+      transition: all 0.2s;
+    }
+    
+    button:hover {
+      background: #00cc6a;
+      transform: translateY(-2px);
+    }
+    
+    button:disabled {
+      background: #444;
+      color: #888;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .log {
+      background: #000;
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 15px;
+      margin-top: 20px;
+      height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+    
+    .log-entry {
+      margin: 5px 0;
+      padding: 5px;
+      border-left: 3px solid #00ff88;
+      padding-left: 10px;
+    }
+    
+    .log-entry.error {
+      border-left-color: #ff0044;
+      color: #ff6688;
+    }
+    
+    .log-entry.info {
+      border-left-color: #00aaff;
+      color: #66ccff;
+    }
+    
+    .connection-status {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    
+    .connection-status.connected {
+      background: #00ff88;
+      box-shadow: 0 0 10px #00ff88;
+    }
+    
+    .connection-status.disconnected {
+      background: #ff0044;
+    }
+  </style>
+</head>
+<body>
+  <h1>🤖 Rube Goldberg API Demo</h1>
+  
+  <div class="card">
+    <h2>Connection</h2>
+    <div class="status">
+      <span class="status-label">WebSocket:</span>
+      <span>
+        <span id="ws-status" class="connection-status disconnected"></span>
+        <span id="ws-status-text">Disconnected</span>
+      </span>
+    </div>
+    <div class="status">
+      <span class="status-label">API Server:</span>
+      <span id="api-url" class="status-value">http://localhost:3030</span>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h2>Controls</h2>
+    <div>
+      <button id="btn-start" onclick="startExecution()">▶ Start Execution</button>
+      <button id="btn-pause" onclick="pauseExecution()" disabled>⏸ Pause</button>
+      <button id="btn-resume" onclick="resumeExecution()" disabled>▶ Resume</button>
+      <button id="btn-stop" onclick="stopExecution()" disabled>⏹ Stop</button>
+    </div>
+    <div style="margin-top: 10px;">
+      <button onclick="getStatus()">📊 Get Status</button>
+      <button onclick="getTasks()">📋 Get Tasks</button>
+      <button onclick="refreshTasks()">🔄 Refresh Tasks</button>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h2>Status</h2>
+    <div class="status">
+      <span class="status-label">Status:</span>
+      <span id="status-value" class="status-value">Idle</span>
+    </div>
+    <div class="status">
+      <span class="status-label">Current Iteration:</span>
+      <span id="iteration-value" class="status-value">0</span>
+    </div>
+    <div class="status">
+      <span class="status-label">Tasks:</span>
+      <span id="tasks-value" class="status-value">0 / 0</span>
+    </div>
+    <div class="status">
+      <span class="status-label">Current Task:</span>
+      <span id="current-task-value" class="status-value">None</span>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h2>Event Log</h2>
+    <div id="log" class="log"></div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:3030';
+    const WS_URL = 'ws://localhost:3030';
+    
+    let ws = null;
+    let isRunning = false;
+    let isPaused = false;
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      connectWebSocket();
+      updateButtonStates();
+    });
+    
+    // WebSocket connection
+    function connectWebSocket() {
+      log('Connecting to WebSocket...', 'info');
+      
+      ws = new WebSocket(WS_URL);
+      
+      ws.onopen = () => {
+        log('WebSocket connected!', 'info');
+        document.getElementById('ws-status').className = 'connection-status connected';
+        document.getElementById('ws-status-text').textContent = 'Connected';
+      };
+      
+      ws.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+        handleWebSocketMessage(message);
+      };
+      
+      ws.onerror = (error) => {
+        log('WebSocket error: ' + error, 'error');
+      };
+      
+      ws.onclose = () => {
+        log('WebSocket disconnected', 'info');
+        document.getElementById('ws-status').className = 'connection-status disconnected';
+        document.getElementById('ws-status-text').textContent = 'Disconnected';
+        
+        // Reconnect after 3 seconds
+        setTimeout(connectWebSocket, 3000);
+      };
+    }
+    
+    // Handle WebSocket messages
+    function handleWebSocketMessage(message) {
+      switch (message.type) {
+        case 'initial-state':
+          log('Received initial state', 'info');
+          updateStatus(message.data);
+          break;
+          
+        case 'engine-event':
+          handleEngineEvent(message.event);
+          break;
+          
+        case 'status':
+          updateStatus(message.data);
+          break;
+          
+        case 'pong':
+          log('Pong received', 'info');
+          break;
+          
+        case 'error':
+          log('Error: ' + message.data.message, 'error');
+          break;
+      }
+    }
+    
+    // Handle engine events
+    function handleEngineEvent(event) {
+      const eventType = event.type;
+      
+      log(`Event: ${eventType}`, 'info');
+      
+      switch (eventType) {
+        case 'engine:started':
+          isRunning = true;
+          isPaused = false;
+          updateButtonStates();
+          log(`Execution started with ${event.totalTasks} tasks`);
+          break;
+          
+        case 'engine:stopped':
+          isRunning = false;
+          isPaused = false;
+          updateButtonStates();
+          log(`Execution stopped. Reason: ${event.reason}`);
+          break;
+          
+        case 'engine:paused':
+          isPaused = true;
+          updateButtonStates();
+          log('Execution paused');
+          break;
+          
+        case 'engine:resumed':
+          isPaused = false;
+          updateButtonStates();
+          log('Execution resumed');
+          break;
+          
+        case 'iteration:started':
+          log(`Iteration ${event.iteration} started: ${event.task.title}`);
+          break;
+          
+        case 'iteration:completed':
+          log(`Iteration ${event.result.iteration} completed in ${event.result.durationMs}ms`);
+          break;
+          
+        case 'task:completed':
+          log(`✓ Task completed: ${event.task.title}`);
+          break;
+          
+        case 'all:complete':
+          log(`🎉 All tasks complete! ${event.totalCompleted} tasks in ${event.totalIterations} iterations`);
+          break;
+      }
+    }
+    
+    // Update status display
+    function updateStatus(data) {
+      if (data.status) {
+        document.getElementById('status-value').textContent = data.status;
+        isRunning = data.status === 'running';
+        isPaused = data.status === 'paused';
+        updateButtonStates();
+      }
+      
+      if (data.currentIteration !== undefined) {
+        document.getElementById('iteration-value').textContent = data.currentIteration;
+      }
+      
+      if (data.totalTasks !== undefined) {
+        const completed = data.tasksCompleted || 0;
+        document.getElementById('tasks-value').textContent = `${completed} / ${data.totalTasks}`;
+      }
+      
+      if (data.currentTask) {
+        document.getElementById('current-task-value').textContent = data.currentTask.title;
+      } else {
+        document.getElementById('current-task-value').textContent = 'None';
+      }
+    }
+    
+    // Update button states
+    function updateButtonStates() {
+      document.getElementById('btn-start').disabled = isRunning;
+      document.getElementById('btn-pause').disabled = !isRunning || isPaused;
+      document.getElementById('btn-resume').disabled = !isRunning || !isPaused;
+      document.getElementById('btn-stop').disabled = !isRunning;
+    }
+    
+    // API calls
+    async function startExecution() {
+      try {
+        const response = await fetch(`${API_URL}/api/execution/start`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prdPath: './prd.json',  // Change this to your PRD path
+            iterations: 0  // 0 = unlimited
+          })
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+          log('Execution started successfully');
+        } else {
+          log('Failed to start: ' + data.error, 'error');
+        }
+      } catch (error) {
+        log('Error starting execution: ' + error, 'error');
+      }
+    }
+    
+    async function pauseExecution() {
+      try {
+        await fetch(`${API_URL}/api/execution/pause`, { method: 'POST' });
+        log('Pause requested');
+      } catch (error) {
+        log('Error pausing: ' + error, 'error');
+      }
+    }
+    
+    async function resumeExecution() {
+      try {
+        await fetch(`${API_URL}/api/execution/resume`, { method: 'POST' });
+        log('Resume requested');
+      } catch (error) {
+        log('Error resuming: ' + error, 'error');
+      }
+    }
+    
+    async function stopExecution() {
+      try {
+        await fetch(`${API_URL}/api/execution/stop`, { method: 'POST' });
+        log('Stop requested');
+      } catch (error) {
+        log('Error stopping: ' + error, 'error');
+      }
+    }
+    
+    async function getStatus() {
+      try {
+        const response = await fetch(`${API_URL}/api/execution/status`);
+        const data = await response.json();
+        log('Status fetched', 'info');
+        updateStatus(data.engine || {});
+      } catch (error) {
+        log('Error getting status: ' + error, 'error');
+      }
+    }
+    
+    async function getTasks() {
+      try {
+        const response = await fetch(`${API_URL}/api/tasks`);
+        const data = await response.json();
+        log(`Fetched ${data.tasks.length} tasks`, 'info');
+        console.log('Tasks:', data.tasks);
+      } catch (error) {
+        log('Error getting tasks: ' + error, 'error');
+      }
+    }
+    
+    async function refreshTasks() {
+      try {
+        await fetch(`${API_URL}/api/tasks/refresh`, { method: 'POST' });
+        log('Tasks refreshed');
+      } catch (error) {
+        log('Error refreshing tasks: ' + error, 'error');
+      }
+    }
+    
+    // Logging
+    function log(message, type = 'default') {
+      const logEl = document.getElementById('log');
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      
+      const timestamp = new Date().toLocaleTimeString();
+      entry.textContent = `[${timestamp}] ${message}`;
+      
+      logEl.appendChild(entry);
+      logEl.scrollTop = logEl.scrollHeight;
+      
+      // Keep only last 100 entries
+      while (logEl.children.length > 100) {
+        logEl.removeChild(logEl.firstChild);
+      }
+    }
+  </script>
+</body>
+</html>
