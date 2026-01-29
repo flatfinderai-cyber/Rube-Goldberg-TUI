@@ -1,22 +1,86 @@
 # Agent Instructions
 
-This file provides guidance to Claude Code AI coding agents when working with code in this repository.
+This file provides guidance to Claude Code AI coding agents working in the Rube Goldberg TUI codebase.
 
-You are an AI assistant. Your role is to assist with software development tasks while adhering to strict coding standards and practices. Here's how you should approach your work:
+## Project Overview
 
-1. Critical Coding Rules:
+**Rube Goldberg TUI** is an AI Agent Loop Orchestrator - a terminal UI and web platform for orchestrating AI coding agents (Claude Code, OpenCode, GitHub Copilot) to work through task lists autonomously.
+
+**Key concepts:**
+- **Agents**: AI coding assistants that execute tasks (see `src/plugins/agents/`)
+- **Trackers**: Task/issue backends like Beads, JSON PRDs (see `src/plugins/trackers/`)
+- **Engine**: The iteration loop that selects tasks, executes agents, and detects completion
+- **TUI**: React-based terminal interface using OpenTUI framework
+
+## Critical Coding Rules
+
+1. **Code Quality**
    - Prioritize simple, clean, and maintainable solutions over clever or complex ones.
    - Make the smallest reasonable changes to achieve the desired outcome.
    - Never make unrelated code changes; document issues for later instead.
    - Preserve code comments unless you can prove they are actively false.
    - Start all code files with a file-level JSDoc comment section explaining the file's purpose, prefixed with "ABOUTME: ".
    - Avoid temporal context in comments; make them evergreen.
-   
-2. Avoiding entropy
+
+2. **Avoiding Entropy**
    - This codebase will outlive you. Every shortcut you take becomes someone else's burden. Every hack compounds into technical debt that slows the whole team down.
-   - You are not just writing code. You are shaping the future of this
-project. The patterns you establish will be copied. The corners you cut will be cut again.
+   - You are not just writing code. You are shaping the future of this project. The patterns you establish will be copied. The corners you cut will be cut again.
    - Fight entropy. Leave the codebase better than you found it.
+
+## Project Architecture
+
+```
+src/
+├── cli.tsx              # CLI entry point
+├── index.ts             # Library exports
+├── commands/            # CLI commands (run, resume, status, logs, setup, etc.)
+├── config/              # Configuration loading and Zod validation schemas
+├── engine/              # Execution engine (iteration loop, rate limiting)
+├── autonomous/          # Autonomous execution mode with LLM orchestration
+├── chat/                # AI chat mode for PRD creation
+├── prd/                 # PRD generation and parsing
+├── interruption/        # Signal handling and graceful shutdown
+├── logs/                # Iteration log persistence and structured logging
+├── session/             # Session persistence and lock management
+├── setup/               # Interactive setup wizard
+├── templates/           # Handlebars prompt templates
+├── plugins/
+│   ├── agents/          # Agent plugins (claude, opencode)
+│   │   ├── builtin/     # Built-in agent implementations
+│   │   └── tracing/     # Subagent tracing parser
+│   └── trackers/        # Tracker plugins (beads, beads-bv, json)
+│       └── builtin/     # Built-in tracker implementations
+└── tui/                 # Terminal UI (OpenTUI/React)
+    └── components/      # React TUI components
+
+website/                 # Documentation website (Next.js)
+skills/                  # Bundled skills for PRD/task creation
+```
+
+## Codebase Conventions
+
+**TypeScript:**
+- Strict mode enabled with all strict checks
+- Use Zod for runtime validation (see `src/config/schema.ts`)
+- Prefer `type` over `interface` for consistency
+- Export types from `types.ts` files in each module
+
+**React/TUI Components:**
+- Uses OpenTUI framework with React 19 (`@opentui/react`)
+- JSX configured with `jsxImportSource: "@opentui/react"`
+- Components go in `src/tui/components/`
+- Use functional components with hooks
+
+**Plugin Architecture:**
+- Agents implement `AgentPlugin` interface (see `src/plugins/agents/base.ts`)
+- Trackers implement `TrackerPlugin` interface (see `src/plugins/trackers/base.ts`)
+- Register plugins in respective `registry.ts` files
+- Built-in plugins go in `builtin/` subdirectories
+
+**Module Organization:**
+- Each major feature has its own directory with `index.ts` barrel export
+- Types defined in `types.ts` within each module
+- Keep related functionality co-located
 
 ## Build Instructions
 
@@ -47,6 +111,23 @@ bun run clean
 ```bash
 bun run typecheck && bun run build
 ```
+
+### Website (Documentation)
+
+The `website/` directory contains a Next.js documentation site:
+
+```bash
+# Development
+bun run website:dev
+
+# Build
+bun run website:build
+
+# Lint
+bun run website:lint
+```
+
+## Issue Tracking with Beads
 
 This project uses **bd** (beads) for issue tracking. Run `bd onboard` to get started.
 
@@ -173,4 +254,3 @@ bd sync               # Sync with git
 - NEVER stop before pushing - that leaves work stranded locally
 - NEVER say "ready to push when you are" - YOU must push
 - If push fails, resolve and retry until it succeeds
-
