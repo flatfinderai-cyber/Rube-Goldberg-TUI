@@ -55,24 +55,23 @@
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "@types/handlebars": "^4.1.0",
-    "@types/node": "^25.0.6",
+    "@types/node": "^25.2.1",
     "@types/node-notifier": "^8.0.5",
-    "@types/react": "^19.2.8",
-    "@typescript-eslint/eslint-plugin": "^8.52.0",
-    "@typescript-eslint/parser": "^8.52.0",
+    "@types/react": "^19.2.13",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
     "eslint": "^9.39.2",
-    "react": "^19.2.3",
+    "react": "^19.2.4",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.71.2",
-    "@opentui/core": "^0.1.72",
-    "@opentui/react": "^0.1.72",
+    "@anthropic-ai/sdk": "^0.73.0",
+    "@opentui/core": "^0.1.77",
+    "@opentui/react": "^0.1.77",
     "handlebars": "^4.7.8",
-    "node-notifier": "^8.0.2",
+    "node-notifier": "^10.0.1",
     "smol-toml": "^1.6.0",
-    "yaml": "^2.8.2",
-    "zod": "^4.3.5"
+    "zod": "^4.3.6"
   },
   "resolutions": {
     "diff": "8.0.3"

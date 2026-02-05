@@ -19,6 +19,8 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 type CardHeaderProps = HTMLAttributes<HTMLDivElement>;
 type CardContentProps = HTMLAttributes<HTMLDivElement>;
 type CardFooterProps = HTMLAttributes<HTMLDivElement>;
+type CardTitleProps = HTMLAttributes<HTMLHeadingElement>;
+type CardDescriptionProps = HTMLAttributes<HTMLParagraphElement>;
 
 /**
  * Base card styles - terminal window aesthetic with layered backgrounds.
@@ -163,4 +165,38 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
 
 CardFooter.displayName = 'CardFooter';
 
-export type { CardProps, CardHeaderProps, CardContentProps, CardFooterProps };
+/**
+ * Card title component for main headings.
+ */
+export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
+  ({ className = '', ...props }, ref) => {
+    const classes = [
+      'text-lg font-semibold leading-none tracking-tight',
+      'text-fg-primary',
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+    return <h3 ref={ref} className={classes} {...props} />;
+  }
+);
+
+CardTitle.displayName = 'CardTitle';
+
+/**
+ * Card description component for secondary text.
+ */
+export const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
+  ({ className = '', ...props }, ref) => {
+    const classes = ['text-sm text-fg-secondary', className]
+      .filter(Boolean)
+      .join(' ');
+
+    return <p ref={ref} className={classes} {...props} />;
+  }
+);
+
+CardDescription.displayName = 'CardDescription';
+
+export type { CardProps, CardHeaderProps, CardContentProps, CardFooterProps, CardTitleProps, CardDescriptionProps };

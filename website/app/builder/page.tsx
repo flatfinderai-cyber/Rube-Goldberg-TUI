@@ -3,11 +3,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/Button';
+import { Textarea } from '@/components/ui/Textarea';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Progress } from '@/components/ui/Progress';
+import { Badge } from '@/components/ui/Badge';
 import { Loader2, Sparkles, CheckCircle, AlertCircle } from 'lucide-react';
 
 type AgentPhase = 'idle' | 'analyzing' | 'planning' | 'building' | 'validating' | 'complete' | 'failed';
@@ -116,7 +116,7 @@ export default function InventionBuilderPage() {
 							<Textarea
 								placeholder="Example: A todo app with AI-powered task suggestions, dark mode, and mobile-friendly design..."
 								value={description}
-								onChange={(e) => setDescription(e.target.value)}
+								onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
 								rows={6}
 								className="resize-none"
 							/>
@@ -147,7 +147,7 @@ export default function InventionBuilderPage() {
 						<CardHeader>
 							<div className="flex items-center justify-between">
 								<CardTitle>Building Your Invention</CardTitle>
-								<Badge variant={agentState.phase === 'failed' ? 'destructive' : 'default'}>
+								<Badge variant={agentState.phase === 'failed' ? 'error' : 'default'}>
 									{agentState.phase}
 								</Badge>
 							</div>
