@@ -29,7 +29,7 @@ function GearIcon({ className }: { className?: string }) {
                       >
                     <circle cx="12" cy="12" r="3" />
                     <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-              </svg>svg>
+              </svg>
             );
 }
 
@@ -42,7 +42,7 @@ function GlobeIcon({ className }: { className?: string }) {
                     <circle cx="12" cy="12" r="10" />
                     <line x1="2" y1="12" x2="22" y2="12" />
                     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-              </svg>svg>
+              </svg>
             );
 }
 
@@ -53,7 +53,7 @@ function FolderIcon({ className }: { className?: string }) {
       return (
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                     <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-              </svg>svg>
+              </svg>
             );
 }
 
@@ -65,7 +65,7 @@ function TerminalIcon({ className }: { className?: string }) {
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                     <polyline points="4 17 10 11 4 5" />
                     <line x1="12" y1="19" x2="20" y2="19" />
-              </svg>svg>
+              </svg>
             );
 }
 
@@ -79,7 +79,7 @@ function PlugIcon({ className }: { className?: string }) {
                     <path d="M9 7V2" />
                     <path d="M15 7V2" />
                     <path d="M6 13V8h12v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4Z" />
-              </svg>svg>
+              </svg>
             );
 }
 
@@ -111,30 +111,30 @@ export function Hero() {
                             <div className="absolute top-20 left-10 w-32 h-32 border-8 border-amber-800 rounded-full animate-spin-slow" />
                             <div className="absolute top-40 right-20 w-24 h-24 border-6 border-amber-700 rounded-full animate-spin-reverse" />
                             <div className="absolute bottom-32 left-1/4 w-40 h-40 border-8 border-amber-900 rounded-full animate-spin-slow" />
-                    </div>div>
+                    </div>
               
                     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
                         {/* Navigation */}
                             <nav className="flex items-center justify-between mb-16">
                                       <div className="flex items-center gap-2">
                                                   <GearIcon className="w-8 h-8 text-amber-700" />
-                                                  <span className="text-2xl font-bold text-amber-900">Rube Goldberg</span>span>
-                                      </div>div>
+                                                  <span className="text-2xl font-bold text-amber-900">Rube Goldberg</span>
+                                      </div>
                                       <div className="flex items-center gap-6">
                                                   <Link href="/docs" className="text-amber-800 hover:text-amber-600 transition-colors">
                                                                 Docs
-                                                  </Link>Link>
+                                                  </Link>
                                                   <Link href="/examples" className="text-amber-800 hover:text-amber-600 transition-colors">
                                                                 Examples
-                                                  </Link>Link>
+                                                  </Link>
                                                   <Link
                                                                     href="https://github.com/flatfinderai-cyber/Rube-Goldberg-TUI"
                                                                     className="flex items-center gap-2 px-4 py-2 bg-amber-800 text-amber-50 rounded-lg hover:bg-amber-700 transition-colors"
                                                                   >
-                                                                <span>GitHub</span>span>
-                                                  </Link>Link>
-                                      </div>div>
-                            </nav>nav>
+                                                                <span>GitHub</span>
+                                                  </Link>
+                                      </div>
+                            </nav>
                     
                         {/* Main Hero Content */}
                             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -143,13 +143,13 @@ export function Hero() {
                                                   <div className="space-y-4">
                                                                 <h1 className="text-5xl lg:text-6xl font-bold text-amber-900 leading-tight">
                                                                                 AI Agent Loop
-                                                                                <span className="block text-amber-600">Orchestrator</span>span>
-                                                                </h1>h1>
+                                                                                <span className="block text-amber-600">Orchestrator</span>
+                                                                </h1>
                                                                 <p className="text-xl text-amber-800 max-w-lg">
                                                                                 Build complex workflows with simple natural language. 
                                                                                 Watch your Rube Goldberg machine work its magic.
-                                                                </p>p>
-                                                  </div>div>
+                                                                </p>
+                                                  </div>
                                       
                                           {/* Agent Orchestrator Form */}
                                                   <div className="bg-white/80 backdrop-blur-sm border-2 border-amber-300 rounded-2xl p-6 shadow-xl">
@@ -169,8 +169,8 @@ export function Hero() {
                                                                                                     />
                                                                                 <div className="absolute top-2 right-2 text-xs text-amber-400 font-mono">
                                                                                                   BLUEPRINT
-                                                                                </div>div>
-                                                                </div>div>
+                                                                                </div>
+                                                                </div>
                                                   
                                                       {/* Controls Row */}
                                                                 <div className="flex flex-wrap items-center gap-4 mb-6">
@@ -185,10 +185,10 @@ export function Hero() {
                                                                                                       {models.map((model) => (
                                                                                                                                                   <option key={model.id} value={model.id}>
                                                                                                                                                       {model.name}
-                                                                                                                                                      </option>option>
+                                                                                                                                                      </option>
                                                                                                                                                 ))}
-                                                                                                      </select>select>
-                                                                                </div>div>
+                                                                                                      </select>
+                                                                                </div>
                                                                 
                                                                     {/* Skills Toggles */}
                                                                                 <div className="flex items-center gap-2 flex-wrap">
@@ -210,10 +210,10 @@ export function Hero() {
                                                               >
                                                             <skill.Icon className="w-4 h-4" />
                                           {skill.name}
-                                      </button>button>
+                                      </button>
                                     ))}
-                                                                                </div>div>
-                                                                </div>div>
+                                                                                </div>
+                                                                </div>
                                                   
                                                       {/* Build Loop Button - Brass Lever Style */}
                                                                 <button
@@ -225,26 +225,26 @@ export function Hero() {
                                                                                 <span className="flex items-center justify-center gap-2">
                                                                                                   <GearIcon className="w-5 h-5" />
                                                                                                   Build Loop
-                                                                                </span>span>
-                                                                </button>button>
-                                                  </div>div>
+                                                                                </span>
+                                                                </button>
+                                                  </div>
                                       
                                           {/* Quick Stats */}
                                                   <div className="flex gap-8 text-amber-800">
                                                                 <div>
-                                                                                <div className="text-2xl font-bold">Infinite</div>div>
-                                                                                <div className="text-sm opacity-75">Possibilities</div>div>
-                                                                </div>div>
+                                                                                <div className="text-2xl font-bold">Infinite</div>
+                                                                                <div className="text-sm opacity-75">Possibilities</div>
+                                                                </div>
                                                                 <div>
-                                                                                <div className="text-2xl font-bold">4-Step</div>div>
-                                                                                <div className="text-sm opacity-75">Loop</div>div>
-                                                                </div>div>
+                                                                                <div className="text-2xl font-bold">4-Step</div>
+                                                                                <div className="text-sm opacity-75">Loop</div>
+                                                                </div>
                                                                 <div>
-                                                                                <div className="text-2xl font-bold">100%</div>div>
-                                                                                <div className="text-sm opacity-75">Open Source</div>div>
-                                                                </div>div>
-                                                  </div>div>
-                                      </div>div>
+                                                                                <div className="text-2xl font-bold">100%</div>
+                                                                                <div className="text-sm opacity-75">Open Source</div>
+                                                                </div>
+                                                  </div>
+                                      </div>
                             
                                 {/* Right side - Mascot */}
                                       <div className="relative flex items-center justify-center">
@@ -265,27 +265,27 @@ export function Hero() {
                                                                                                                           className="w-full h-full object-cover"
                                                                                                                           priority
                                                                                                                         />
-                                                                                </div>div>
+                                                                                </div>
                                                                                 
                                                                     {/* Floating gear decorations */}
                                                                                 <div className="absolute -top-4 -right-4 w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center shadow-lg">
                                                                                                   <GearIcon className="w-6 h-6 text-white animate-spin-slow" />
-                                                                                </div>div>
+                                                                                </div>
                                                                                 <div className="absolute -bottom-3 -left-3 w-10 h-10 bg-amber-400 rounded-full flex items-center justify-center shadow-lg">
                                                                                                   <GearIcon className="w-5 h-5 text-white animate-spin-reverse" />
-                                                                                </div>div>
-                                                                </div>div>
-                                                  </div>div>
-                                      </div>div>
-                            </div>div>
+                                                                                </div>
+                                                                </div>
+                                                  </div>
+                                      </div>
+                            </div>
                     
                         {/* Tagline */}
                             <div className="text-center mt-16">
                                       <p className="text-lg text-amber-700 italic">
                                                   Where complexity becomes orchestration
-                                      </p>p>
-                            </div>div>
-                    </div>div>
+                                      </p>
+                            </div>
+                    </div>
               
                   {/* Custom CSS for animations */}
                     <style jsx>{`
@@ -303,7 +303,7 @@ export function Hero() {
                                                                                                                               .animate-spin-reverse {
                                                                                                                                         animation: spin-reverse 15s linear infinite;
                                                                                                                                                 }
-                                                                                                                                                      `}</style>style>
-              </section>section>
+                                                                                                                                                      `}</style>
+              </section>
             );
-}</svg>
+}
