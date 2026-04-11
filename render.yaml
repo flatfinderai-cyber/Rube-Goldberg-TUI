@@ -1,0 +1,15 @@
+# ABOUTME: Render deployment config for the vibe-coding-platform.
+# One-click deploy: render.com > New Web Service > connect this repo > add ANTHROPIC_API_KEY > Deploy
+
+services:
+  - type: web
+    name: rube-goldberg
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: WORKSPACE_DIR
+        value: /tmp/workspaces
+      - key: DB_PATH
+        value: /tmp/sessions.db
