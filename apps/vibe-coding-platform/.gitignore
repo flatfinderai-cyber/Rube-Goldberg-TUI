@@ -1,0 +1,28 @@
+# ABOUTME: Git ignore rules for vibe-coding-platform.
+# Excludes generated files: virtualenv, pycache, DB, workspaces, and temp zips.
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# Environment
+.env
+
+# Agent workspaces (per-session build dirs)
+workspaces/
+
+# Temp files
+*.tmp
+*.zip
+
+# OS
+.DS_Store
