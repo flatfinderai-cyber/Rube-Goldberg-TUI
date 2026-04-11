@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Rube Goldberg — Running{% endblock %}
+{% block main_class %}w-full px-0{% endblock %}
+{% block content %}
+
+<div id="run-app" class="flex flex-col h-screen" style="height: calc(100vh - 112px);">
+
+  <!-- ─── TOP: MACHINE + BENNY ──────────────────────────────────────────── -->
+  <div class="bg-rg-bg2 border-b border-rg-bg3 px-6 py-5">
+
+    <!-- Phase pipeline -->
+    <div class="flex items-center justify-center gap-0 mb-5" id="phase-pipeline">
+      <div class="phase-node" data-phase="analyze">
+        <div class="phase-gear">⚙</div>
+        <div class="phase-label">Analyze</div>
+      </div>
+      <div class="phase-connector">——▶</div>
+      <div class="phase-node" data-phase="plan">
+        <div class="phase-gear">⚙</div>
+        <div class="phase-label">Plan</div>
+      </div>
+      <div class="phase-connector">——▶</div>
+      <div class="phase-node" data-phase="build">
+        <div class="phase-gear">⚙</div>
+        <div class="phase-label">Build</div>
+      </div>
+      <div class="phase-connector">——▶</div>
+      <div class="phase-node" data-phase="validate">
+        <div class="phase-gear">⚙</div>
+        <div class="phase-label">Validate</div>
+      </div>
+      <div class="phase-connector">——▶</div>
+      <div class="phase-node" data-phase="package">
+        <div class="phase-gear">⚙</div>
+        <div class="phase-label">Package</div>
+      </div>
+    </div>
+
+    <!-- Benny + status row -->
+    <div class="flex items-center gap-6">
+
+      <!-- Benny the cat — working animation -->
+      <div class="relative flex-shrink-0">
+        <img id="benny-gif"
+             src="/static/benny.gif"
+             alt="Benny working"
+             class="w-28 h-28 rounded-xl object-cover border-2 border-rg-bg3"
+             onerror="this.style.display='none'; document.getElementById('benny-fallback').style.display='flex'">
+        <div id="benny-fallback"
+             class="hidden w-28 h-28 rounded-xl border-2 border-rg-bg3 bg-rg-bg
+                    items-center justify-center text-5xl animate-pulse">⚙</div>
+        <!-- Status dot -->
+        <div id="benny-status-dot"
+             class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rg-green
+                    border-2 border-rg-bg2 animate-pulse"></div>
+      </div>
+
+      <!-- Stats -->
+      <div class="flex-1 grid grid-cols-3 gap-4">
+        <div class="bg-rg-bg rounded-lg p-3 border border-rg-bg3">
+          <div class="text-rg-muted text-xs font-mono mb-1">ITERATION</div>
+          <div class="text-rg-blue font-mono font-bold text-2xl">
+            <span id="iter-current">0</span>
+            <span class="text-rg-muted text-sm"> / </span>
+            <span id="iter-total" class="text-rg-muted text-lg">?</span>
+          </div>
+        </div>
+        <div class="bg-rg-bg rounded-lg p-3 border border-rg-bg3">
+          <div class="text-rg-muted text-xs font-mono mb-1">PHASE</div>
+          <div id="current-phase-label" class="text-rg-purple font-mono font-bold text-sm leading-tight">
+            Starting...
+          </div>
+        </div>
+        <div class="bg-rg-bg rounded-lg p-3 border border-rg-bg3">
+          <div class="text-rg-muted text-xs font-mono mb-1">STATUS</div>
+          <div id="engine-status" class="text-rg-green font-mono font-bold text-sm">RUNNING</div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-col gap-2 flex-shrink-0">
+        <button id="btn-pause" onclick="pauseSession()"
+                class="px-4 py-2 rounded-lg font-mono text-xs border border-rg-yellow text-rg-yellow
+                       hover:bg-rg-yellow hover:text-rg-bg transition-all">
+          ⏸ Pause
+        </button>
+        <button id="btn-stop" onclick="stopSession()"
+                class="px-4 py-2 rounded-lg font-mono text-xs border border-rg-red text-rg-red
+                       hover:bg-rg-red hover:text-rg-bg transition-all">
+          ⏹ Stop
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="mt-4 bg-rg-bg rounded-full h-2 overflow-hidden">
+      <div id="progress-bar"
+           class="h-full bg-gradient-to-r from-rg-blue to-rg-purple transition-all duration-500 ease-out"
+           style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- ─── BOTTOM: SPLIT PANEL ───────────────────────────────────────────── -->
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- Left: Agent output terminal -->
+    <div class="flex-1 flex flex-col bg-rg-bg border-r border-rg-bg3">
+      <div class="flex items-center gap-2 px-4 py-2 border-b border-rg-bg3 bg-rg-bg2">
+        <div class="flex gap-1.5">
+          <div class="w-3 h-3 rounded-full bg-rg-red"></div>
+          <div class="w-3 h-3 rounded-full bg-rg-yellow"></div>
+          <div class="w-3 h-3 rounded-full bg-rg-green"></div>
+        </div>
+        <span class="text-rg-muted font-mono text-xs ml-2">agent output</span>
+        <div id="output-indicator" class="ml-auto flex items-center gap-1 text-rg-green text-xs font-mono">
+          <div class="w-2 h-2 rounded-full bg-rg-green animate-pulse"></div>
+          live
+        </div>
+      </div>
+      <div id="terminal-output"
+           class="flex-1 overflow-y-auto p-4 font-mono text-xs text-rg-fg leading-relaxed
+                  scrollbar-thin scrollbar-thumb-rg-bg3">
+        <div class="text-rg-muted">Connecting to agent stream...</div>
+      </div>
+    </div>
+
+    <!-- Right: Tool activity log -->
+    <div class="w-72 flex flex-col bg-rg-bg2">
+      <div class="px-4 py-2 border-b border-rg-bg3 text-rg-muted font-mono text-xs">
+        tool activity
+      </div>
+      <div id="tool-log"
+           class="flex-1 overflow-y-auto p-3 space-y-2 font-mono text-xs">
+        <div class="text-rg-dim text-center py-4">waiting for tools...</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const SESSION_ID = "{{ session_id }}";
+</script>
+<script src="/static/stream.js"></script>
+{% endblock %}

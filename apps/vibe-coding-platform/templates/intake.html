@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% block title %}Rube Goldberg — Build Something{% endblock %}
+{% block content %}
+
+<div id="app" x-data="intakeApp()" class="max-w-3xl mx-auto">
+
+  <!-- Hero -->
+  <div class="text-center mb-10">
+    <h1 class="text-4xl font-mono font-bold text-rg-fg mb-3">
+      <span class="text-rg-blue">⚙</span> Build Anything
+    </h1>
+    <p class="text-rg-fg2 text-lg">
+      Drop in your PRD. The machine does the rest.<br>
+      <span class="text-rg-muted text-sm">Like a dishwasher. Set it. Walk away.</span>
+    </p>
+  </div>
+
+  <!-- Step indicator -->
+  <div class="flex items-center justify-center gap-0 mb-10 font-mono text-sm">
+    <template x-for="(step, i) in steps" :key="i">
+      <div class="flex items-center">
+        <div class="flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300"
+             :class="currentStep === i ? 'bg-rg-blue text-rg-bg font-bold' :
+                     currentStep > i  ? 'text-rg-green' : 'text-rg-muted'">
+          <span x-text="currentStep > i ? '✓' : (i + 1)"></span>
+          <span x-text="step"></span>
+        </div>
+        <div x-show="i < steps.length - 1" class="w-8 h-px bg-rg-bg3 mx-1"></div>
+      </div>
+    </template>
+  </div>
+
+  <!-- ─── STEP 1: PRD INPUT ──────────────────────────────────────────────── -->
+  <div x-show="currentStep === 0" x-transition class="space-y-6">
+    <div class="bg-rg-bg2 border border-rg-bg3 rounded-xl p-6">
+      <h2 class="text-rg-blue font-mono font-bold text-lg mb-1">What do you want to build?</h2>
+      <p class="text-rg-muted text-sm mb-4">Paste a PRD, product idea, or plain English description.</p>
+      <textarea
+        x-model="prdText"
+        rows="10"
+        placeholder="Example: Build a SaaS app that lets teams track their daily standups. Users can log blockers, wins, and goals. Should have a dashboard showing team velocity, Slack integration, and email digests..."
+        class="w-full bg-rg-bg border border-rg-bg3 rounded-lg p-4 text-rg-fg font-mono text-sm
+               placeholder-rg-dim focus:outline-none focus:border-rg-blue resize-none leading-relaxed"
+      ></textarea>
+
+      <!-- File upload row -->
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-rg-fg2 text-xs font-mono mb-2">Context Files (optional)</label>
+          <div class="border border-dashed border-rg-bg4 rounded-lg p-3 text-center cursor-pointer
+                      hover:border-rg-blue transition-colors"
+               @click="$refs.contextFiles.click()">
+            <input type="file" multiple x-ref="contextFiles" class="hidden"
+                   @change="handleContextFiles($event)">
+            <p class="text-rg-muted text-xs font-mono">
+              📎 Drop files or click<br>
+              <span class="text-rg-dim">existing code, specs, designs</span>
+            </p>
+            <div x-show="contextFiles.length > 0" class="mt-2 text-rg-green text-xs">
+              <template x-for="f in contextFiles" :key="f.name">
+                <div x-text="'✓ ' + f.name"></div>
+              </template>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div>
+            <label class="block text-rg-fg2 text-xs font-mono mb-2">Skills (optional)</label>
+            <div class="space-y-1">
+              <template x-for="skill in availableSkills" :key="skill">
+                <label class="flex items-center gap-2 text-sm text-rg-fg2 cursor-pointer hover:text-rg-fg">
+                  <input type="checkbox" :value="skill" x-model="selectedSkills"
+                         class="accent-rg-blue">
+                  <span class="font-mono text-xs" x-text="skill"></span>
+                </label>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-end">
+      <button @click="goToStep1"
+              :disabled="!prdText.trim()"
+              :class="prdText.trim() ? 'bg-rg-blue hover:bg-rg-cyan text-rg-bg' : 'bg-rg-bg3 text-rg-muted cursor-not-allowed'"
+              class="px-8 py-3 rounded-lg font-mono font-bold text-sm transition-all duration-200">
+        Generate Questions →
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── STEP 2: CLARIFYING QUESTIONS ──────────────────────────────────── -->
+  <div x-show="currentStep === 1" x-transition class="space-y-6">
+    <div class="bg-rg-bg2 border border-rg-bg3 rounded-xl p-6">
+      <h2 class="text-rg-blue font-mono font-bold text-lg mb-1">Quick Clarifications</h2>
+      <p class="text-rg-muted text-sm mb-6">Answer what you know. Skip what you don't. The agent figures out the rest.</p>
+
+      <!-- Loading state -->
+      <div x-show="loadingQuestions" class="text-center py-8 text-rg-muted font-mono text-sm">
+        <div class="inline-block animate-spin text-2xl mb-2">⚙</div><br>
+        Analyzing your PRD...
+      </div>
+
+      <!-- Questions -->
+      <div x-show="!loadingQuestions" class="space-y-5">
+        <template x-for="q in questions" :key="q.id">
+          <div class="border-l-2 border-rg-bg4 pl-4">
+            <label class="block text-rg-fg font-medium text-sm mb-1" x-text="q.question"></label>
+            <p class="text-rg-muted text-xs font-mono mb-2" x-text="q.hint || ''"></p>
+            <input type="text"
+                   x-model="answers[q.id]"
+                   :placeholder="'Optional — ' + (q.hint || 'your answer')"
+                   class="w-full bg-rg-bg border border-rg-bg3 rounded-lg px-3 py-2 text-rg-fg
+                          font-mono text-sm focus:outline-none focus:border-rg-blue placeholder-rg-dim">
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <div class="flex justify-between">
+      <button @click="currentStep = 0" class="px-6 py-3 rounded-lg font-mono text-sm text-rg-muted hover:text-rg-fg transition-colors">
+        ← Back
+      </button>
+      <button @click="goToStep2"
+              :disabled="loadingQuestions"
+              class="px-8 py-3 rounded-lg font-mono font-bold text-sm bg-rg-blue hover:bg-rg-cyan text-rg-bg transition-all duration-200 disabled:opacity-50">
+        Generate Plan →
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── STEP 3: PLAN + LAUNCH ──────────────────────────────────────────── -->
+  <div x-show="currentStep === 2" x-transition class="space-y-6">
+    <!-- Plan loading -->
+    <div x-show="loadingPlan" class="bg-rg-bg2 border border-rg-bg3 rounded-xl p-10 text-center">
+      <div class="text-4xl animate-spin inline-block mb-3 text-rg-blue">⚙</div>
+      <p class="text-rg-muted font-mono text-sm">Designing architecture...</p>
+    </div>
+
+    <!-- Plan display -->
+    <div x-show="!loadingPlan && plan" class="bg-rg-bg2 border border-rg-bg3 rounded-xl p-6">
+      <h2 class="text-rg-green font-mono font-bold text-lg mb-1">✓ Implementation Plan Ready</h2>
+      <p class="text-rg-fg2 text-sm mb-6" x-text="plan?.summary"></p>
+
+      <!-- Tech stack -->
+      <div class="mb-5 p-4 bg-rg-bg rounded-lg border border-rg-bg3">
+        <h3 class="text-rg-blue font-mono text-xs font-bold uppercase tracking-wider mb-3">Tech Stack</h3>
+        <div class="grid grid-cols-2 gap-2 font-mono text-xs">
+          <template x-for="[k, v] in Object.entries(plan?.tech_stack || {})" :key="k">
+            <div x-show="v && v !== 'TBD'" class="flex gap-2">
+              <span class="text-rg-muted" x-text="k + ':'"></span>
+              <span class="text-rg-cyan" x-text="v"></span>
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <!-- Phases -->
+      <div class="space-y-3 mb-6">
+        <h3 class="text-rg-blue font-mono text-xs font-bold uppercase tracking-wider">Build Phases</h3>
+        <template x-for="(phase, i) in (plan?.phases || [])" :key="i">
+          <div class="flex gap-3 p-3 bg-rg-bg rounded-lg border border-rg-bg3">
+            <span class="text-rg-purple font-mono text-lg leading-none" x-text="'⚙'"></span>
+            <div>
+              <div class="font-mono text-sm font-bold text-rg-fg" x-text="phase.name"></div>
+              <div class="text-rg-muted text-xs mt-0.5" x-text="phase.description"></div>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Iteration budget -->
+      <div class="p-4 bg-rg-bg rounded-lg border border-rg-bg4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-rg-blue font-mono text-xs font-bold uppercase tracking-wider">Iteration Budget</h3>
+          <span class="text-rg-yellow font-mono text-sm font-bold" x-text="maxIterations + ' iterations'"></span>
+        </div>
+        <input type="range" min="5" max="100" x-model="maxIterations"
+               class="w-full accent-rg-blue mb-2">
+        <div class="flex justify-between text-rg-dim text-xs font-mono">
+          <span>5 (fast)</span>
+          <span class="text-rg-muted">← drag to set budget →</span>
+          <span>100 (thorough)</span>
+        </div>
+        <p class="text-rg-muted text-xs font-mono mt-2">
+          ~<span x-text="plan?.estimated_iterations || 20"></span> recommended · each iteration = one Claude call
+        </p>
+      </div>
+    </div>
+
+    <div x-show="!loadingPlan" class="flex justify-between">
+      <button @click="currentStep = 1" class="px-6 py-3 rounded-lg font-mono text-sm text-rg-muted hover:text-rg-fg transition-colors">
+        ← Back
+      </button>
+      <button @click="startMachine"
+              :disabled="launching"
+              class="px-10 py-4 rounded-xl font-mono font-bold text-base bg-rg-green hover:bg-rg-cyan text-rg-bg
+                     transition-all duration-200 disabled:opacity-50 shadow-lg shadow-rg-green/20
+                     flex items-center gap-3">
+        <span x-show="!launching">⚡ START THE MACHINE</span>
+        <span x-show="launching" class="flex items-center gap-2">
+          <span class="animate-spin">⚙</span> Launching...
+        </span>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script src="/static/intake.js"></script>
+{% endblock %}

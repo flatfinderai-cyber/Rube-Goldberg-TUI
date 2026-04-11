@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Rube Goldberg — Vibe Coding Platform{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/theme.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rg: {
+              bg:       '#1a1b26',
+              bg2:      '#24283b',
+              bg3:      '#2f3449',
+              bg4:      '#3d4259',
+              fg:       '#c0caf5',
+              fg2:      '#a9b1d6',
+              muted:    '#565f89',
+              dim:      '#414868',
+              blue:     '#7aa2f7',
+              purple:   '#bb9af7',
+              cyan:     '#7dcfff',
+              green:    '#9ece6a',
+              yellow:   '#e0af68',
+              red:      '#f7768e',
+              orange:   '#ff9e64',
+            }
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'monospace'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-rg-bg text-rg-fg font-sans min-h-screen">
+
+  <!-- Nav -->
+  <nav class="border-b border-rg-bg3 px-6 py-3 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3 group">
+      <span class="text-rg-blue text-xl font-mono font-bold tracking-tight group-hover:text-rg-cyan transition-colors">
+        ⚙ RUBE GOLDBERG
+      </span>
+      <span class="text-rg-muted text-xs font-mono">v1.0</span>
+    </a>
+    <div class="flex items-center gap-4 text-sm font-mono text-rg-muted">
+      <span class="text-rg-green">● ONLINE</span>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="{% block main_class %}container mx-auto max-w-5xl px-6 py-10{% endblock %}">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-rg-bg3 px-6 py-4 text-center text-rg-dim text-xs font-mono">
+    set it · walk away · it builds
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% block title %}Rube Goldberg — Build Complete{% endblock %}
+{% block content %}
+
+<div class="max-w-4xl mx-auto">
+
+  <!-- Hero -->
+  <div class="text-center mb-10">
+    <div class="text-6xl mb-4">🎉</div>
+    <h1 class="text-3xl font-mono font-bold text-rg-green mb-2">Build Complete</h1>
+    <p class="text-rg-fg2" id="result-summary">Your product was built successfully.</p>
+  </div>
+
+  <!-- Stats row -->
+  <div class="grid grid-cols-3 gap-4 mb-8" id="stats-row">
+    <div class="bg-rg-bg2 border border-rg-bg3 rounded-xl p-5 text-center">
+      <div class="text-3xl font-mono font-bold text-rg-blue" id="stat-iterations">—</div>
+      <div class="text-rg-muted text-xs font-mono mt-1">ITERATIONS USED</div>
+    </div>
+    <div class="bg-rg-bg2 border border-rg-bg3 rounded-xl p-5 text-center">
+      <div class="text-3xl font-mono font-bold text-rg-purple" id="stat-files">—</div>
+      <div class="text-rg-muted text-xs font-mono mt-1">FILES GENERATED</div>
+    </div>
+    <div class="bg-rg-bg2 border border-rg-bg3 rounded-xl p-5 text-center">
+      <div class="text-3xl font-mono font-bold text-rg-green">✓</div>
+      <div class="text-rg-muted text-xs font-mono mt-1">BUILT & VALIDATED</div>
+    </div>
+  </div>
+
+  <!-- Main content: files + README side by side -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+
+    <!-- Generated files tree -->
+    <div class="bg-rg-bg2 border border-rg-bg3 rounded-xl overflow-hidden">
+      <div class="px-5 py-3 border-b border-rg-bg3 flex items-center gap-2">
+        <span class="text-rg-blue font-mono text-sm font-bold">📁 Generated Files</span>
+      </div>
+      <div id="file-tree" class="p-4 font-mono text-xs space-y-1 max-h-80 overflow-y-auto">
+        <div class="text-rg-dim">Loading...</div>
+      </div>
+    </div>
+
+    <!-- README preview -->
+    <div class="bg-rg-bg2 border border-rg-bg3 rounded-xl overflow-hidden">
+      <div class="px-5 py-3 border-b border-rg-bg3 flex items-center gap-2">
+        <span class="text-rg-blue font-mono text-sm font-bold">📄 README</span>
+      </div>
+      <div id="readme-content"
+           class="p-4 font-mono text-xs text-rg-fg2 max-h-80 overflow-y-auto whitespace-pre-wrap leading-relaxed">
+        Loading...
+      </div>
+    </div>
+  </div>
+
+  <!-- File viewer -->
+  <div id="file-viewer" class="hidden bg-rg-bg2 border border-rg-bg3 rounded-xl overflow-hidden mb-8">
+    <div class="px-5 py-3 border-b border-rg-bg3 flex items-center justify-between">
+      <span class="text-rg-blue font-mono text-sm font-bold" id="viewer-filename"></span>
+      <button onclick="document.getElementById('file-viewer').classList.add('hidden')"
+              class="text-rg-muted hover:text-rg-fg text-xs font-mono">✕ close</button>
+    </div>
+    <pre id="viewer-content"
+         class="p-4 font-mono text-xs text-rg-fg overflow-x-auto max-h-96 leading-relaxed"></pre>
+  </div>
+
+  <!-- ─── DEPLOY + SAVE ────────────────────────────────────────────────────── -->
+  <div class="bg-rg-bg2 border border-rg-bg3 rounded-xl p-6 mb-8">
+    <h2 class="text-rg-fg font-mono font-bold text-lg mb-1">Deploy or Save</h2>
+    <p class="text-rg-muted text-sm mb-6">Your build is ready to ship. Pick where to send it.</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+
+      <!-- Vercel -->
+      <button onclick="deployTo('vercel')"
+              class="deploy-btn group flex flex-col items-center gap-2 p-4 rounded-xl border border-rg-bg3
+                     hover:border-rg-blue bg-rg-bg transition-all duration-200 hover:shadow-lg hover:shadow-rg-blue/10">
+        <svg class="w-8 h-8 text-rg-fg group-hover:text-rg-blue transition-colors" viewBox="0 0 76 65" fill="currentColor">
+          <path d="M37.5274 0L75.0548 65H0L37.5274 0Z"/>
+        </svg>
+        <span class="font-mono text-xs text-rg-muted group-hover:text-rg-fg transition-colors">Vercel</span>
+      </button>
+
+      <!-- Netlify -->
+      <button onclick="deployTo('netlify')"
+              class="deploy-btn group flex flex-col items-center gap-2 p-4 rounded-xl border border-rg-bg3
+                     hover:border-rg-cyan bg-rg-bg transition-all duration-200 hover:shadow-lg hover:shadow-rg-cyan/10">
+        <div class="w-8 h-8 flex items-center justify-center text-2xl group-hover:text-rg-cyan transition-colors">
+          <svg viewBox="0 0 40 40" class="w-8 h-8 text-rg-fg group-hover:text-rg-cyan" fill="currentColor">
+            <path d="M28.589 14.135l.014.006-5.123 5.123-.463-.463L28.589 14.135zM6.885 23.018h-.774l-2.316-2.252.016-.023.37-.37h.487l2.217 2.645zm7.256 0H12.97l-5.255-6.253v-.786l.487-.487h.536l5.4 6.439v1.087zm12.76-3.867l-9.714 9.68-.004-.004a1.62 1.62 0 0 1-.63.34l-7.91 2.256a1.697 1.697 0 0 1-.45.062 1.645 1.645 0 0 1-1.167-.49 1.629 1.629 0 0 1-.43-1.61l2.256-7.908a1.62 1.62 0 0 1 .34-.63l.004.004 9.68-9.714 7.044 7.044.981-.98-7.044-7.045L29.57 4.37a2.23 2.23 0 0 1 3.152 0l3.953 3.952a2.23 2.23 0 0 1 0 3.153l-9.774 9.674z"/>
+          </svg>
+        </div>
+        <span class="font-mono text-xs text-rg-muted group-hover:text-rg-fg transition-colors">Netlify</span>
+      </button>
+
+      <!-- Render -->
+      <button onclick="deployTo('render')"
+              class="deploy-btn group flex flex-col items-center gap-2 p-4 rounded-xl border border-rg-bg3
+                     hover:border-rg-purple bg-rg-bg transition-all duration-200 hover:shadow-lg hover:shadow-rg-purple/10">
+        <div class="w-8 h-8 flex items-center justify-center text-rg-fg group-hover:text-rg-purple transition-colors font-bold text-xl font-mono">R</div>
+        <span class="font-mono text-xs text-rg-muted group-hover:text-rg-fg transition-colors">Render</span>
+      </button>
+
+      <!-- GitHub -->
+      <button onclick="deployTo('github')"
+              class="deploy-btn group flex flex-col items-center gap-2 p-4 rounded-xl border border-rg-bg3
+                     hover:border-rg-yellow bg-rg-bg transition-all duration-200 hover:shadow-lg hover:shadow-rg-yellow/10">
+        <svg class="w-8 h-8 text-rg-fg group-hover:text-rg-yellow transition-colors" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+        </svg>
+        <span class="font-mono text-xs text-rg-muted group-hover:text-rg-fg transition-colors">GitHub</span>
+      </button>
+    </div>
+
+    <!-- Deploy instructions panel -->
+    <div id="deploy-instructions" class="hidden bg-rg-bg rounded-xl border border-rg-bg3 p-4">
+      <div class="font-mono text-xs text-rg-fg2" id="deploy-instructions-content"></div>
+    </div>
+
+    <!-- Download ZIP -->
+    <div class="flex items-center gap-3 pt-4 border-t border-rg-bg3">
+      <a id="download-zip" href="#"
+         class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-mono text-sm
+                border border-rg-bg4 text-rg-fg2 hover:border-rg-fg hover:text-rg-fg transition-all">
+        ⬇ Download ZIP
+      </a>
+      <a href="/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-mono text-sm
+                          bg-rg-blue hover:bg-rg-cyan text-rg-bg font-bold transition-all">
+        ⚙ Build Another
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const SESSION_ID = "{{ session_id }}";
+
+  const DEPLOY_INSTRUCTIONS = {
+    vercel: `# Deploy to Vercel
+1. Install Vercel CLI: npm i -g vercel
+2. From your project directory:
+   vercel login
+   vercel --prod
+3. Or connect your GitHub repo at vercel.com/new`,
+
+    netlify: `# Deploy to Netlify
+1. Install Netlify CLI: npm i -g netlify-cli
+2. netlify login
+   netlify deploy --prod --dir=./dist
+3. Or drag & drop your build folder at app.netlify.com/drop`,
+
+    render: `# Deploy to Render
+1. Push your code to GitHub
+2. Go to render.com → New → Web Service
+3. Connect your repo, set build command and start command
+4. Deploy automatically on every push`,
+
+    github: `# Push to GitHub
+1. Create a new repo at github.com/new
+2. cd your-project
+   git init
+   git add .
+   git commit -m "Initial commit — built by Rube Goldberg"
+   git remote add origin https://github.com/YOU/REPO.git
+   git push -u origin main`,
+  };
+
+  function deployTo(platform) {
+    const panel = document.getElementById('deploy-instructions');
+    const content = document.getElementById('deploy-instructions-content');
+    content.textContent = DEPLOY_INSTRUCTIONS[platform] || '';
+    panel.classList.remove('hidden');
+    panel.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  async function loadResults() {
+    const res = await fetch(`/api/session/${SESSION_ID}`);
+    const session = await res.json();
+    const result = session.result || {};
+
+    document.getElementById('result-summary').textContent =
+      result.success ? 'Your product was built successfully.' : 'Build completed with some issues.';
+    document.getElementById('stat-iterations').textContent = result.iterations_used || '—';
+    document.getElementById('stat-files').textContent = result.file_count || '—';
+
+    // File tree
+    const tree = document.getElementById('file-tree');
+    const files = result.files || [];
+    if (files.length > 0) {
+      tree.innerHTML = files.map(f => `
+        <div class="flex items-center gap-2 hover:text-rg-blue cursor-pointer py-0.5 transition-colors"
+             onclick="viewFile('${f.path}')">
+          <span class="text-rg-muted">📄</span>
+          <span class="text-rg-fg2">${f.path}</span>
+        </div>
+      `).join('');
+    } else {
+      tree.innerHTML = '<div class="text-rg-dim">No files found</div>';
+    }
+
+    // README
+    const readme = document.getElementById('readme-content');
+    readme.textContent = result.readme || '(no README generated)';
+
+    // Download link
+    document.getElementById('download-zip').href = `/api/session/${SESSION_ID}/download`;
+  }
+
+  async function viewFile(path) {
+    const res = await fetch(`/api/session/${SESSION_ID}/file?path=${encodeURIComponent(path)}`);
+    const data = await res.json();
+    document.getElementById('viewer-filename').textContent = data.path;
+    document.getElementById('viewer-content').textContent = data.content;
+    document.getElementById('file-viewer').classList.remove('hidden');
+    document.getElementById('file-viewer').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  loadResults();
+</script>
+{% endblock %}

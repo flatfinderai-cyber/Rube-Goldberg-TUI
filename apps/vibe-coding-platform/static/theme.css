@@ -1,0 +1,265 @@
+/* ABOUTME: Rube Goldberg dark theme — Tokyo Night palette with mechanical accents.
+   Gear animations, terminal styling, scrollbars, and the Benny loading display. */
+
+:root {
+  --rg-bg:     #1a1b26;
+  --rg-bg2:    #24283b;
+  --rg-bg3:    #2f3449;
+  --rg-bg4:    #3d4259;
+  --rg-fg:     #c0caf5;
+  --rg-fg2:    #a9b1d6;
+  --rg-muted:  #565f89;
+  --rg-dim:    #414868;
+  --rg-blue:   #7aa2f7;
+  --rg-purple: #bb9af7;
+  --rg-cyan:   #7dcfff;
+  --rg-green:  #9ece6a;
+  --rg-yellow: #e0af68;
+  --rg-red:    #f7768e;
+  --rg-orange: #ff9e64;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+body {
+  background-color: var(--rg-bg);
+  color: var(--rg-fg);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--rg-blue);
+  color: var(--rg-bg);
+}
+
+/* ── Scrollbars ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--rg-bg); }
+::-webkit-scrollbar-thumb { background: var(--rg-bg4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--rg-muted); }
+
+/* ── Phase pipeline nodes ─────────────────────────────────────────────────── */
+.phase-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--rg-bg3);
+  background: var(--rg-bg);
+  transition: all 0.4s ease;
+  min-width: 80px;
+}
+
+.phase-node.active {
+  border-color: var(--rg-blue);
+  background: rgba(122, 162, 247, 0.1);
+  box-shadow: 0 0 20px rgba(122, 162, 247, 0.2);
+}
+
+.phase-node.complete {
+  border-color: var(--rg-green);
+  background: rgba(158, 206, 106, 0.08);
+}
+
+.phase-gear {
+  font-size: 20px;
+  color: var(--rg-muted);
+  transition: all 0.4s ease;
+  display: inline-block;
+  line-height: 1;
+}
+
+.phase-node.active .phase-gear {
+  color: var(--rg-blue);
+  animation: spin-gear 2s linear infinite;
+}
+
+.phase-node.complete .phase-gear {
+  color: var(--rg-green);
+  animation: none;
+}
+
+.phase-node.complete .phase-gear::before {
+  content: '✓';
+}
+.phase-node.complete .phase-gear {
+  font-size: 0;
+}
+.phase-node.complete .phase-gear::before {
+  font-size: 20px;
+}
+
+.phase-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--rg-muted);
+  letter-spacing: 0.05em;
+  transition: color 0.4s ease;
+}
+
+.phase-node.active .phase-label { color: var(--rg-blue); }
+.phase-node.complete .phase-label { color: var(--rg-green); }
+
+.phase-connector {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--rg-dim);
+  padding: 0 2px;
+  align-self: center;
+  padding-bottom: 18px;
+  letter-spacing: -2px;
+}
+
+/* ── Gear spin animation ──────────────────────────────────────────────────── */
+@keyframes spin-gear {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes spin-gear-reverse {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+/* ── Terminal output ──────────────────────────────────────────────────────── */
+#terminal-output {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  background: var(--rg-bg);
+}
+
+.output-chunk {
+  color: var(--rg-fg);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.output-chunk.tool {
+  color: var(--rg-purple);
+  border-left: 2px solid var(--rg-purple);
+  padding-left: 8px;
+  margin: 2px 0;
+}
+
+.output-chunk.system {
+  color: var(--rg-muted);
+  font-style: italic;
+}
+
+.output-chunk.error {
+  color: var(--rg-red);
+}
+
+.output-chunk.success {
+  color: var(--rg-green);
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--rg-blue);
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Tool log entries ─────────────────────────────────────────────────────── */
+.tool-entry {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--rg-bg3);
+  background: var(--rg-bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  animation: slide-in 0.2s ease;
+}
+
+.tool-entry .tool-name {
+  color: var(--rg-purple);
+  font-weight: bold;
+}
+
+.tool-entry .tool-detail {
+  color: var(--rg-muted);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Deploy buttons ───────────────────────────────────────────────────────── */
+.deploy-btn {
+  cursor: pointer;
+  user-select: none;
+}
+.deploy-btn:active {
+  transform: scale(0.97);
+}
+
+/* ── Benny animation states ───────────────────────────────────────────────── */
+#benny-gif {
+  transition: opacity 0.3s ease;
+}
+
+body.engine-complete #benny-status-dot {
+  background: var(--rg-green);
+  animation: none;
+}
+
+body.engine-error #benny-status-dot {
+  background: var(--rg-red);
+  animation: none;
+}
+
+/* ── Progress bar shimmer ─────────────────────────────────────────────────── */
+#progress-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+#progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.15) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  from { left: -100%; }
+  to   { left: 200%; }
+}
+
+/* ── Intake step transitions ──────────────────────────────────────────────── */
+[x-cloak] { display: none !important; }
+
+/* ── File viewer code block ───────────────────────────────────────────────── */
+#viewer-content {
+  color: var(--rg-fg);
+  background: var(--rg-bg);
+  border-top: 1px solid var(--rg-bg3);
+}
